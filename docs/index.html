@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBP v1.13 — Rapid Batch-process-supported Powerful tool for GWAS & GS</title>
+<style>
+  /* ========== Variables ========== */
+  :root {
+    --c1: #1a1a2e;
+    --c2: #16213e;
+    --c3: #0f3460;
+    --c4: #e94560;
+    --c5: #f5f5f5;
+    --c6: #ffffff;
+    --c7: #2d3436;
+    --c8: #00b894;
+    --c9: #0984e3;
+    --c10: #dfe6e9;
+    --c11: #636e72;
+    --code-bg: #f0f3f5;
+    --border: #e0e4e8;
+    --radius: 6px;
+    --width-side: 260px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font: 15px/1.7 "Segoe UI", "Noto Sans SC", system-ui, sans-serif;
+    color: var(--c7);
+    background: var(--c5);
+    display: flex;
+  }
+
+  /* ========== Sidebar ========== */
+  .sidebar {
+    position: fixed; top:0; left:0; width:var(--width-side); height:100vh;
+    background: var(--c1); color:#ccc; overflow-y:auto; z-index:100;
+    display:flex; flex-direction:column;
+  }
+  .sidebar .logo-area {
+    text-align:center; padding:28px 20px 20px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .sidebar .logo-area svg { width:140px; height:auto; }
+  .sidebar .ver {
+    display:block; margin-top:6px;
+    font-size:11px; color:#6c7a89; letter-spacing:1px;
+  }
+  .sidebar nav { padding:16px 0; flex:1; }
+  .sidebar nav a {
+    display:block; padding:9px 28px; color:#a0aec0; text-decoration:none;
+    font-size:13.5px; border-left:3px solid transparent;
+    transition:.18s;
+  }
+  .sidebar nav a:hover, .sidebar nav a.active {
+    color:#fff; background:rgba(255,255,255,.05);
+    border-left-color:var(--c4);
+  }
+  .sidebar nav a.section-head {
+    color:#8a94a6; font-size:11px; letter-spacing:1.4px;
+    text-transform:uppercase; padding-top:18px; pointer-events:none;
+    border-left-color:transparent;
+  }
+
+  /* ========== Main ========== */
+  .main {
+    margin-left:var(--width-side); flex:1; min-width:0;
+    background:var(--c6);
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c3) 100%);
+    color:#fff; padding:48px 52px 52px;
+    border-bottom:3px solid var(--c4);
+  }
+  .hero h1 {
+    font-size:32px; font-weight:700; letter-spacing:-.3px;
+  }
+  .hero p { margin-top:10px; font-size:16px; color:#b2c9e0; max-width:700px; }
+
+  .content { padding:40px 52px 80px; max-width:900px; }
+  .content h2 {
+    font-size:22px; margin:44px 0 14px; padding-bottom:8px;
+    border-bottom:2px solid var(--c10); color:var(--c1);
+  }
+  .content h3 {
+    font-size:17px; margin:28px 0 10px; color:var(--c3);
+  }
+  .content h4 {
+    font-size:14.5px; margin:20px 0 6px; color:var(--c7);
+  }
+  .content p { margin:8px 0 14px; }
+  .content ul, .content ol { margin:6px 0 16px 22px; }
+  .content li { margin:4px 0; }
+
+  /* ========== Tables ========== */
+  .param-table {
+    width:100%; border-collapse:collapse; margin:14px 0 22px;
+    font-size:13.5px;
+  }
+  .param-table th {
+    background:var(--c1); color:#fff; padding:9px 12px;
+    text-align:left; font-weight:600;
+  }
+  .param-table td {
+    padding:8px 12px; border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  .param-table tr:hover td { background:#f8f9fb; }
+  .param-table td:first-child { font-family:"Fira Code","Cascadia Code",monospace; font-size:12.5px; color:var(--c4); white-space:nowrap; }
+
+  /* ========== Code ========== */
+  pre {
+    background:var(--code-bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:16px 20px; overflow-x:auto;
+    margin:10px 0 18px; font-size:13px; line-height:1.6;
+  }
+  code {
+    font-family:"Fira Code","Cascadia Code","JetBrains Mono",monospace;
+    font-size:13px;
+  }
+  pre code { font-size:13px; }
+  :not(pre) > code {
+    background:var(--code-bg); padding:1px 5px; border-radius:3px;
+    color:var(--c4); font-size:13px;
+  }
+
+  /* ========== Info / Warning boxes ========== */
+  .info {
+    background:#e8f4fd; border-left:4px solid var(--c9);
+    padding:12px 16px; margin:12px 0 18px; border-radius:0 var(--radius) var(--radius) 0;
+    font-size:14px;
+  }
+  .warn {
+    background:#fff3e0; border-left:4px solid #f39c12;
+    padding:12px 16px; margin:12px 0 18px; border-radius:0 var(--radius) var(--radius) 0;
+    font-size:14px;
+  }
+  .warn strong { color:#c0392b; }
+
+  /* ========== File examples ========== */
+  .file-box {
+    background:#fafbfc; border:1px solid var(--border);
+    border-radius:var(--radius); margin:10px 0 18px;
+  }
+  .file-box .file-name {
+    background:var(--c1); color:#fff; padding:5px 14px; font-size:12px;
+    font-family:"Fira Code","Cascadia Code",monospace;
+    border-radius:var(--radius) var(--radius) 0 0;
+  }
+  .file-box pre {
+    border:none; margin:0; border-radius:0 0 var(--radius) var(--radius);
+    background:#fff;
+  }
+
+  /* ========== Footer ========== */
+  .footer {
+    text-align:center; padding:28px; font-size:12.5px; color:var(--c11);
+    border-top:1px solid var(--border);
+  }
+  .footer a { color:var(--c9); text-decoration:none; }
+
+  @media (max-width:860px) {
+    .sidebar { display:none; }
+    .main { margin-left:0; }
+    .hero { padding:28px 22px; }
+    .content { padding:24px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== SIDEBAR ==================== -->
+<aside class="sidebar">
+  <div class="logo-area">
+    <!-- RBP Logo SVG -->
+    <svg viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   style="stop-color:#e94560;stop-opacity:1"/>
+          <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1"/>
+        </linearGradient>
+        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   style="stop-color:#0984e3;stop-opacity:1"/>
+          <stop offset="100%" style="stop-color:#6c5ce7;stop-opacity:1"/>
+        </linearGradient>
+      </defs>
+      <!-- R -->
+      <text x="28" y="76" font-size="56" font-weight="800" fill="url(#g1)"
+            font-family="Arial Black, sans-serif">R</text>
+      <!-- B -->
+      <rect x="95" y="12" width="72" height="72" rx="10" fill="none" stroke="url(#g2)" stroke-width="8"/>
+      <text x="106" y="68" font-size="48" font-weight="800" fill="url(#g2)"
+            font-family="Arial Black, sans-serif">B</text>
+      <!-- P -->
+      <text x="198" y="76" font-size="56" font-weight="800" fill="#00b894"
+            font-family="Arial Black, sans-serif">P</text>
+      <!-- DNA helix under -->
+      <g transform="translate(20,95)" opacity="0.35">
+        <line x1="0" y1="0" x2="280" y2="0" stroke="#6c7a89" stroke-width="1.2"/>
+        <circle cx="14" cy="0" r="3" fill="#e94560"/>
+        <circle cx="42" cy="0" r="3" fill="#0984e3"/>
+        <circle cx="70" cy="0" r="3" fill="#00b894"/>
+        <circle cx="98" cy="0" r="3" fill="#e94560"/>
+        <circle cx="126" cy="0" r="3" fill="#0984e3"/>
+        <circle cx="154" cy="0" r="3" fill="#00b894"/>
+        <circle cx="182" cy="0" r="3" fill="#e94560"/>
+        <circle cx="210" cy="0" r="3" fill="#0984e3"/>
+        <circle cx="238" cy="0" r="3" fill="#00b894"/>
+        <circle cx="266" cy="0" r="3" fill="#e94560"/>
+      </g>
+    </svg>
+    <span class="ver">Version 1.13 · HZAU</span>
+  </div>
+  <nav>
+    <a href="#intro" class="active">软件介绍</a>
+    <a href="#input" class="section-head">输入文件格式</a>
+    <a href="#phe-file">表型文件</a>
+    <a href="#geno-file">基因型文件</a>
+    <a href="#modules" class="section-head">模块说明</a>
+    <a href="#grm">GRM 构建</a>
+    <a href="#kpca">kPCA 分析</a>
+    <a href="#single">单性状分析</a>
+    <a href="#batch">批量性状分析</a>
+    <a href="#output" class="section-head">输出文件</a>
+    <a href="#output-files">输出说明</a>
+  </nav>
+</aside>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main">
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Rapid Batch-process-supported Powerful tool for GWAS &amp; GS</h1>
+  <p>
+    基于混合线性模型（MLM）的大规模基因组数据高效 GWAS 和 GS 分析工具，支持批量性状分析。
+  </p>
+</section>
+
+<!-- ==================== CONTENT ==================== -->
+<div class="content">
+
+<!-- ========== 1. 软件介绍 ========== -->
+<h2 id="intro">1. 软件介绍</h2>
+
+<p>
+  RBP（Rapid Batch-process-supported Powerful tool）是一款面向大规模基因组数据的高性能计算工具，
+  基于<strong>混合线性模型</strong>（Mixed Linear Model, MLM）框架，用于：
+</p>
+
+<ul>
+  <li><strong>GWAS</strong>（全基因组关联分析）—— 扫描基因组中与性状显著关联的 SNP 位点</li>
+  <li><strong>GS</strong>（基因组选择）—— 估计育种值（GEBV / Random Effects）用于个体选育</li>
+</ul>
+
+<p>RBP 的核心特点：</p>
+<ul>
+  <li><strong>高性能</strong>：基于 C++ + Armadillo + OpenMP 实现，支持多线程并行</li>
+  <li><strong>双精度支持</strong>：同时支持 <code>float</code>（单精度）和 <code>double</code>（双精度）计算，单精度可大幅节省内存</li>
+  <li><strong>Out-of-Core 分块模式</strong>：对超大规模数据（个体数 &gt; 50,000）支持分块映射，突破内存限制</li>
+  <li><strong>批量性状分析</strong>：支持一次运行同时对多个性状进行方差组分估计和 GWAS 扫描</li>
+  <li><strong>多随机效应</strong>：支持构建多个 GRM 作为随机效应，以及额外分类随机效应</li>
+  <li><strong>多种 GWAS 检验方法</strong>：Standard MLM、Quasi-Standard、Gamma 近似、Exact MLM</li>
+</ul>
+
+<p>RBP 提供了四个子命令（模块）：</p>
+<ol>
+  <li><code>--make-grm</code> &mdash; 构建基因组关系矩阵（GRM）</li>
+  <li><code>--kpca</code> &mdash; 基于 GRM 的主成分分析（kPCA）</li>
+  <li><code>--single-trait</code> &mdash; 单性状 GWAS / AI-REML 分析</li>
+  <li><code>--batch-trait</code> &mdash; 批量多性状 GWAS / DFREML 分析</li>
+</ol>
+
+
+<!-- ========== 2. 输入文件格式 ========== -->
+<h2 id="input">2. 输入文件格式</h2>
+
+<!-- --- 表型文件 --- -->
+<h3 id="phe-file">2.1 表型文件（Phenotype File）</h3>
+
+<p>表型文件为<strong>纯文本文件</strong>，使用空格、制表符（Tab）或逗号分隔各列。</p>
+
+<div class="warn"><strong>必须满足：</strong>文件必须包含表头（header），且第一列为个体 ID。</div>
+
+<p><strong>文件示例（phe.txt）：</strong></p>
+<div class="file-box">
+  <div class="file-name">phe.txt</div>
+  <pre><code>ID          Trait1   Trait2   Sex    Batch   Age    Sire
+IND001      12.5     8.3      M      B1      2.1    BULL_A
+IND002      14.1     9.1      F      B2      1.8    BULL_B
+IND003      11.8     7.9      M      B1      2.4    BULL_A
+IND004      13.2     8.7      F      B1      1.5    BULL_C
+IND005      10.9     7.2      M      B2      2.0    BULL_B
+...</code></pre>
+</div>
+
+<p>与此表型文件相关的常用参数：</p>
+
+<table class="param-table">
+  <thead>
+    <tr><th>参数</th><th>说明</th><th>示例</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--phe FILE</td>
+      <td>指定表型文件路径</td>
+      <td><code>--phe phe.txt</code></td>
+    </tr>
+    <tr>
+      <td>--phe-col STR</td>
+      <td>指定作为响应变量（性状）的列，1-based 索引，逗号分隔。单性状模式仅取第一列；批量模式可取多列</td>
+      <td><code>--phe-col 2</code> 或 <code>--phe-col 2,3</code></td>
+    </tr>
+    <tr>
+      <td>--fix-col STR</td>
+      <td>指定<strong>分类固定效应</strong>列（如性别、批次），1-based，逗号分隔。程序自动进行哑变量编码（最后一个水平作为参照）</td>
+      <td><code>--fix-col 4,5</code></td>
+    </tr>
+    <tr>
+      <td>--cov-col STR</td>
+      <td>指定<strong>连续协变量</strong>列（如年龄、体重），1-based，逗号分隔</td>
+      <td><code>--cov-col 6</code></td>
+    </tr>
+    <tr>
+      <td>--rand-col STR</td>
+      <td>指定<strong>额外随机效应</strong>的分类变量所在列，1-based，逗号分隔（仅单性状模式支持）</td>
+      <td><code>--rand-col 7</code></td>
+    </tr>
+    <tr>
+      <td>--rand-cov LIST</td>
+      <td>指定额外随机效应对应的协方差矩阵文件前缀（空格分隔）。若为 <code>1</code> 则表示使用单位矩阵（即独立同分布随机效应）。也可传入 <code>.txt</code> 列表文件</td>
+      <td><code>--rand-cov pedigree_grm</code> 或 <code>--rand-cov 1</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="info">
+  <strong>列索引说明：</strong>所有列索引（<code>--phe-col</code>、<code>--fix-col</code>、<code>--cov-col</code>、<code>--rand-col</code>）均为 <strong>1-based</strong>，即第一列（ID 列）为 1。
+</div>
+
+<!-- --- 基因型文件 --- -->
+<h3 id="geno-file">2.2 基因型文件（Genotype File）</h3>
+
+<p>基因型文件采用 <strong>PLINK 二进制格式</strong>（<code>.bed</code> / <code>.bim</code> / <code>.fam</code>），通过 <code>--geno</code> 参数指定前缀（不含扩展名，或含 <code>.bed</code> 后缀均可）。</p>
+
+<p>用于指定读取个体和 SNP 子集的参数：</p>
+
+<table class="param-table">
+  <thead>
+    <tr><th>参数</th><th>说明</th><th>示例</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--geno FILE</td>
+      <td>基因型数据 PLINK 前缀（或 .bed 完整路径）</td>
+      <td><code>--geno ./data/geno</code></td>
+    </tr>
+    <tr>
+      <td>--geno-ind STR</td>
+      <td>指定要读取的个体索引（1-based），支持逗号分隔的列表 <strong>或</strong> 一个每行一个数字的文件路径</td>
+      <td><code>--geno-ind 1,3,5,100</code> 或 <code>--geno-ind keep_ids.txt</code></td>
+    </tr>
+    <tr>
+      <td>--geno-snp STR</td>
+      <td>指定要读取的 SNP 索引（1-based），支持逗号分隔的列表 <strong>或</strong> 一个每行一个数字的文件路径</td>
+      <td><code>--geno-snp 1,2,3,500</code> 或 <code>--geno-snp snp_list.txt</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="info">
+  <strong>智能解析：</strong><code>--geno-ind</code> 和 <code>--geno-snp</code> 会先尝试将输入作为文件路径打开；若文件不存在，则按逗号分隔的列表解析。索引均为 1-based。
+</div>
+
+
+<!-- ========== 3. 模块说明 ========== -->
+<h2 id="modules">3. 模块说明</h2>
+
+<p>RBP 四个模块通过第一个位置参数选择。以下通用参数适用于所有模块：</p>
+
+<table class="param-table">
+  <thead>
+    <tr><th>参数</th><th>说明</th><th>默认值</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>--out PREFIX</td><td>输出文件前缀</td><td>rbp</td></tr>
+    <tr><td>--ncpus N</td><td>CPU 线程数</td><td>1</td></tr>
+    <tr><td>--float</td><td>使用单精度（float）计算以节省内存。<strong>GRM 构建时若启用，后续分析也必须启用</strong></td><td>关闭（使用 double）</td></tr>
+    <tr><td>--chunk</td><td>启用 Out-of-Core 分块模式（推荐个体数 &gt; 50,000）</td><td>关闭</td></tr>
+    <tr><td>--quiet</td><td>静默模式，不向终端打印日志（日志仍写入 .log 文件）</td><td>关闭</td></tr>
+  </tbody>
+</table>
+
+<div class="warn">
+  <strong>重要：<code>--float</code> 参数的一致性</strong><br>
+  如果 GRM 构建时使用了 <code>--float</code>，那么后续的 kPCA、单性状分析等模块也<strong>必须</strong>使用 <code>--float</code>。因为 float 和 double 模式的 GRM 二进制文件数据类型不一致，混用会导致读取错误。
+</div>
+
+<!-- ========== 3.1 GRM ========== -->
+<h2 id="grm">3.1 GRM 构建（--make-grm）</h2>
+
+<h3>功能说明</h3>
+<p>
+  从 PLINK 二进制格式的基因型数据构建<strong>基因组关系矩阵</strong>（Genomic Relationship Matrix, GRM）。
+  支持三种计算方法，并可选择是否计算 GRM 的广义逆矩阵。
+</p>
+
+<h3>输出文件</h3>
+<table class="param-table">
+  <thead><tr><th>扩展名</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td><code>.GA.bin</code></td><td>加性 GRM 二进制矩阵（Yang 或 VanRaden 方法）</td></tr>
+    <tr><td><code>.GD.bin</code></td><td>显性 GRM 二进制矩阵（Dominance 方法）</td></tr>
+    <tr><td><code>.id</code></td><td>与 GRM 行列对应的个体 ID 列表</td></tr>
+    <tr><td><code>.inv.txt</code></td><td>GRM 的广义逆矩阵，三列格式（行、列、值）—— 仅当指定 <code>--inv</code> 时生成</td></tr>
+  </tbody>
+</table>
+
+<h3>专属参数</h3>
+<table class="param-table">
+  <thead><tr><th>参数</th><th>说明</th><th>默认值</th></tr></thead>
+  <tbody>
+    <tr><td>--method N</td><td>GRM 构建方法：<code>1</code>=Yang 加性（默认），<code>2</code>=VanRaden 加性，<code>3</code>=Dominance 显性</td><td>1</td></tr>
+    <tr><td>--weight FILE</td><td>SNP 权重文件（单列文本，每行对应一个 SNP 的权重）</td><td>无（所有 SNP 等权）</td></tr>
+    <tr><td>--snp-chunk N</td><td>每次处理的 SNP 块大小，影响内存使用和计算效率</td><td>10000</td></tr>
+    <tr><td>--ind-chunk N</td><td>分块模式下每次处理的个体块大小（仅 <code>--chunk</code> 模式下生效）</td><td>512</td></tr>
+    <tr><td>--inv</td><td>计算 GRM 的广义逆矩阵并保存为三列格式 <code>.inv.txt</code></td><td>关闭</td></tr>
+    <tr><td>--geno-ind STR</td><td>选择参与 GRM 构建的个体子集</td><td>全部个体</td></tr>
+    <tr><td>--geno-snp STR</td><td>选择参与 GRM 构建的 SNP 子集</td><td>全部 SNP</td></tr>
+  </tbody>
+</table>
+
+<h3>完整示例</h3>
+<pre><code># 使用默认 Yang 方法构建加性 GRM（双精度）
+RBP --make-grm --geno ./data/geno --out my_grm --ncpus 8
+
+# 使用 VanRaden 方法 + SNP 权重（单精度，适用于超大数据集）
+RBP --make-grm --geno ./data/geno --out my_grm_vanraden --method 2 --weight snp_weights.txt --float --ncpus 16
+
+# 构建显性效应 GRM 并计算逆矩阵
+RBP --make-grm --geno ./data/geno --out dom_grm --method 3 --inv --ncpus 8
+
+# 使用指定个体子集构建 GRM，启用分块模式（个体 > 50,000）
+RBP --make-grm --geno ./data/geno --out large_grm --geno-ind keep_list.txt --chunk --ind-chunk 1024 --ncpus 24</code></pre>
+
+
+<!-- ========== 3.2 kPCA ========== -->
+<h2 id="kpca">3.2 kPCA 分析（--kpca）</h2>
+
+<h3>功能说明</h3>
+<p>
+  基于已构建的 GRM，使用 <strong>Lanczos 算法</strong>计算前 <em>k</em> 个最大特征值及对应的特征向量（即主成分，PCs）。
+  kPCA 常用于群体分层检测以及将主成分作为协变量引入 GWAS 模型以控制群体结构。
+</p>
+
+<h3>输出文件</h3>
+<table class="param-table">
+  <thead><tr><th>扩展名</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td><code>.val</code></td><td>特征值列表（每行一个）</td></tr>
+    <tr><td><code>.vec</code></td><td>主成分（PCs）矩阵：第一列为个体 ID，后续列为各 PC 得分</td></tr>
+  </tbody>
+</table>
+
+<div class="info">
+  <strong>注意：</strong>若提供了多个 GRM（<code>--grm file1 file2</code>），kPCA 模块仅对<strong>第一个 GRM</strong> 进行分析，并会输出警告提示。
+</div>
+
+<h3>专属参数</h3>
+<table class="param-table">
+  <thead><tr><th>参数</th><th>说明</th><th>默认值</th></tr></thead>
+  <tbody>
+    <tr><td>--grm PREFIX</td><td>输入的 GRM 文件前缀（不含 <code>.bin</code> 扩展名）</td><td>—（必填）</td></tr>
+    <tr><td>--npc N</td><td>提取的主成分个数</td><td>10</td></tr>
+    <tr><td>--tol VAL</td><td>Lanczos 算法收敛容差</td><td>1e-6</td></tr>
+  </tbody>
+</table>
+
+<h3>完整示例</h3>
+<pre><code># 从 GRM 中提取前 10 个主成分
+RBP --kpca --grm my_grm --npc 10 --ncpus 8
+
+# 指定输出前缀、提取前 20 个 PC，并使用单精度
+RBP --kpca --grm my_grm_float --npc 20 --out pca_result --float --ncpus 8</code></pre>
+
+
+<!-- ========== 3.3 Single Trait ========== -->
+<h2 id="single">3.3 单性状分析（--single-trait）</h2>
+
+<h3>功能说明</h3>
+<p>
+  对单个性状拟合混合线性模型，使用<strong>AI-REML 算法</strong>（Average Information Restricted Maximum Likelihood）估计方差组分，
+  并可选择进行 GWAS 扫描或计算随机效应预测值（育种值）及其 PEV（预测误差方差）。
+</p>
+
+<p>单性状分析支持多种复杂模型结构：</p>
+<ul>
+  <li>一般 GS / GWAS（单 GRM + 残差）</li>
+  <li>重复力模型（repeated measures，使用 <code>--repeat</code>）</li>
+  <li>多 GRM 随机效应（如加性 + 显性 + 上位）</li>
+  <li>含额外分类随机效应（如批次、母体效应）</li>
+  <li>以父母祖先遗传随机效应为背景（使用 <code>--rand-col</code> + <code>--rand-cov</code>）</li>
+</ul>
+
+<h3>输出文件</h3>
+<table class="param-table">
+  <thead><tr><th>文件</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td><code>.var</code></td><td>方差组分估计（Variance、SE、Proportion）</td></tr>
+    <tr><td><code>.beta</code></td><td>固定效应估计值及标准误</td></tr>
+    <tr><td><code>.rand</code></td><td>所有随机效应的预测值（育种值等），可选 PEV 和可靠性 r²</td></tr>
+    <tr><td><code>.mlm</code></td><td>GWAS 扫描结果（SNP、Chr、Pos、Effect、SE、Pvalue）—— 仅当指定 <code>--gwas</code> 时生成</td></tr>
+    <tr><td><code>.log</code></td><td>运行日志（包含 Lambda GC 和 Mean Chi² 统计量）</td></tr>
+  </tbody>
+</table>
+
+<h3>专属参数</h3>
+<table class="param-table">
+  <thead><tr><th>参数</th><th>说明</th><th>默认值</th></tr></thead>
+  <tbody>
+    <tr><td>--grm LIST</td><td>一个或多个 GRM 文件前缀（空格分隔）。也可传入 <code>.txt</code> 列表文件。所有 GRM 的<strong>数据类型（float/double）必须一致</strong></td><td>—</td></tr>
+    <tr><td>--rand-col STR</td><td>额外随机效应的分类变量列</td><td>—</td></tr>
+    <tr><td>--rand-cov LIST</td><td>额外随机效应的协方差矩阵文件前缀（空格分隔）。若为 <code>1</code> 表示独立同分布</td><td>—</td></tr>
+    <tr><td>--test METHOD</td><td>GWAS 检验方法：<code>standard</code>（标准 MLM）、<code>quasi-standard</code>（拟标准，不适用于 batch）、<code>gamma</code>（Gamma 近似）、<code>exact</code>（精确检验，不适用于 single）</td><td>standard</td></tr>
+    <tr><td>--gwas</td><td>执行 GWAS 扫描</td><td>关闭</td></tr>
+    <tr><td>--solver METHOD</td><td>AI-REML 求解器：<code>CG</code>（共轭梯度，默认）或 <code>Cholesky</code></td><td>CG</td></tr>
+    <tr><td>--mom</td><td>启用 MoM-RHE 初始化方差组分（加速收敛）</td><td>关闭</td></tr>
+    <tr><td>--pev</td><td>计算随机效应预测的 PEV 和可靠性（r²）</td><td>关闭</td></tr>
+    <tr><td>--repeat</td><td>指定重复力模型（repeated measures）</td><td>关闭</td></tr>
+    <tr><td>--seed N</td><td>随机数种子</td><td>6666</td></tr>
+    <tr><td>--num-ranvec N</td><td>quasi-standard/gamma 方法使用的随机向量数</td><td>100</td></tr>
+    <tr><td>--re-gamma-size N</td><td>估计 gamma 因子时随机采样的 SNP 数量</td><td>500</td></tr>
+    <tr><td>--re-est-gamma</td><td>强制重新估计 gamma 因子</td><td>关闭</td></tr>
+    <tr><td>--maxit N</td><td>AI-REML 最大迭代次数</td><td>30</td></tr>
+    <tr><td>--tol VAL</td><td>AI-REML 收敛容差</td><td>1e-5</td></tr>
+    <tr><td>--cg-maxit N</td><td>CG 求解器最大迭代次数</td><td>500</td></tr>
+    <tr><td>--cg-tol VAL</td><td>CG 求解器收敛容差</td><td>1e-6</td></tr>
+  </tbody>
+</table>
+
+<h3>关于 --grm 参数的详细用法</h3>
+
+<div class="warn">
+  <strong>多 GRM 数据类型必须一致：</strong>当指定多个 GRM 时，所有 GRM 必须是同一精度（全部 float 或全部 double）构建的，否则会导致数据读取错误。
+</div>
+
+<p><strong>指定多个 GRM 的三种方式：</strong></p>
+
+<pre><code># 方式 1：直接列出多个 GRM 前缀（空格分隔）
+RBP --single-trait --grm grm_add grm_dom grm_epi --phe phe.txt --phe-col 2 --geno geno
+
+# 方式 2：通过 .txt 列表文件指定（每行一个 GRM 前缀）
+# 文件 grm_list.txt 内容：
+#   grm_add
+#   grm_dom
+#   grm_epi
+RBP --single-trait --grm grm_list.txt --phe phe.txt --phe-col 2 --geno geno
+
+# 方式 3：混合使用（直接前缀 + 列表文件）
+RBP --single-trait --grm grm_add grm_list.txt --phe phe.txt --phe-col 2 --geno geno</code></pre>
+
+<p><strong>GRM 的数据类型要求：</strong></p>
+<ul>
+  <li>所有 GRM 必须使用相同精度构建（全部 float 或全部 double）</li>
+  <li>如果 GRM 构建时使用了 <code>--float</code>，单性状分析时也必须使用 <code>--float</code></li>
+  <li>每个 GRM 目录下需包含 <code>.bin</code> 和 <code>.id</code> 文件；若为压缩矩阵还需 <code>.col</code> 文件</li>
+</ul>
+
+<h3>完整示例</h3>
+
+<h4>场景 1：一般 GS / GWAS（单 GRM）</h4>
+<pre><code># 仅估计方差组分和育种值（GS）
+RBP --single-trait \
+  --grm my_grm \
+  --phe phe.txt \
+  --phe-col 2 \
+  --fix-col 4 \
+  --cov-col 6 \
+  --geno ./data/geno \
+  --out gs_result \
+  --ncpus 8
+
+# GWAS 扫描（Standard MLM）
+RBP --single-trait \
+  --grm my_grm \
+  --phe phe.txt \
+  --phe-col 2 \
+  --fix-col 4 \
+  --cov-col 6 \
+  --geno ./data/geno \
+  --gwas \
+  --out gwas_result \
+  --ncpus 8
+
+# GS + GWAS 同时进行
+RBP --single-trait \
+  --grm my_grm \
+  --phe phe.txt \
+  --phe-col 2 \
+  --fix-col 4 \
+  --cov-col 6 \
+  --geno ./data/geno \
+  --gwas --pev \
+  --out gs_gwas_result \
+  --ncpus 8</code></pre>
+
+<h4>场景 2：重复力性状的 GS / GWAS</h4>
+<pre><code># 对同一性状有重复测量记录时，使用 --repeat 指定重复力模型
+RBP --single-trait \
+  --grm my_grm \
+  --phe phe_repeat.txt \
+  --phe-col 2 \
+  --fix-col 4,5 \
+  --geno ./data/geno \
+  --gwas --repeat \
+  --out repeat_result \
+  --ncpus 8</code></pre>
+
+<h4>场景 3：包含多 GRM 随机效应的 GS / GWAS</h4>
+<pre><code># 将加性和显性 GRM 同时纳入模型
+RBP --single-trait \
+  --grm grm_add grm_dom \
+  --phe phe.txt \
+  --phe-col 2 \
+  --fix-col 4 \
+  --cov-col 6 \
+  --geno ./data/geno \
+  --gwas --pev \
+  --out multi_grm_result \
+  --ncpus 8</code></pre>
+
+<h4>场景 4：以父母祖先遗传随机效应为背景的 GS / GWAS</h4>
+<pre><code># --rand-col 指定表型文件中个体与父母对应关系的列索引
+# --rand-cov 指定父母的亲缘关系矩阵
+RBP --single-trait \
+  --grm my_grm \
+  --phe phe_with_sire.txt \
+  --phe-col 3 \
+  --fix-col 5 \
+  --rand-col 7 \
+  --rand-cov sire_grm \
+  --geno ./data/geno \
+  --gwas --pev \
+  --out sire_model_result \
+  --ncpus 8</code></pre>
+
+<div class="info">
+  <strong>父母模型示例说明：</strong>表型文件中第 7 列（<code>--rand-col 7</code>）记录了每个个体对应的父亲 ID；
+  <code>sire_grm</code> 是预先构建的父亲间的亲缘关系矩阵（GRM）。模型将父亲遗传效应作为额外的随机效应纳入，
+  从而在估计个体加性效应时校正父亲遗传背景。
+</div>
+
+
+<!-- ========== 3.4 Batch Trait ========== -->
+<h2 id="batch">3.4 批量性状分析（--batch-trait）</h2>
+
+<h3>功能说明</h3>
+<p>
+  对<strong>多个性状</strong>同时进行方差组分估计和 GWAS 扫描。使用 <strong>DFREML</strong>（Derivative-Free REML）算法，
+  通过网格搜索最大化对数似然来估计每个性状的遗传方差（Vg）和残差方差（Ve）。
+</p>
+
+<div class="warn">
+  <strong>批量模式的重要限制：</strong>
+  <ul>
+    <li>仅能包含<strong>1 个 GRM</strong>，不支持多个 GRM</li>
+    <li><strong>不支持额外随机效应</strong>（<code>--rand-col</code> / <code>--rand-cov</code> 不可用）</li>
+    <li><strong>不支持分块模式</strong>（<code>--chunk</code> 会被自动忽略）</li>
+    <li>模型结构为：y = Xb + Zg + e（固定效应 + 加性遗传 + 残差）</li>
+  </ul>
+</div>
+
+<h3>输出文件</h3>
+<table class="param-table">
+  <thead><tr><th>文件</th><th>内容</th></tr></thead>
+  <tbody>
+    <tr><td><code>.var</code></td><td>每个性状的 Vg、Ve、标准误及遗传力（h²）</td></tr>
+    <tr><td><code>.rand</code></td><td>每个性状的随机效应预测值（育种值）</td></tr>
+    <tr><td><code>.batchmlm</code></td><td>所有性状的 Effect、SE、Pvalue（Vg、Ve—— 仅当 <code>--test</code> 为 <code>exact</code> 时生成）</td></tr>
+    <tr><td><code>.batchSummary</code></td><td>每个性状的 Lambda GC 和 Mean Chi² 汇总</td></tr>
+    <tr><td><code>.log</code></td><td>运行日志</td></tr>
+  </tbody>
+</table>
+
+<h3>专属参数</h3>
+<table class="param-table">
+  <thead><tr><th>参数</th><th>说明</th><th>默认值</th></tr></thead>
+  <tbody>
+    <tr><td>--grm PREFIX</td><td>单个 GRM 文件前缀（必须恰好一个）</td><td>—（必填）</td></tr>
+    <tr><td>--phe-col STR</td><td>批量分析的性状列（逗号分隔）</td><td>—</td></tr>
+    <tr><td>--test METHOD</td><td>GWAS 检验方法：<code>standard</code>、<code>gamma</code>、<code>exact</code>（注意：不支持 quasi-standard）</td><td>standard</td></tr>
+    <tr><td>--gwas</td><td>执行 GWAS 扫描</td><td>关闭</td></tr>
+    <tr><td>--seed N</td><td>随机数种子</td><td>6666</td></tr>
+    <tr><td>--num-ranvec N</td><td>gamma 方法使用的随机向量数</td><td>100</td></tr>
+    <tr><td>--re-gamma-size N</td><td>估计 gamma 因子的随机 SNP 采样数</td><td>500</td></tr>
+  </tbody>
+</table>
+
+<h3>完整示例</h3>
+<pre><code># 批量分析 3 个性状（第 2、3、4 列），仅估计方差组分
+RBP --batch-trait \
+  --grm my_grm \
+  --phe phe.txt \
+  --phe-col 2,3,4 \
+  --fix-col 5 \
+  --cov-col 6,7 \
+  --geno ./data/geno \
+  --out batch_gs \
+  --ncpus 8
+
+# 批量分析 + GWAS 扫描（standard 方法）
+RBP --batch-trait \
+  --grm my_grm \
+  --phe phe.txt \
+  --phe-col 2,3,4 \
+  --fix-col 5 \
+  --cov-col 6,7 \
+  --geno ./data/geno \
+  --gwas --test standard \
+  --out batch_gwas \
+  --ncpus 16
+
+# 批量分析 + GWAS（gamma 近似方法，适合大样本快速扫描）
+RBP --batch-trait \
+  --grm my_grm \
+  --phe phe.txt \
+  --phe-col 2,3,4,5,6,7,8,9,10 \
+  --geno ./data/geno \
+  --gwas --test gamma \
+  --num-ranvec 200 --re-gamma-size 1000 \
+  --out batch_gamma_gwas \
+  --ncpus 24</code></pre>
+
+
+<!-- ========== 4. 输出文件说明 ========== -->
+<h2 id="output-files">4. 输出文件总览</h2>
+
+<p>各模块生成的输出文件汇总如下：</p>
+
+<table class="param-table">
+  <thead><tr><th>模块</th><th>输出文件</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">--make-grm</td>
+      <td><code>.GA.bin</code> / <code>.GD.bin</code></td>
+      <td>二进制 GRM 矩阵</td>
+    </tr>
+    <tr><td><code>.id</code></td><td>个体 ID 列表</td></tr>
+    <tr><td><code>.inv.txt</code></td><td>GRM 逆矩阵（三列格式）</td></tr>
+    <tr>
+      <td rowspan="2">--kpca</td>
+      <td><code>.val</code></td>
+      <td>特征值列表</td>
+    </tr>
+    <tr><td><code>.vec</code></td><td>主成分得分</td></tr>
+    <tr>
+      <td rowspan="4">--single-trait</td>
+      <td><code>.var</code></td>
+      <td>方差组分及比例</td>
+    </tr>
+    <tr><td><code>.beta</code></td><td>固定效应估计值</td></tr>
+    <tr><td><code>.rand</code></td><td>随机效应预测值（育种值、PEV、r²）</td></tr>
+    <tr><td><code>.mlm</code></td><td>GWAS 结果</td></tr>
+    <tr>
+      <td rowspan="4">--batch-trait</td>
+      <td><code>.var</code></td>
+      <td>各性状方差组分和遗传力</td>
+    </tr>
+    <tr><td><code>.rand</code></td><td>各性状育种值</td></tr>
+    <tr><td><code>.batchmlm</code></td><td>批量 GWAS 结果</td></tr>
+    <tr><td><code>.batchSummary</code></td><td>GWAS 汇总统计量</td></tr>
+    <tr>
+      <td>所有模块</td>
+      <td><code>.log</code></td>
+      <td>运行日志</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- ========== Footer ========== -->
+<div class="footer">
+  <p>RBP v1.13 &copy; 2025 &mdash; Fangjun Xu &amp; Mengjin Zhu, Huazhong Agricultural University (HZAU)</p>
+  <p>Licensed to HZAU · Platform: Linux x86_64</p>
+</div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+
+</body>
+</html>
