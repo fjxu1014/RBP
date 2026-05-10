@@ -16,7 +16,7 @@
     flex-direction: column;
     min-height: 100vh;
   }
-  h1, h2, h3, h4, h5, .navbar, .sidebar, .footer {
+  h1, h2, h3, h4, h5, .navbar, .sidebar {
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* UI elements use Sans-serif */
   }
 
@@ -293,34 +293,11 @@
     background-color: #fafbfc;
   }
 
-  /* ========== Footer ========== */
-  .footer {
-    background-color: #000000;
-    color: #ffffff;
-    padding: 40px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-  }
-  .footer-col h4 {
-    color: #f5a623;
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  .footer-col p {
-    font-size: 13px;
-    color: #aaaaaa;
-    line-height: 1.6;
-  }
-
   /* Responsive */
   @media (max-width: 900px) {
     .main-wrapper { flex-direction: column; }
     .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid #eaeaea; }
     .content { padding: 30px 20px; }
-    .footer { flex-direction: column; gap: 20px; text-align: center; }
-    .footer-col { text-align: center !important; }
   }
 </style>
 </head>
@@ -931,19 +908,6 @@ RBP --batch-trait \
 
   </main>
 </div>
-
-<!-- ==================== FOOTER ==================== -->
-<footer class="footer">
-  <div class="footer-col">
-    <h4>Sitemap:</h4>
-  </div>
-  <div class="footer-col">
-    <h4>Visit our other tools:</h4>
-  </div>
-  <div class="footer-col" style="text-align: right;">
-    <p>Copyright &copy; 2025&ndash;present. RBP release<br>official website. (ICP License xxxx)</p>
-  </div>
-</footer>
 
 <script>
   // Copy code block functionality
