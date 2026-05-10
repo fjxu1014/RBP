@@ -39,6 +39,42 @@
     text-decoration: none;
     cursor: pointer;
   }
+  
+  /* Release Asset Links */
+  .release-links-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    width: fit-content;
+    min-width: 400px;
+  }
+  .release-asset-link {
+    display: flex;
+    align-items: center;
+    color: #0969da;
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 16px;
+    transition: background-color 0.2s;
+  }
+  .release-asset-link:first-child {
+    border-bottom: 1px solid #d0d7de;
+  }
+  .release-asset-link:hover {
+    background-color: #f6f8fa;
+    color: #0969da;
+    text-decoration: underline;
+  }
+  .release-asset-link svg {
+    margin-right: 12px;
+    fill: #656d76;
+    flex-shrink: 0;
+  }
 
   /* ========== Layout Wrapper ========== */
   .main-wrapper {
@@ -116,7 +152,7 @@
     font-size: 42px;
     font-weight: 700;
     color: #222;
-    margin-bottom: 50px;
+    margin-bottom: 20px; /* Adjusted margin to accommodate the button */
   }
   .content h2 {
     font-size: 24px;
@@ -303,17 +339,19 @@
   <!-- ==================== SIDEBAR ==================== -->
   <aside class="sidebar">
     <ul class="nav-menu" id="sidebar-nav">
-      <li class="nav-title"><a href="#intro">1. INTRODUCTION</a></li>
+      <li class="nav-title"><a href="#release">1. RELEASE</a></li>
+
+      <li class="nav-title"><a href="#intro">2. INTRODUCTION</a></li>
       
-      <li class="nav-title">2. INPUT FILE FORMATS</li>
-      <li class="nav-item"><a class="nav-link" href="#phe-file">2.1. Phenotype file</a></li>
-      <li class="nav-item"><a class="nav-link" href="#geno-file">2.2. Genotype file</a></li>
+      <li class="nav-title">3. INPUT FILE FORMATS</li>
+      <li class="nav-item"><a class="nav-link" href="#phe-file">3.1. Phenotype file</a></li>
+      <li class="nav-item"><a class="nav-link" href="#geno-file">3.2. Genotype file</a></li>
       
-      <li class="nav-title">3. MODULES</li>
-      <li class="nav-item"><a class="nav-link" href="#grm">3.1. Make GRM</a></li>
-      <li class="nav-item"><a class="nav-link" href="#kpca">3.2. kPCA Analysis</a></li>
-      <li class="nav-item"><a class="nav-link" href="#single">3.3. Single-trait Analysis</a></li>
-      <li class="nav-item"><a class="nav-link" href="#batch">3.4. Batch-trait Analysis</a></li>
+      <li class="nav-title">4. MODULES</li>
+      <li class="nav-item"><a class="nav-link" href="#grm">4.1. Make GRM</a></li>
+      <li class="nav-item"><a class="nav-link" href="#kpca">4.2. kPCA Analysis</a></li>
+      <li class="nav-item"><a class="nav-link" href="#single">4.3. Single-trait Analysis</a></li>
+      <li class="nav-item"><a class="nav-link" href="#batch">4.4. Batch-trait Analysis</a></li>
     </ul>
   </aside>
 
@@ -322,12 +360,35 @@
     
     <h1>User Manual of RBP</h1>
 
-    <p>
+    <p style="margin-bottom: 25px;">
       An efficient GWAS and GS analysis tool for large-scale genomic data based on the Mixed Linear Model (MLM), supporting batch-trait analysis.
     </p>
 
-    <!-- ========== 1. Introduction ========== -->
-    <h2 id="intro">1. Introduction</h2>
+    <!-- ========== 1. Release ========== -->
+    <h2 id="release">1. Release</h2>
+
+    <p>
+      RBP is currently compiled and supported on the <strong>Linux x86_64</strong> platform. To maximize calculation efficiency across different CPU architectures, we provide two pre-compiled executable versions linked with different linear algebra libraries:
+    </p>
+    <ul>
+      <li><strong>MKL version:</strong> Highly recommended for Intel CPUs.</li>
+      <li><strong>OpenBLAS version:</strong> Recommended for AMD CPUs or systems where MKL is not optimal.</li>
+    </ul>
+
+    <!-- Release Downloads -->
+    <div class="release-links-container">
+      <a href="https://github.com/fjxu1014/RBP/releases/download/V1.13/RBP_v1.13_Linux_x86_64_MKL.tar.gz" class="release-asset-link">
+        <svg viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.404L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.404v5.544z"></path></svg>
+        RBP_v1.13_Linux_x86_64_MKL.tar.gz
+      </a>
+      <a href="https://github.com/fjxu1014/RBP/releases/download/V1.13/RBP_v1.13_Linux_x86_64_openBLAS.tar.gz" class="release-asset-link">
+        <svg viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.404L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.404v5.544z"></path></svg>
+        RBP_v1.13_Linux_x86_64_openBLAS.tar.gz
+      </a>
+    </div>
+
+    <!-- ========== 2. Introduction ========== -->
+    <h2 id="intro">2. Introduction</h2>
 
     <p>
       RBP (Rapid Batch-process-supported Powerful tool) is a high-performance computing tool designed for large-scale genomic data. 
@@ -358,11 +419,11 @@
     </ol>
 
 
-    <!-- ========== 2. Input File Formats ========== -->
-    <h2 id="input">2. Input File Formats</h2>
+    <!-- ========== 3. Input File Formats ========== -->
+    <h2 id="input">3. Input File Formats</h2>
 
     <!-- --- Phenotype File --- -->
-    <h3 id="phe-file">2.1. Phenotype file</h3>
+    <h3 id="phe-file">3.1. Phenotype file</h3>
 
     <p>The phenotype file is a <strong>plain text file</strong>, with columns separated by spaces, tabs, or commas.</p>
 
@@ -427,7 +488,7 @@ IND005      10.9     7.2      M      B2      2.0    BULL_B
     </p>
 
     <!-- --- Genotype File --- -->
-    <h3 id="geno-file">2.2. Genotype file</h3>
+    <h3 id="geno-file">3.2. Genotype file</h3>
 
     <p>The genotype file uses the <strong>PLINK binary format</strong> (<code>.bed</code> / <code>.bim</code> / <code>.fam</code>). Specify the prefix (without extension, or with the <code>.bed</code> suffix) using the <code>--geno</code> parameter.</p>
 
@@ -473,8 +534,8 @@ IND005      10.9     7.2      M      B2      2.0    BULL_B
     </div>
 
 
-    <!-- ========== 3. Modules ========== -->
-    <h2 id="modules">3. Modules</h2>
+    <!-- ========== 4. Modules ========== -->
+    <h2 id="modules">4. Modules</h2>
 
     <p>RBP's four modules are selected by the first positional parameter. The following common parameters apply to all modules:</p>
 
@@ -496,8 +557,8 @@ IND005      10.9     7.2      M      B2      2.0    BULL_B
       If <code>--float</code> is used during GRM construction, subsequent modules like kPCA and single-trait analysis <strong>MUST</strong> also use <code>--float</code>. Mixing float and double GRM binary files will cause reading errors due to inconsistent data types.
     </div>
 
-    <!-- ========== 3.1 Make GRM ========== -->
-    <h3 id="grm">3.1. Make GRM (--make-grm)</h3>
+    <!-- ========== 4.1 Make GRM ========== -->
+    <h3 id="grm">4.1. Make GRM (--make-grm)</h3>
 
     <h4>Description</h4>
     <p>
@@ -559,8 +620,8 @@ RBP --make-grm --geno ./data/geno --out large_grm --geno-ind keep_list.txt --chu
     </div>
 
 
-    <!-- ========== 3.2 kPCA ========== -->
-    <h3 id="kpca">3.2. kPCA Analysis (--kpca)</h3>
+    <!-- ========== 4.2 kPCA ========== -->
+    <h3 id="kpca">4.2. kPCA Analysis (--kpca)</h3>
 
     <h4>Description</h4>
     <p>
@@ -602,8 +663,8 @@ RBP --kpca --grm my_grm_float --npc 20 --out pca_result --float --ncpus 8</code>
     </div>
 
 
-    <!-- ========== 3.3 Single Trait ========== -->
-    <h3 id="single">3.3. Single-trait Analysis (--single-trait)</h3>
+    <!-- ========== 4.3 Single Trait ========== -->
+    <h3 id="single">4.3. Single-trait Analysis (--single-trait)</h3>
 
     <h4>Description</h4>
     <p>
@@ -785,8 +846,8 @@ RBP --single-trait \
     </div>
 
 
-    <!-- ========== 3.4 Batch Trait ========== -->
-    <h3 id="batch">3.4. Batch-trait Analysis (--batch-trait)</h3>
+    <!-- ========== 4.4 Batch Trait ========== -->
+    <h3 id="batch">4.4. Batch-trait Analysis (--batch-trait)</h3>
 
     <h4>Description</h4>
     <p>
