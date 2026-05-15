@@ -261,6 +261,12 @@
     font-size: 15px;
   }
   .warn strong { color: #f5a623; }
+  .info {
+    background: #f0f7ff;
+    border: 1px solid #cce5ff;
+    border-left: 4px solid #007bff;
+  }
+  .info strong { color: #007bff; }
   
   /* Text NOTE style matching image */
   .note-text {
@@ -306,6 +312,7 @@
 <!-- ==================== NAVBAR ==================== -->
 <header class="navbar">
   <div class="logo">
+    <!-- Assuming the image is named logo.png and is located in the same directory -->
     <img src="logo.png" alt="RBP Logo" style="height: 78px; width: auto; object-fit: contain;">
   </div>
 </header>
@@ -326,9 +333,10 @@
       
       <li class="nav-title">4. MODULES</li>
       <li class="nav-item"><a class="nav-link" href="#grm">4.1. Make GRM</a></li>
-      <li class="nav-item"><a class="nav-link" href="#kpca">4.2. kPCA Analysis</a></li>
-      <li class="nav-item"><a class="nav-link" href="#single">4.3. Single-trait Analysis</a></li>
-      <li class="nav-item"><a class="nav-link" href="#batch">4.4. Batch-trait Analysis</a></li>
+      <li class="nav-item"><a class="nav-link" href="#trans-grm">4.2. GRM Precision Conversion</a></li>
+      <li class="nav-item"><a class="nav-link" href="#kpca">4.3. kPCA Analysis</a></li>
+      <li class="nav-item"><a class="nav-link" href="#single">4.4. Single-trait Analysis</a></li>
+      <li class="nav-item"><a class="nav-link" href="#batch">4.5. Batch-trait Analysis</a></li>
     </ul>
   </aside>
 
@@ -390,6 +398,7 @@
     <p>RBP provides four sub-commands (modules):</p>
     <ol>
       <li><code>--make-grm</code> &mdash; Build Genomic Relationship Matrix (GRM)</li>
+      <li><code>--trans-grm</code> &mdash; Convert GRM precision (Float &lt;-&gt; Double)</li>
       <li><code>--kpca</code> &mdash; GRM-based Principal Component Analysis (kPCA)</li>
       <li><code>--single-trait</code> &mdash; Single-trait GWAS / AI-REML analysis</li>
       <li><code>--batch-trait</code> &mdash; Batch multi-trait GWAS / DFREML analysis</li>
@@ -514,7 +523,7 @@ IND005      10.9     7.2      M      B2      2.0    BULL_B
     <!-- ========== 4. Modules ========== -->
     <h2 id="modules">4. Modules</h2>
 
-    <p>RBP's four modules are selected by the first positional parameter. The following common parameters apply to all modules:</p>
+    <p>RBP's modules are selected by the first positional parameter. The following common parameters apply to all modules:</p>
 
     <table class="param-table">
       <thead>
@@ -597,8 +606,61 @@ RBP --make-grm --geno ./data/geno --out large_grm --geno-ind keep_list.txt --chu
     </div>
 
 
-    <!-- ========== 4.2 kPCA ========== -->
-    <h3 id="kpca">4.2. kPCA Analysis (--kpca)</h3>
+    <!-- ========== 4.2 Trans GRM ========== -->
+    <h3 id="trans-grm">4.2. GRM Precision Conversion (--trans-grm)</h3>
+
+    <h4>Description</h4>
+    <p>
+      Automatically detect the data precision of a GRM binary file (<code>double</code> / 64-bit or <code>float</code> / 32-bit) and perform a high-speed conversion to the other format. 
+    </p>
+    <p>
+      This module utilizes a highly optimized OpenMP multi-threaded streaming architecture with <strong>O(1) memory complexity</strong>. Regardless of whether the matrix is 1GB or 500GB, the physical memory consumption is strictly locked at around 12 MB, completely avoiding Out-of-Memory (OOM) errors. The accompanying plain text files (<code>.id</code> and <code>.col</code>) are safely duplicated to the new prefix.
+    </p>
+
+    <div class="warn">
+      <strong>Safety Protection:</strong> The <code>--out</code> prefix <strong>CANNOT</strong> be identical to the input <code>--grm</code> prefix. This is a strict safeguard to prevent irreversible data destruction via in-place file truncation.
+    </div>
+
+    <h4>Output Files</h4>
+    <table class="param-table">
+      <thead><tr><th>Extension</th><th>Content</th></tr></thead>
+      <tbody>
+        <tr><td><code>.bin</code></td><td>The converted GRM binary matrix (Double -> Float, or Float -> Double)</td></tr>
+        <tr><td><code>.id</code></td><td>Copied individual ID list</td></tr>
+        <tr><td><code>.col</code></td><td>Copied column list (Generated only if the input is a compressed GRM)</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Exclusive Parameters</h4>
+    <table class="param-table">
+      <thead><tr><th>Parameter</th><th>Description</th><th>Default</th></tr></thead>
+      <tbody>
+        <tr><td><code>--grm PREFIX</code></td><td>Input GRM file prefix (without the <code>.bin</code> extension)</td><td>— (Required)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info">
+      <strong>Smart Detection:</strong> You do not need to specify whether the input is float or double. RBP will calculate the exact dimensions from the <code>.id</code> (and <code>.col</code>) files and use underlying OS calls to determine the byte size, automatically executing dimension reduction (truncation) or precision promotion (zero-padding).
+    </div>
+
+    <h4>Complete Example</h4>
+    <div class="code-wrapper">
+      <button class="copy-btn" onclick="copyCode(this)">copy</button>
+      <pre><code># Automatically convert a GRM (e.g., from double to float to save memory for subsequent steps)
+RBP --trans-grm \
+  --grm my_huge_grm \
+  --out my_huge_grm_float \
+  --ncpus 16</code></pre>
+    </div>
+
+    <!-- ===== Recommendation Box ===== -->
+    <div class="info" style="border-left-color: #28a745; background-color: #f1faee;">
+      <strong>Recommendation:</strong> It is highly recommended to use <strong>double-precision</strong> GRM (or use <code>--trans-grm</code> to convert a float GRM to double) in subsequent downstream analyses to ensure optimal precision and numerical stability. This is especially crucial when using the Conjugate Gradient (CG) solver (<code>--solver CG</code>) in the <code>--single-trait</code> module, as the CG algorithm is sensitive to floating-point truncation errors.
+    </div>
+
+
+    <!-- ========== 4.3 kPCA ========== -->
+    <h3 id="kpca">4.3. kPCA Analysis (--kpca)</h3>
 
     <h4>Description</h4>
     <p>
@@ -640,8 +702,8 @@ RBP --kpca --grm my_grm_float --npc 20 --out pca_result --float --ncpus 8</code>
     </div>
 
 
-    <!-- ========== 4.3 Single Trait ========== -->
-    <h3 id="single">4.3. Single-trait Analysis (--single-trait)</h3>
+    <!-- ========== 4.4 Single Trait ========== -->
+    <h3 id="single">4.4. Single-trait Analysis (--single-trait)</h3>
 
     <h4>Description</h4>
     <p>
@@ -823,8 +885,8 @@ RBP --single-trait \
     </div>
 
 
-    <!-- ========== 4.4 Batch Trait ========== -->
-    <h3 id="batch">4.4. Batch-trait Analysis (--batch-trait)</h3>
+    <!-- ========== 4.5 Batch Trait ========== -->
+    <h3 id="batch">4.5. Batch-trait Analysis (--batch-trait)</h3>
 
     <h4>Description</h4>
     <p>
