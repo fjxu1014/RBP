@@ -305,6 +305,45 @@
     .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid #eaeaea; }
     .content { padding: 30px 20px; }
   }
+
+  /* ---- added by md2html.py ---- */
+  .content blockquote {
+    margin: 22px 0;
+    padding: 14px 22px;
+    border-left: 4px solid #0969da;
+    background: #f6f8fa;
+    color: #24292f;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .content blockquote p { margin: 0; font-size: inherit; }
+
+  /* ---- added by md2html.py ---- */
+  .content blockquote {
+    margin: 22px 0;
+    padding: 14px 22px;
+    border-left: 4px solid #0969da;
+    background: #f6f8fa;
+    color: #24292f;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .content blockquote p { margin: 0; font-size: inherit; }
+
+  /* ---- added by md2html.py ---- */
+  .content blockquote {
+    margin: 22px 0;
+    padding: 14px 22px;
+    border-left: 4px solid #0969da;
+    background: #f6f8fa;
+    color: #24292f;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .content blockquote p { margin: 0; font-size: inherit; }
 </style>
 </head>
 <body>
@@ -321,652 +360,1027 @@
 <div class="main-wrapper">
   
   <!-- ==================== SIDEBAR ==================== -->
-  <aside class="sidebar">
+        <aside class="sidebar">
     <ul class="nav-menu" id="sidebar-nav">
-      <li class="nav-title"><a href="#release">1. RELEASE</a></li>
-
-      <li class="nav-title"><a href="#intro">2. INTRODUCTION</a></li>
-      
-      <li class="nav-title">3. INPUT FILE FORMATS</li>
-      <li class="nav-item"><a class="nav-link" href="#phe-file">3.1. Phenotype file</a></li>
-      <li class="nav-item"><a class="nav-link" href="#geno-file">3.2. Genotype file</a></li>
-      
-      <li class="nav-title">4. MODULES</li>
-      <li class="nav-item"><a class="nav-link" href="#grm">4.1. Make GRM</a></li>
-      <li class="nav-item"><a class="nav-link" href="#trans-grm">4.2. GRM Precision Conversion</a></li>
-      <li class="nav-item"><a class="nav-link" href="#kpca">4.3. kPCA Analysis</a></li>
-      <li class="nav-item"><a class="nav-link" href="#single">4.4. Single-trait Analysis</a></li>
-      <li class="nav-item"><a class="nav-link" href="#batch">4.5. Batch-trait Analysis</a></li>
+      <li class="nav-title"><a href="#1-introduction">1. INTRODUCTION</a></li>
+      <li class="nav-title"><a href="#2-installation">2. INSTALLATION</a></li>
+      <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
+      <li class="nav-item"><a class="nav-link" href="#package-contents">Package contents</a></li>
+      <li class="nav-item"><a class="nav-link" href="#requirements">Requirements</a></li>
+      <li class="nav-item"><a class="nav-link" href="#smoke-test">Smoke test</a></li>
+      <li class="nav-title"><a href="#3-input-file-formats">3. INPUT FILE FORMATS</a></li>
+      <li class="nav-item"><a class="nav-link" href="#31-phenotype-file">3.1 Phenotype file</a></li>
+      <li class="nav-item"><a class="nav-link" href="#32-fixed-effects-and-covariates">3.2 Fixed effects and covariates</a></li>
+      <li class="nav-item"><a class="nav-link" href="#33-additional-random-effects">3.3 Additional random effects</a></li>
+      <li class="nav-item"><a class="nav-link" href="#34-pedigree-file">3.4 Pedigree file</a></li>
+      <li class="nav-item"><a class="nav-link" href="#35-genotype-file">3.5 Genotype file</a></li>
+      <li class="nav-item"><a class="nav-link" href="#36-snp-weight-file">3.6 SNP weight file</a></li>
+      <li class="nav-item"><a class="nav-link" href="#37-genetic-relationship-and-predictor-matrices">3.7 Genetic relationship and predictor matrices</a></li>
+      <li class="nav-title"><a href="#4-running-rbp">4. RUNNING RBP</a></li>
+      <li class="nav-item"><a class="nav-link" href="#41-global-parameters">4.1 Global parameters</a></li>
+      <li class="nav-item"><a class="nav-link" href="#42-building-relationship-matrices">4.2 Building relationship matrices</a></li>
+      <li class="nav-item"><a class="nav-link" href="#43-principal-component-analysis---kpca">4.3 Principal component analysis (`--kpca`)</a></li>
+      <li class="nav-item"><a class="nav-link" href="#44-blup---single-trait">4.4 BLUP (`--single-trait`)</a></li>
+      <li class="nav-item"><a class="nav-link" href="#45-single-step-blup---single-step">4.5 Single-step BLUP (`--single-step`)</a></li>
+      <li class="nav-item"><a class="nav-link" href="#46-batch-blup---batch-trait">4.6 Batch BLUP (`--batch-trait`)</a></li>
+      <li class="nav-item"><a class="nav-link" href="#47-pev-and-reliability">4.7 PEV and reliability</a></li>
+      <li class="nav-item"><a class="nav-link" href="#48-gwas">4.8 GWAS</a></li>
+      <li class="nav-title"><a href="#appendix-a--output-files">APPENDIX A — OUTPUT FILES</a></li>
+      <li class="nav-title"><a href="#appendix-b--complete-workflows">APPENDIX B — COMPLETE WORKFLOWS</a></li>
+      <li class="nav-title"><a href="#appendix-c--performance-and-memory">APPENDIX C — PERFORMANCE AND MEMORY</a></li>
+      <li class="nav-title"><a href="#appendix-d--open-items">APPENDIX D — OPEN ITEMS</a></li>
     </ul>
   </aside>
 
-  <!-- ==================== CONTENT ==================== -->
   <main class="content" id="main-content">
-    
-    <h1>User Manual of RBP</h1>
-
-    <p style="margin-bottom: 25px;">
-      An efficient GWAS and GS analysis tool for large-scale genomic data based on the Mixed Linear Model (MLM), supporting batch-trait analysis.
-    </p>
-
-    <!-- ========== 1. Release ========== -->
-    <h2 id="release">1. Release</h2>
-
-    <p>
-      RBP is currently compiled and supported on the <strong>Linux x86_64</strong> platform. To maximize calculation efficiency across different CPU architectures, we provide two pre-compiled executable versions linked with different linear algebra libraries:
-    </p>
-    <ul>
-      <li><strong>MKL version:</strong> Highly recommended for Intel CPUs.</li>
-      <li><strong>OpenBLAS version:</strong> Recommended for AMD CPUs or systems where MKL is not optimal.</li>
-    </ul>
-
-    <!-- Release Downloads -->
-    <div class="release-links-container">
-      <a href="https://github.com/fjxu1014/RBP/releases/download/V1.13/RBP_v1.13_Linux_x86_64_MKL.tar.gz" class="release-asset-link">
-        <svg viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.404L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.404v5.544z"></path></svg>
-        RBP_v1.13_Linux_x86_64_MKL.tar.gz
-      </a>
-      <a href="https://github.com/fjxu1014/RBP/releases/download/V1.13/RBP_v1.13_Linux_x86_64_openBLAS.tar.gz" class="release-asset-link">
-        <svg viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M8.878.392a1.75 1.75 0 00-1.756 0l-5.25 3.045A1.75 1.75 0 001 4.951v6.098c0 .624.332 1.2.872 1.514l5.25 3.045a1.75 1.75 0 001.756 0l5.25-3.045c.54-.313.872-.89.872-1.514V4.951c0-.624-.332-1.2-.872-1.514L8.878.392zM7.875 1.69a.25.25 0 01.25 0l4.63 2.685L8 7.133 3.245 4.375l4.63-2.685zM2.5 5.677v5.372c0 .09.047.171.125.216l4.625 2.683V8.404L2.5 5.677zm6.25 8.271l4.625-2.683a.25.25 0 00.125-.216V5.677L8.75 8.404v5.544z"></path></svg>
-        RBP_v1.13_Linux_x86_64_openBLAS.tar.gz
-      </a>
-    </div>
-
-    <!-- ========== 2. Introduction ========== -->
-    <h2 id="intro">2. Introduction</h2>
-
-    <p>
-      RBP (Rapid Batch-process-supported Powerful tool) is a high-performance computing tool designed for large-scale genomic data. 
-      Based on the <strong>Mixed Linear Model (MLM)</strong> framework, it is used for:
-    </p>
-
-    <ul>
-      <li><strong>GWAS (Genome-Wide Association Study)</strong> — Scanning the genome for SNP loci significantly associated with traits.</li>
-      <li><strong>GS (Genomic Selection)</strong> — Estimating breeding values (GEBV / Random Effects) for individual selection.</li>
-    </ul>
-
-    <p>Core features of RBP:</p>
-    <ul>
-      <li><strong>High performance</strong>: Implemented in C++ + Armadillo + OpenMP, supporting multi-thread parallelism.</li>
-      <li><strong>Double precision support</strong>: Supports both <code>float</code> (single-precision) and <code>double</code> (double-precision) calculations. Single precision saves significant memory.</li>
-      <li><strong>Out-of-Core block mode</strong>: Supports block mapping for ultra-large datasets (individuals &gt; 50,000), breaking memory limits.</li>
-      <li><strong>Batch-trait analysis</strong>: Supports simultaneous variance component estimation and GWAS scanning for multiple traits in a single run.</li>
-      <li><strong>Multiple random effects</strong>: Supports building multiple GRMs as random effects, as well as additional categorical random effects.</li>
-      <li><strong>Multiple GWAS testing methods</strong>: Standard MLM, Quasi-Standard, Gamma approximation, Exact MLM.</li>
-    </ul>
-
-    <p>RBP provides four sub-commands (modules):</p>
-    <ol>
-      <li><code>--make-grm</code> &mdash; Build Genomic Relationship Matrix (GRM)</li>
-      <li><code>--trans-grm</code> &mdash; Convert GRM precision (Float &lt;-&gt; Double)</li>
-      <li><code>--kpca</code> &mdash; GRM-based Principal Component Analysis (kPCA)</li>
-      <li><code>--single-trait</code> &mdash; Single-trait GWAS / AI-REML analysis</li>
-      <li><code>--batch-trait</code> &mdash; Batch multi-trait GWAS / DFREML analysis</li>
-    </ol>
-
-
-    <!-- ========== 3. Input File Formats ========== -->
-    <h2 id="input">3. Input File Formats</h2>
-
-    <!-- --- Phenotype File --- -->
-    <h3 id="phe-file">3.1. Phenotype file</h3>
-
-    <p>The phenotype file is a <strong>plain text file</strong>, with columns separated by spaces, tabs, or commas.</p>
-
-    <div class="warn"><strong>Must satisfy:</strong> The file must contain a header, and the first column must be the individual ID.</div>
-
-    <p><strong>File example (phe.txt):</strong></p>
-    
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre class="green-border"><code>ID          Trait1   Trait2   Sex    Batch   Age    Sire
-IND001      12.5     8.3      M      B1      2.1    BULL_A
-IND002      14.1     9.1      F      B2      1.8    BULL_B
-IND003      11.8     7.9      M      B1      2.4    BULL_A
-IND004      13.2     8.7      F      B1      1.5    BULL_C
-IND005      10.9     7.2      M      B2      2.0    BULL_B
-...</code></pre>
-    </div>
-
-    <p>Common parameters related to the phenotype file:</p>
-
-    <table class="param-table">
-      <thead>
-        <tr><th>Parameter</th><th>Description</th><th>Example</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--phe FILE</code></td>
-          <td>Specify the phenotype file path</td>
-          <td><code>--phe phe.txt</code></td>
-        </tr>
-        <tr>
-          <td><code>--phe-col STR</code></td>
-          <td>Specify the column(s) as the response variable (trait), 1-based index, comma-separated. Single-trait mode only takes the first column; batch mode can take multiple columns.</td>
-          <td><code>--phe-col 2</code> or <code>--phe-col 2,3</code></td>
-        </tr>
-        <tr>
-          <td><code>--fix-col STR</code></td>
-          <td>Specify <strong>categorical fixed effect</strong> columns (e.g., sex, batch), 1-based, comma-separated. The program automatically performs dummy variable encoding (using the last level as a reference).</td>
-          <td><code>--fix-col 4,5</code></td>
-        </tr>
-        <tr>
-          <td><code>--cov-col STR</code></td>
-          <td>Specify <strong>continuous covariate</strong> columns (e.g., age, weight), 1-based, comma-separated.</td>
-          <td><code>--cov-col 6</code></td>
-        </tr>
-        <tr>
-          <td><code>--rand-col STR</code></td>
-          <td>Specify the columns of categorical variables for <strong>additional random effects</strong>, 1-based, comma-separated (only supported in single-trait mode).</td>
-          <td><code>--rand-col 7</code></td>
-        </tr>
-        <tr>
-          <td><code>--rand-cov LIST</code></td>
-          <td>Specify the covariance matrix file prefix corresponding to additional random effects (space-separated). '<code>1</code>' indicates an identity matrix (i.i.d. random effect). A <code>.txt</code> list file is also accepted.</td>
-          <td><code>--rand-cov pedigree_grm</code> or <code>--rand-cov 1</code></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="note-text">NOTE</div>
-    <p style="text-align: center; font-family: 'Segoe UI', sans-serif; font-size: 14px; margin-top: -10px; margin-bottom: 30px;">
-      <strong>Column index note:</strong> All column indices (<code>--phe-col</code>, <code>--fix-col</code>, <code>--cov-col</code>, <code>--rand-col</code>) are <strong>1-based</strong>, meaning the first column (ID column) is 1.
-    </p>
-
-    <!-- --- Genotype File --- -->
-    <h3 id="geno-file">3.2. Genotype file</h3>
-
-    <p>The genotype file uses the <strong>PLINK binary format</strong> (<code>.bed</code> / <code>.bim</code> / <code>.fam</code>). Specify the prefix (without extension, or with the <code>.bed</code> suffix) using the <code>--geno</code> parameter.</p>
-
-    <p>Parameters for specifying individual and SNP subsets:</p>
-
-    <table class="param-table">
-      <thead>
-        <tr><th>Parameter</th><th>Description</th><th>Example</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>--geno FILE</code></td>
-          <td>Genotype data PLINK prefix (or full .bed path)</td>
-          <td><code>--geno ./data/geno</code></td>
-        </tr>
-        <tr>
-          <td><code>--geno-ind STR</code></td>
-          <td>Specify the individual indices to read (1-based), supporting a comma-separated list <strong>OR</strong> a file path with one number per line.</td>
-          <td><code>--geno-ind 1,3,5,100</code> or <code>--geno-ind keep_ids.txt</code></td>
-        </tr>
-        <tr>
-          <td><code>--geno-snp STR</code></td>
-          <td>Specify the SNP indices to read (1-based), supporting a comma-separated list <strong>OR</strong> a file path with one number per line.</td>
-          <td><code>--geno-snp 1,2,3,500</code> or <code>--geno-snp snp_list.txt</code></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="info">
-      <strong>Smart parsing:</strong> <code>--geno-ind</code> and <code>--geno-snp</code> will first try to open the input as a file path; if the file does not exist, it will be parsed as a comma-separated list. Indices are 1-based.
-    </div>
-
-    <p><strong>Index file example (e.g., <code>keep_ids.txt</code> or <code>snp_list.txt</code>):</strong></p>
-    <p>The file is a single-column plain text format, with one number per line, representing the index (1-based) of the individual or SNP to keep from the original data.</p>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre class="green-border"><code>1
-3
-5
-102
-105
-...</code></pre>
-    </div>
-
-
-    <!-- ========== 4. Modules ========== -->
-    <h2 id="modules">4. Modules</h2>
-
-    <p>RBP's modules are selected by the first positional parameter. The following common parameters apply to all modules:</p>
-
-    <table class="param-table">
-      <thead>
-        <tr><th>Parameter</th><th>Description</th><th>Default</th></tr>
-      </thead>
-      <tbody>
-        <tr><td><code>--out PREFIX</code></td><td>Output file prefix</td><td>rbp</td></tr>
-        <tr><td><code>--ncpus N</code></td><td>Number of CPU threads</td><td>1</td></tr>
-        <tr><td><code>--float</code></td><td>Use single-precision (float) calculation to save memory. <strong>If enabled during GRM construction, subsequent analysis must also enable it</strong></td><td>Off (uses double)</td></tr>
-        <tr><td><code>--chunk</code></td><td>Enable Out-of-Core block mode (recommended for individuals &gt; 50,000)</td><td>Off</td></tr>
-        <tr><td><code>--quiet</code></td><td>Quiet mode, do not print logs to the terminal (logs are still written to the .log file)</td><td>Off</td></tr>
-      </tbody>
-    </table>
-
-    <div class="warn">
-      <strong>Important: Consistency of the <code>--float</code> parameter</strong><br>
-      If <code>--float</code> is used during GRM construction, subsequent modules like kPCA and single-trait analysis <strong>MUST</strong> also use <code>--float</code>. Mixing float and double GRM binary files will cause reading errors due to inconsistent data types.
-    </div>
-
-    <!-- ========== 4.1 Make GRM ========== -->
-    <h3 id="grm">4.1. Make GRM (--make-grm)</h3>
-
-    <h4>Description</h4>
-    <p>
-      Build the <strong>Genomic Relationship Matrix (GRM)</strong> from PLINK binary genotype data.
-      Supports three calculation methods and the option to calculate the generalized inverse matrix of the GRM.
-    </p>
-
-    <h4>Output Files</h4>
-    <table class="param-table">
-      <thead><tr><th>Extension</th><th>Content</th></tr></thead>
-      <tbody>
-        <tr><td><code>.GA.bin</code></td><td>Additive GRM binary matrix (Yang or VanRaden method)</td></tr>
-        <tr><td><code>.GD.bin</code></td><td>Dominance GRM binary matrix</td></tr>
-        <tr><td><code>.id</code></td><td>Individual ID list corresponding to the rows/columns of the GRM</td></tr>
-        <tr><td><code>.inv.txt</code></td><td>Generalized inverse matrix of the GRM, three-column format (row, col, val) — generated only when <code>--inv</code> is specified</td></tr>
-      </tbody>
-    </table>
-
-    <h4>Exclusive Parameters</h4>
-    <table class="param-table">
-      <thead><tr><th>Parameter</th><th>Description</th><th>Default</th></tr></thead>
-      <tbody>
-        <tr><td><code>--method N</code></td><td>GRM construction method: <code>1</code>=Yang additive (default), <code>2</code>=VanRaden additive, <code>3</code>=Dominance</td><td>1</td></tr>
-        <tr><td><code>--weight FILE</code></td><td>SNP weight file (single-column text, each line corresponds to a SNP weight)</td><td>None (all SNPs equal weight)</td></tr>
-        <tr><td><code>--snp-chunk N</code></td><td>SNP chunk size processed at a time, affecting memory usage and calculation efficiency</td><td>10000</td></tr>
-        <tr><td><code>--ind-chunk N</code></td><td>Individual chunk size processed at a time in block mode (effective only under <code>--chunk</code> mode)</td><td>512</td></tr>
-        <tr><td><code>--inv</code></td><td>Calculate the generalized inverse matrix of the GRM and save it in three-column format <code>.inv.txt</code></td><td>Off</td></tr>
-        <tr><td><code>--geno-ind STR</code></td><td>Select individual subset for GRM construction</td><td>All individuals</td></tr>
-        <tr><td><code>--geno-snp STR</code></td><td>Select SNP subset for GRM construction</td><td>All SNPs</td></tr>
-      </tbody>
-    </table>
-
-    <p><strong>SNP weight file example (<code>snp_weights.txt</code>):</strong></p>
-    <p>Single-column text file, the number of lines must exactly match the number of SNPs finally used in the calculation, each line corresponds to a weight value of a SNP (negative values are not supported).</p>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre class="green-border"><code>1.0
-0.8
-1.5
-2.0
-1.1
-...</code></pre>
-    </div>
-
-    <h4>Complete Examples</h4>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># Build additive GRM using the default Yang method (double precision)
-RBP --make-grm --geno ./data/geno --out my_grm --ncpus 8
-
-# Use VanRaden method + SNP weights (single precision, suitable for ultra-large datasets)
-RBP --make-grm --geno ./data/geno --out my_grm_vanraden --method 2 --weight snp_weights.txt --float --ncpus 16
-
-# Build dominance effect GRM and calculate the inverse matrix
-RBP --make-grm --geno ./data/geno --out dom_grm --method 3 --inv --ncpus 8
-
-# Build GRM using a specified individual subset, enable block mode (individuals > 50,000)
-RBP --make-grm --geno ./data/geno --out large_grm --geno-ind keep_list.txt --chunk --ind-chunk 1024 --ncpus 24</code></pre>
-    </div>
-
-
-    <!-- ========== 4.2 Trans GRM ========== -->
-    <h3 id="trans-grm">4.2. GRM Precision Conversion (--trans-grm)</h3>
-
-    <h4>Description</h4>
-    <p>
-      Automatically detect the data precision of a GRM binary file (<code>double</code> / 64-bit or <code>float</code> / 32-bit) and perform a high-speed conversion to the other format. 
-    </p>
-    <p>
-      This module utilizes a highly optimized OpenMP multi-threaded streaming architecture with <strong>O(1) memory complexity</strong>. Regardless of whether the matrix is 1GB or 500GB, the physical memory consumption is strictly locked at around 12 MB, completely avoiding Out-of-Memory (OOM) errors. The accompanying plain text files (<code>.id</code> and <code>.col</code>) are safely duplicated to the new prefix.
-    </p>
-
-    <div class="warn">
-      <strong>Safety Protection:</strong> The <code>--out</code> prefix <strong>CANNOT</strong> be identical to the input <code>--grm</code> prefix. This is a strict safeguard to prevent irreversible data destruction via in-place file truncation.
-    </div>
-
-    <h4>Output Files</h4>
-    <table class="param-table">
-      <thead><tr><th>Extension</th><th>Content</th></tr></thead>
-      <tbody>
-        <tr><td><code>.bin</code></td><td>The converted GRM binary matrix (Double -> Float, or Float -> Double)</td></tr>
-        <tr><td><code>.id</code></td><td>Copied individual ID list</td></tr>
-        <tr><td><code>.col</code></td><td>Copied column list (Generated only if the input is a compressed GRM)</td></tr>
-      </tbody>
-    </table>
-
-    <h4>Exclusive Parameters</h4>
-    <table class="param-table">
-      <thead><tr><th>Parameter</th><th>Description</th><th>Default</th></tr></thead>
-      <tbody>
-        <tr><td><code>--grm PREFIX</code></td><td>Input GRM file prefix (without the <code>.bin</code> extension)</td><td>— (Required)</td></tr>
-      </tbody>
-    </table>
-
-    <div class="info">
-      <strong>Smart Detection:</strong> You do not need to specify whether the input is float or double. RBP will calculate the exact dimensions from the <code>.id</code> (and <code>.col</code>) files and use underlying OS calls to determine the byte size, automatically executing dimension reduction (truncation) or precision promotion (zero-padding).
-    </div>
-
-    <h4>Complete Example</h4>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># Automatically convert a GRM (e.g., from double to float to save memory for subsequent steps)
-RBP --trans-grm \
-  --grm my_huge_grm \
-  --out my_huge_grm_float \
-  --ncpus 16</code></pre>
-    </div>
-
-    <!-- ===== Recommendation Box ===== -->
-    <div class="info" style="border-left-color: #28a745; background-color: #f1faee;">
-      <strong>Recommendation:</strong> It is highly recommended to use <strong>double-precision</strong> GRM (or use <code>--trans-grm</code> to convert a float GRM to double) in subsequent downstream analyses to ensure optimal precision and numerical stability. This is especially crucial when using the Conjugate Gradient (CG) solver (<code>--solver CG</code>) in the <code>--single-trait</code> module, as the CG algorithm is sensitive to floating-point truncation errors.
-    </div>
-
-
-    <!-- ========== 4.3 kPCA ========== -->
-    <h3 id="kpca">4.3. kPCA Analysis (--kpca)</h3>
-
-    <h4>Description</h4>
-    <p>
-      Based on the constructed GRM, use the <strong>Lanczos algorithm</strong> to calculate the top <em>k</em> largest eigenvalues and their corresponding eigenvectors (i.e., principal components, PCs).
-      kPCA is commonly used for population stratification detection and introducing PCs as covariates into GWAS models to control population structure.
-    </p>
-
-    <h4>Output Files</h4>
-    <table class="param-table">
-      <thead><tr><th>Extension</th><th>Content</th></tr></thead>
-      <tbody>
-        <tr><td><code>.val</code></td><td>Eigenvalue list (one per line)</td></tr>
-        <tr><td><code>.vec</code></td><td>Principal component (PCs) matrix: the first column is the individual ID, and subsequent columns are PC scores</td></tr>
-      </tbody>
-    </table>
-
-    <div class="info">
-      <strong>Note:</strong> If multiple GRMs are provided (<code>--grm file1 file2</code>), the kPCA module will only analyze the <strong>first GRM</strong> and output a warning.
-    </div>
-
-    <h4>Exclusive Parameters</h4>
-    <table class="param-table">
-      <thead><tr><th>Parameter</th><th>Description</th><th>Default</th></tr></thead>
-      <tbody>
-        <tr><td><code>--grm PREFIX</code></td><td>Input GRM file prefix (without the <code>.bin</code> extension)</td><td>— (Required)</td></tr>
-        <tr><td><code>--npc N</code></td><td>Number of principal components to extract</td><td>10</td></tr>
-        <tr><td><code>--tol VAL</code></td><td>Lanczos algorithm convergence tolerance</td><td>1e-6</td></tr>
-      </tbody>
-    </table>
-
-    <h4>Complete Examples</h4>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># Extract the top 10 principal components from the GRM
-RBP --kpca --grm my_grm --npc 10 --ncpus 8
-
-# Specify output prefix, extract top 20 PCs, and use single precision
-RBP --kpca --grm my_grm_float --npc 20 --out pca_result --float --ncpus 8</code></pre>
-    </div>
-
-
-    <!-- ========== 4.4 Single Trait ========== -->
-    <h3 id="single">4.4. Single-trait Analysis (--single-trait)</h3>
-
-    <h4>Description</h4>
-    <p>
-      Fit a mixed linear model for a single trait, use the <strong>AI-REML</strong> (Average Information Restricted Maximum Likelihood) algorithm to estimate variance components,
-      and optionally perform GWAS scanning or calculate random effect predicted values (breeding values) and their PEV (Prediction Error Variance).
-    </p>
-
-    <p>Single-trait analysis supports various complex model structures:</p>
-    <ul>
-      <li>General GS / GWAS (Single GRM + Residuals)</li>
-      <li>Repeatability model (repeated measures, use <code>--repeat</code>)</li>
-      <li>Multiple GRM random effects (e.g., additive + dominance + epistasis)</li>
-      <li>Including additional categorical random effects (e.g., batch, maternal effects)</li>
-      <li>Using parental ancestral genetic random effects as background (use <code>--rand-col</code> + <code>--rand-cov</code>)</li>
-    </ul>
-
-    <h4>Output Files</h4>
-    <table class="param-table">
-      <thead><tr><th>File</th><th>Content</th></tr></thead>
-      <tbody>
-        <tr><td><code>.var</code></td><td>Variance component estimates (Variance, SE, Proportion)</td></tr>
-        <tr><td><code>.beta</code></td><td>Fixed effect estimates and standard errors</td></tr>
-        <tr><td><code>.rand</code></td><td>Predicted values of all random effects (breeding values, etc.), optionally PEV and reliability r²</td></tr>
-        <tr><td><code>.mlm</code></td><td>GWAS scan results (SNP, Chr, Pos, Effect, SE, Pvalue) — generated only when <code>--gwas</code> is specified</td></tr>
-        <tr><td><code>.log</code></td><td>Run log (including Lambda GC and Mean Chi² statistics)</td></tr>
-      </tbody>
-    </table>
-
-    <h4>Exclusive Parameters</h4>
-    <table class="param-table">
-      <thead><tr><th>Parameter</th><th>Description</th><th>Default</th></tr></thead>
-      <tbody>
-        <tr><td><code>--grm LIST</code></td><td>One or more GRM file prefixes (space-separated). A <code>.txt</code> list file is also accepted. The <strong>data types (float/double)</strong> of all GRMs must be consistent</td><td>—</td></tr>
-        <tr><td><code>--rand-col STR</code></td><td>Categorical variable columns for additional random effects</td><td>—</td></tr>
-        <tr><td><code>--rand-cov LIST</code></td><td>Covariance matrix file prefixes for additional random effects (space-separated). If '<code>1</code>', it means i.i.d.</td><td>—</td></tr>
-        <tr><td><code>--test METHOD</code></td><td>GWAS testing method: <code>standard</code> (Standard MLM), <code>quasi-standard</code> (not applicable to batch), <code>gamma</code> (Gamma approximation), <code>exact</code> (Exact test, not applicable to single)</td><td>standard</td></tr>
-        <tr><td><code>--gwas</code></td><td>Perform GWAS scan</td><td>Off</td></tr>
-        <tr><td><code>--solver METHOD</code></td><td>AI-REML solver: <code>CG</code> (Conjugate Gradient, default) or <code>Cholesky</code></td><td>CG</td></tr>
-        <tr><td><code>--criterion N</code></td><td>AI-REML convergence criteria:<br><code>0</code>=Converged if either 1 or 2 is satisfied<br><code>1</code>=Relative error of variance component estimates between two iterations &lt; tol<br><code>2</code>=Log-likelihood gradient of the objective function &lt; tol</td><td>0</td></tr>
-        <tr><td><code>--mom</code></td><td>Enable MoM-RHE initialization of variance components (accelerates convergence)</td><td>Off</td></tr>
-        <tr><td><code>--pev</code></td><td>Calculate PEV and reliability (r²) of random effect predictions</td><td>Off</td></tr>
-        <tr><td><code>--repeat</code></td><td>Specify repeatability model (repeated measures)</td><td>Off</td></tr>
-        <tr><td><code>--seed N</code></td><td>Random number seed</td><td>6666</td></tr>
-        <tr><td><code>--num-ranvec N</code></td><td>Number of random vectors used by quasi-standard/gamma method</td><td>100</td></tr>
-        <tr><td><code>--re-gamma-size N</code></td><td>Number of randomly sampled SNPs when estimating the gamma factor</td><td>500</td></tr>
-        <tr><td><code>--re-est-gamma</code></td><td>Force re-estimation of the gamma factor</td><td>Off</td></tr>
-        <tr><td><code>--maxit N</code></td><td>AI-REML maximum iterations</td><td>30</td></tr>
-        <tr><td><code>--tol VAL</code></td><td>AI-REML convergence tolerance</td><td>1e-5</td></tr>
-        <tr><td><code>--cg-maxit N</code></td><td>CG solver maximum iterations</td><td>500</td></tr>
-        <tr><td><code>--cg-tol VAL</code></td><td>CG solver convergence tolerance</td><td>1e-6</td></tr>
-      </tbody>
-    </table>
-
-    <h4>Detailed usage of the --grm parameter</h4>
-
-    <div class="warn">
-      <strong>Multiple GRM data types must be consistent:</strong> When specifying multiple GRMs, all GRMs must be constructed with the same precision (all float or all double), otherwise data reading errors will occur.
-    </div>
-
-    <p><strong>Three ways to specify multiple GRMs:</strong></p>
-
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># Method 1: List multiple GRM prefixes directly (space-separated)
-RBP --single-trait --grm grm_add grm_dom grm_epi --phe phe.txt --phe-col 2 --geno geno
-
-# Method 2: Specify via a .txt list file (one GRM prefix per line)
-# Content of grm_list.txt file:
-#   grm_add
-#   grm_dom
-#   grm_epi
-RBP --single-trait --grm grm_list.txt --phe phe.txt --phe-col 2 --geno geno
-
-# Method 3: Mixed use (direct prefixes + list file)
-RBP --single-trait --grm grm_add grm_list.txt --phe phe.txt --phe-col 2 --geno geno</code></pre>
-    </div>
-
-    <p><strong>GRM data type requirements:</strong></p>
-    <ul>
-      <li>All GRMs must be constructed with the same precision (all float or all double)</li>
-      <li>If <code>--float</code> was used during GRM construction, <code>--float</code> must also be used in single-trait analysis</li>
-      <li>Each GRM prefix must include <code>.bin</code> and <code>.id</code> files; if it is a compressed matrix, a <code>.col</code> file is also required</li>
-    </ul>
-
-    <h4>Complete Examples</h4>
-
-    <h5>Scenario 1: General GS / GWAS (Single GRM)</h5>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># Only estimate variance components and breeding values (GS)
-RBP --single-trait \
-  --grm my_grm \
-  --phe phe.txt \
-  --phe-col 2 \
-  --fix-col 4 \
-  --cov-col 6 \
-  --geno ./data/geno \
-  --out gs_result \
-  --ncpus 8
-
-# GWAS scan (Standard MLM)
-RBP --single-trait \
-  --grm my_grm \
-  --phe phe.txt \
-  --phe-col 2 \
-  --fix-col 4 \
-  --cov-col 6 \
-  --geno ./data/geno \
-  --gwas \
-  --out gwas_result \
-  --ncpus 8
-
-# GS + GWAS and calculate prediction error variance of estimated breeding values
-RBP --single-trait \
-  --grm my_grm \
-  --phe phe.txt \
-  --phe-col 2 \
-  --fix-col 4 \
-  --cov-col 6 \
-  --geno ./data/geno \
-  --gwas --pev \
-  --out gs_gwas_result \
-  --ncpus 8</code></pre>
-    </div>
-
-    <h5>Scenario 2: GS / GWAS for repeatability traits</h5>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># When there are repeated measure records for the same trait, use --repeat to specify the repeatability model
-RBP --single-trait \
-  --grm my_grm \
-  --phe phe_repeat.txt \
-  --phe-col 2 \
-  --fix-col 4,5 \
-  --geno ./data/geno \
-  --gwas --repeat \
-  --out repeat_result \
-  --ncpus 8</code></pre>
-    </div>
-
-    <h5>Scenario 3: GS / GWAS including multiple GRM random effects</h5>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># Incorporate both additive and dominance GRMs into the model
-RBP --single-trait \
-  --grm grm_add grm_dom \
-  --phe phe.txt \
-  --phe-col 2 \
-  --fix-col 4 \
-  --cov-col 6 \
-  --geno ./data/geno \
-  --gwas --pev \
-  --out multi_grm_result \
-  --ncpus 8</code></pre>
-    </div>
-
-    <h5>Scenario 4: GS / GWAS using parental ancestral genetic random effects as background</h5>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># --rand-col specifies the column index in the phenotype file for the individual-to-parent mapping
-# --rand-cov specifies the parental relationship matrix
-RBP --single-trait \
-  --grm my_grm \
-  --phe phe_with_sire.txt \
-  --phe-col 3 \
-  --fix-col 5 \
-  --rand-col 7 \
-  --rand-cov sire_grm \
-  --geno ./data/geno \
-  --gwas --pev \
-  --out sire_model_result \
-  --ncpus 8</code></pre>
-    </div>
-
-    <div class="info">
-      <strong>Parental model example note:</strong> Column 7 (<code>--rand-col 7</code>) in the phenotype file records the sire ID corresponding to each individual;
-      <code>sire_grm</code> is the pre-constructed relationship matrix (GRM) among sires. The model incorporates the sire genetic effect as an additional random effect,
-      thereby correcting the sire genetic background when estimating individual additive effects.
-    </div>
-
-
-    <!-- ========== 4.5 Batch Trait ========== -->
-    <h3 id="batch">4.5. Batch-trait Analysis (--batch-trait)</h3>
-
-    <h4>Description</h4>
-    <p>
-      Simultaneously perform variance component estimation and GWAS scanning for <strong>multiple traits</strong>. Uses the <strong>DFREML</strong> (Derivative-Free REML) algorithm
-      to estimate the genetic variance (Vg) and residual variance (Ve) of each trait by maximizing the log-likelihood via grid search.
-    </p>
-
-    <div class="warn">
-      <strong>Important limitations of batch mode:</strong>
-      <ul>
-        <li>Can only include <strong>1 GRM</strong>, multiple GRMs are not supported</li>
-        <li><strong>Additional random effects are not supported</strong> (<code>--rand-col</code> / <code>--rand-cov</code> are disabled)</li>
-        <li><strong>Block mode is not supported</strong> (<code>--chunk</code> will be automatically ignored)</li>
-        <li>Model structure: y = Xb + Zg + e (Fixed effects + Additive genetic + Residuals)</li>
-      </ul>
-    </div>
-
-    <h4>Output Files</h4>
-    <table class="param-table">
-      <thead><tr><th>File</th><th>Content</th></tr></thead>
-      <tbody>
-        <tr><td><code>.var</code></td><td>Vg, Ve, SE, and heritability (h²) for each trait</td></tr>
-        <tr><td><code>.rand</code></td><td>Random effect predicted values (breeding values) for each trait</td></tr>
-        <tr><td><code>.batchmlm</code></td><td>Effect, SE, Pvalue of all traits (Vg, Ve — generated only when <code>--test</code> is exact)</td></tr>
-        <tr><td><code>.batchSummary</code></td><td>Lambda GC and Mean Chi² summary for each trait</td></tr>
-        <tr><td><code>.log</code></td><td>Run log</td></tr>
-      </tbody>
-    </table>
-
-    <h4>Exclusive Parameters</h4>
-    <table class="param-table">
-      <thead><tr><th>Parameter</th><th>Description</th><th>Default</th></tr></thead>
-      <tbody>
-        <tr><td><code>--grm PREFIX</code></td><td>Single GRM file prefix (must be exactly one)</td><td>— (Required)</td></tr>
-        <tr><td><code>--phe-col STR</code></td><td>Trait columns for batch analysis (comma-separated)</td><td>—</td></tr>
-        <tr><td><code>--test METHOD</code></td><td>GWAS testing method: <code>standard</code>, <code>gamma</code>, <code>exact</code> (Note: quasi-standard is not supported)</td><td>standard</td></tr>
-        <tr><td><code>--gwas</code></td><td>Perform GWAS scan</td><td>Off</td></tr>
-        <tr><td><code>--seed N</code></td><td>Random number seed</td><td>6666</td></tr>
-        <tr><td><code>--num-ranvec N</code></td><td>Number of random vectors used by the gamma method</td><td>100</td></tr>
-        <tr><td><code>--re-gamma-size N</code></td><td>Number of random SNPs sampled to estimate the gamma factor</td><td>500</td></tr>
-      </tbody>
-    </table>
-
-    <h4>Complete Examples</h4>
-    <div class="code-wrapper">
-      <button class="copy-btn" onclick="copyCode(this)">copy</button>
-      <pre><code># Batch analysis for 3 traits (columns 2, 3, 4), only estimate variance components
-RBP --batch-trait \
-  --grm my_grm \
-  --phe phe.txt \
-  --phe-col 2,3,4 \
-  --fix-col 5 \
-  --cov-col 6,7 \
-  --geno ./data/geno \
-  --out batch_gs \
-  --ncpus 8
-
-# Batch analysis + GWAS scan (standard method)
-RBP --batch-trait \
-  --grm my_grm \
-  --phe phe.txt \
-  --phe-col 2,3,4 \
-  --fix-col 5 \
-  --cov-col 6,7 \
-  --geno ./data/geno \
-  --gwas --test standard \
-  --out batch_gwas \
-  --ncpus 16
-
-# Batch analysis + GWAS (gamma approximation method, suitable for fast scanning of large samples)
-RBP --batch-trait \
-  --grm my_grm \
-  --phe phe.txt \
-  --phe-col 2,3,4,5,6,7,8,9,10 \
-  --geno ./data/geno \
-  --gwas --test gamma \
-  --num-ranvec 200 --re-gamma-size 1000 \
-  --out batch_gamma_gwas \
-  --ncpus 24</code></pre>
-    </div>
+
+<h1>RBP User Manual</h1>
+
+<p><strong>Version 1.13</strong></p>
+
+<p>RBP (Rapid Batch-process-supported Powerful tool) is a command-line tool for <strong>GWAS</strong> and <strong>genomic selection (GS)</strong> on large-scale genomic data, built on the mixed linear model (MLM).</p>
+
+<blockquote><p><strong>Draft status.</strong> The text follows the author&#x27;s outline (<code>1.docx</code>). Every command, parameter, default value, output file name and restriction below was checked against the source code (<code>src/</code>) and the program&#x27;s built-in <code>--help</code>; all examples in §2, §4 and Appendix B were executed against the bundled demo data. Items that still need the author&#x27;s input are marked <strong>[TBC]</strong> and collected in Appendix D.</p></blockquote>
+
+<h2 id="contents">Contents</h2>
+
+<p>1. <a href="#1-introduction">Introduction</a> 2. <a href="#2-installation">Installation</a> 3. <a href="#3-input-file-formats">Input file formats</a></p>
+
+<ul><li>3.1 <a href="#31-phenotype-file">Phenotype file</a></li><li>3.2 <a href="#32-fixed-effects-and-covariates">Fixed effects and covariates</a></li><li>3.3 <a href="#33-additional-random-effects">Additional random effects</a></li><li>3.4 <a href="#34-pedigree-file">Pedigree file</a></li><li>3.5 <a href="#35-genotype-file">Genotype file</a></li><li>3.6 <a href="#36-snp-weight-file">SNP weight file</a></li><li>3.7 <a href="#37-genetic-relationship-and-predictor-matrices">Genetic relationship and predictor matrices</a></li></ul>
+
+<p>4. <a href="#4-running-rbp">Running RBP</a></p>
+
+<ul><li>4.1 <a href="#41-global-parameters">Global parameters</a></li><li>4.2 <a href="#42-building-relationship-matrices">Building relationship matrices</a></li><li>4.3 <a href="#43-principal-component-analysis---kpca">Principal component analysis</a></li><li>4.4 <a href="#44-blup---single-trait">BLUP: <code>--single-trait</code></a></li><li>4.5 <a href="#45-single-step-blup---single-step">Single-step BLUP: <code>--single-step</code></a></li><li>4.6 <a href="#46-batch-blup---batch-trait">Batch BLUP: <code>--batch-trait</code></a></li><li>4.7 <a href="#47-pev-and-reliability">PEV and reliability</a></li><li>4.8 <a href="#48-gwas">GWAS</a></li></ul>
+
+<p>5. <a href="#appendix-a--output-files">Appendix A — Output files</a> 6. <a href="#appendix-b--complete-workflows">Appendix B — Complete workflows</a> 7. <a href="#appendix-c--performance-and-memory">Appendix C — Performance and memory</a> 8. <a href="#appendix-d--open-items">Appendix D — Open items</a></p>
+
+<h2 id="1-introduction">1. Introduction</h2>
+
+<p>Genotyping has outgrown the classical analysis pipeline. A single sequencing or imputation project can carry millions of markers on hundreds of thousands of individuals, so a genome-wide mixed model has to solve a system whose dimension is the number of individuals, repeatedly, once per variance-component iteration. The practical bottlenecks are therefore matrix size (memory) and the number of linear solves (time), not the statistical model itself.</p>
+
+<p>RBP is built around those two bottlenecks.</p>
+
+<p><strong>What it does</strong></p>
+
+<ul><li><strong>GWAS</strong> — scan markers for association with a trait under a mixed model, with</li></ul>
+
+<p>the polygenic background absorbed by a relationship matrix.</p>
+
+<ul><li><strong>GS / BLUP</strong> — estimate variance components and breeding values (random effects)</li></ul>
+
+<p>for selection, from pedigree, genotypes, or both.</p>
+
+<p><strong>Algorithmic features</strong></p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Feature</th>
+<th>What it buys</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>AI-REML for variance components</td><td>Fast, well-tested REML, with a stopping rule on the parameter change or the gradient</td></tr>
+<tr><td>Linear solvers: direct Cholesky, CG and deflated PCG</td><td>A direct solve for small problems; matrix-free CG with Lanczos eigenvalue deflation for large ones</td></tr>
+<tr><td>Deflation of the mixed-model operator</td><td>Removes the extreme eigenvalues, cutting the CG iteration count by an order of magnitude on large single-step problems</td></tr>
+<tr><td>Single-step (<code>--single-step</code>)</td><td>Fits pedigree + genomic information jointly <strong>without ever forming H or H⁻¹</strong>: pedigree terms are applied through T/D operators, the genomic block through a Schur complement with a preconditioned inner CG</td></tr>
+<tr><td>Chunked (out-of-core) mode</td><td>Genotype/GRM blocks are streamed from disk, so the working set stays bounded for very large data</td></tr>
+<tr><td>Low-rank compression (<code>--make-compress</code>)</td><td>LD-block PC1 projection turns a high-density marker matrix into a compact predictor matrix</td></tr>
+<tr><td>Precision control (<code>--float</code> / double)</td><td>Single precision roughly halves the memory footprint</td></tr>
+<tr><td>Batch mode (<code>--batch-trait</code>)</td><td>Many traits analysed in one pass, sharing the genotype/GRM work</td></tr>
+</tbody>
+</table>
+
+<p><strong>Implementation</strong></p>
+
+<p>C++ with Armadillo and OpenMP. OpenBLAS or Intel MKL is linked <strong>statically</strong>; the Fortran/OpenMP runtime is <strong>bundled</strong> with the binaries, so the release package runs on a bare Linux installation (see §2). The <code>rbp</code> launcher selects the appropriate binary for the machine.</p>
+
+<h2 id="2-installation">2. Installation</h2>
+
+<h3 id="download">Download</h3>
+
+<p>The Linux package is published on GitHub:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>https://github.com/fjxu1014/RBP/releases/download/V1.13/RBP_v1.13_Linux.tar.gz</code></pre>
+</div>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>mkdir rbp &amp;&amp; cd rbp
+tar xzf RBP_v1.13_Linux.tar.gz
+./rbp                    # prints the full help</code></pre>
+</div>
+
+<h3 id="package-contents">Package contents</h3>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>rbp                  launcher (bash)
+rbp_x86_openBLAS     x86-64 + OpenBLAS   (static)
+rbp_x86_MKL          x86-64 + Intel MKL  (static)
+rbp_arm_openBLAS     ARM64  + OpenBLAS   (static)
+x86_libs/            bundled Fortran/OpenMP runtime for the x86 binaries
+rbp_arm_libs/        bundled runtime for the ARM binary
+data/                small demo dataset
+README.md            package notes</code></pre>
+</div>
+
+<h3 id="requirements">Requirements</h3>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Item</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Architecture</td><td>x86-64 or aarch64 (64-bit)</td></tr>
+<tr><td>OS</td><td>any GNU/Linux with glibc ≥ 2.7 (CentOS 7 / Ubuntu 16.04 and newer)</td></tr>
+<tr><td>Shell</td><td><code>bash</code></td></tr>
+<tr><td>Libraries</td><td><strong>nothing to install</strong> — OpenBLAS/MKL are linked in, the Fortran/OpenMP runtime ships in <code>x86_libs/</code> / <code>rbp_arm_libs/</code></td></tr>
+<tr><td>Optional</td><td><code>gcc</code>/<code>gfortran</code> are *not* needed; no conda environment is required</td></tr>
+</tbody>
+</table>
+
+<p>The launcher picks a binary automatically:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>uname -m = aarch64               -&gt; rbp_arm_openBLAS
+x86-64 + Intel CPU with AVX-512  -&gt; rbp_x86_MKL
+otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
+</div>
+
+<p>To force one, call it directly (e.g. <code>./rbp_x86_openBLAS</code>).</p>
+
+<h3 id="smoke-test">Smoke test</h3>
+
+<p>The bundled demo data runs the whole pipeline in about two minutes:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code># the demo phenotype has the header &quot;ID sex trait&quot;: trait = col 3, sex = col 2
+./rbp --make-grm   --geno data/demo_geno --method 2 --out demo --ncpus 8
+./rbp --kpca       --grm demo.GA --npc 10 --out demo --ncpus 8
+./rbp --single-trait --grm demo.GA --phe data/demo_pheno.txt \
+      --phe-col 3 --fix-col 2 --out demo --ncpus 8</code></pre>
+</div>
+
+<p><code>demo.var</code> should report a genetic variance near 0.40 and a residual near 0.59 (h² ≈ 0.41) — the demo population was simulated with h² = 0.4.</p>
+
+<h2 id="3-input-file-formats">3. Input file formats</h2>
+
+<p>All input files are whitespace-separated text unless stated otherwise, and <strong>all column indices are 1-based</strong> (the ID column counts as column 1).</p>
+
+<h3 id="31-phenotype-file">3.1 Phenotype file</h3>
+
+<p>A phenotype file holds <strong>one row per record</strong> and <strong>must have a header line</strong>. Its first column must be the individual ID; every other quantity used by the model — traits, fixed effects, covariates and any additional random effect — must be a column of this same file.</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>ID       sex   trait     herd   age    dam
+100001   1     0.533     A      3.2    NA
+100002   2     0.624     B      2.8    100014
+100003   1    -0.053     A      4.1    NA</code></pre>
+</div>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--phe FILE</code></td><td>the phenotype file</td></tr>
+<tr><td><code>--phe-col STR</code></td><td>which column(s) hold the trait(s): <code>--phe-col 3</code> for one trait, <code>--phe-col 3,4</code> for several. In <code>--batch-trait</code> mode this selects the traits analysed in one run</td></tr>
+</tbody>
+</table>
+
+<p>Only the individuals present in the phenotype file contribute records; individuals without a record may still appear in the relationship matrix (they then receive an EBV but no residual).</p>
+
+<h3 id="32-fixed-effects-and-covariates">3.2 Fixed effects and covariates</h3>
+
+<p>Both live in the phenotype file as extra columns; the difference is how they are treated:</p>
+
+<ul><li><strong>Fixed effects are categorical</strong> — sex, herd, batch, year. One coefficient per</li></ul>
+
+<p>level (the program builds the design matrix).</p>
+
+<ul><li><strong>Covariates are continuous</strong> — age, weight, inbreeding coefficient. One</li></ul>
+
+<p>regression coefficient each.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--fix-col STR</code></td><td>categorical fixed-effect column(s), 1-based, comma-separated</td><td><code>--fix-col 2</code> (sex) or <code>--fix-col 2,4</code> (sex + herd)</td></tr>
+<tr><td><code>--cov-col STR</code></td><td>continuous covariate column(s)</td><td><code>--cov-col 5</code> (age)</td></tr>
+</tbody>
+</table>
+
+<p>A model statement spelled out in one line reads: *trait = column 3, fixed effects are sex (column 2) and herd (column 4), age (column 5) enters as a covariate* → <code>--phe-col 3 --fix-col 2,4 --cov-col 5</code>.</p>
+
+<h3 id="33-additional-random-effects">3.3 Additional random effects</h3>
+
+<p>Random effects other than the genetic one (a permanent environment, a litter effect, a maternal genetic effect) are handled the same way: the factor whose levels are the random-effect levels must be a <strong>column of the phenotype file</strong>, and each such column is declared with <code>--rand-col</code>.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--rand-col STR</code></td><td>column(s) holding additional random effects, comma-separated; <strong><code>--single-trait</code> only</strong></td></tr>
+<tr><td><code>--rand-cov LIST</code></td><td>the covariance structure of each additional random effect, space-separated and in the same order as <code>--rand-col</code></td></tr>
+</tbody>
+</table>
+
+<p><code>--rand-cov</code> accepts three kinds of entry:</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Entry</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>1</code></td><td>identity — the levels are independent and identically distributed (i.i.d.)</td></tr>
+<tr><td>a file ending in <code>.ped</code></td><td>the levels are linked by a <strong>pedigree relationship matrix</strong> (e.g. a maternal genetic effect)</td></tr>
+<tr><td>a matrix <strong>prefix</strong></td><td>the levels are linked by a user-supplied covariance matrix, stored <strong>in the same layout as a genetic relationship matrix</strong> (a <code>.bin</code> plus a matching <code>.id</code>; see §3.7)</td></tr>
+</tbody>
+</table>
+
+<p>A text file listing one entry per line may be given instead of an inline list.</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code># i.i.d. litter effect (column 6) + maternal genetic effect from the pedigree (column 7)
+./rbp --single-trait --grm G.GA --phe pheno.txt --phe-col 3 --fix-col 2 \
+      --rand-col 6,7 --rand-cov 1 data/demo_pedigree.ped --out demo</code></pre>
+</div>
+
+<h3 id="34-pedigree-file">3.4 Pedigree file</h3>
+
+<p>Three columns, <strong>with a header line</strong> (a header is recognised and skipped — see below), one row per individual, unknown parents coded as <code>0</code>:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>ID     Sire   Dam
+63212  0      0
+76841  0      0
+100001 63212  76841</code></pre>
+</div>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--pedigree FILE</code></td><td>pedigree, used by <code>--single-step</code> and <code>--make-hmatrix</code></td></tr>
+</tbody>
+</table>
+
+<p>The parser detects a header line automatically when the first token is one of the common header labels (<code>ID</code>, <code>id</code>, <code>IND</code>, <code>Animal</code>, <code>Individual</code>, <code>个体号</code>, …), so a pedigree without a header is also accepted. Individuals in the genotype file <strong>must all be present in the pedigree</strong> with the same IDs.</p>
+
+<h3 id="35-genotype-file">3.5 Genotype file</h3>
+
+<p>Only the <strong>PLINK binary</strong> format is supported: a <code>.bed</code> / <code>.bim</code> / <code>.fam</code> triple, specified by its prefix (<code>--geno PREFIX</code>, with or without the <code>.bed</code> suffix).</p>
+
+<blockquote><p><strong>ID rule.</strong> The second column of the <code>.fam</code> file (the IID) is the ID used throughout RBP. It must be identical to the ID column of the phenotype file and of the pedigree file — otherwise the same animal is treated as two different individuals.</p></blockquote>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--geno FILE</code></td><td>genotype prefix</td></tr>
+<tr><td><code>--geno-ind STR</code></td><td>keep only these individuals: comma-separated 1-based indices, or a file with one index per line</td></tr>
+<tr><td><code>--geno-snp STR</code></td><td>keep only these markers, same syntax</td></tr>
+</tbody>
+</table>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>--geno data/demo_geno
+--geno-ind 1,3,5,100      --geno-ind keep_ids.txt
+--geno-snp 1,2,3,500      --geno-snp snp_list.txt</code></pre>
+</div>
+
+<p>*Smart parsing*: if the argument is an existing file it is read as a list, otherwise it is parsed as a comma-separated index list. Indices refer to the <code>.fam</code> / <code>.bim</code> order, 1-based.</p>
+
+<h3 id="36-snp-weight-file">3.6 SNP weight file</h3>
+
+<p>A single column of numbers, <strong>no header</strong>, one weight per marker <strong>of the selected marker set</strong> (i.e. after <code>--geno-snp</code>).</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--weight FILE</code></td><td>per-SNP weights, used by <code>--make-grm</code> and <code>--make-compress</code></td></tr>
+</tbody>
+</table>
+
+<p>Rules enforced by the program:</p>
+
+<ul><li>the number of weights must equal the number of selected markers, otherwise</li></ul>
+
+<p><code>SNP weights vector length must match the number of selected SNPs.</code></p>
+
+<ul><li>weights must be non-negative; non-positive weights are rejected by the</li></ul>
+
+<p>compression path (<code>SNP weights cannot contain negative values.</code>)</p>
+
+<ul><li>if the file is omitted, all markers receive weight 1.</li></ul>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --weight snp_weights.txt --out G</code></pre>
+</div>
+
+<h3 id="37-genetic-relationship-and-predictor-matrices">3.7 Genetic relationship and predictor matrices</h3>
+
+<p>Everything a module reads through <code>--grm</code> is a <strong>binary matrix plus an ID file</strong>, identified by a shared prefix:</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;prefix&gt;.bin</code></td><td>the matrix, binary. Symmetric matrices are stored as the lower triangle (<code>n(n+1)/2</code> values); predictor matrices as the full <code>n × k</code> block</td></tr>
+<tr><td><code>&lt;prefix&gt;.id</code></td><td>one ID per line, giving the row/column order (rows for predictor matrices)</td></tr>
+<tr><td><code>&lt;prefix&gt;.col</code></td><td><strong>only for the non-symmetric predictor matrices</strong> — see below</td></tr>
+</tbody>
+</table>
+
+<p>Two families exist.</p>
+
+<p><strong>(a) Symmetric relationship matrices</strong> — written by <code>--make-grm</code> / <code>--make-hmatrix</code>:</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Matrix</th>
+<th>Intended use</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>.GA</code></td><td>genomic additive (Yang or VanRaden)</td><td>BLUP, GWAS</td></tr>
+<tr><td><code>.GD</code></td><td>genomic dominance</td><td>dominance models</td></tr>
+<tr><td><code>.HA</code>, <code>.HD</code></td><td>pedigree-informed H (G blended with A22)</td><td>*see the note below*</td></tr>
+</tbody>
+</table>
+
+<blockquote><p><strong>Recommendation.</strong> Do <strong>not</strong> feed <code>.HA</code> / <code>.HD</code> to <code>--single-trait</code> for a single-step analysis. Build them only if a file-based H matrix is really needed; the <code>--single-step</code> module works directly from the pedigree plus the GRM and is markedly faster and lighter on memory.</p></blockquote>
+
+<p><strong>(b) Non-symmetric predictor matrices</strong> — written by <code>--make-compress</code>:</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Matrix</th>
+<th><code>.col</code> content</th>
+<th>Intended use</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>.Z</code></td><td>standardised genotypes, with <code>Z Zᵀ = G</code></td><td>marker names, one per line</td><td>chip-level data (tens of thousands of markers)</td></tr>
+<tr><td><code>.compress</code></td><td>LD-block PC1-compressed marker matrix</td><td>LD blocks, one per line as <code>chrom:start-end</code></td><td>large-scale sequencing / imputed data (millions of markers)</td></tr>
+</tbody>
+</table>
+
+<p>Because these matrices are rectangular, the <code>.col</code> file records what the columns mean: marker identity for <code>.Z</code>, and the genomic interval of each block for <code>.compress</code>. Both are accepted wherever a GRM prefix is accepted.</p>
+
+<h2 id="4-running-rbp">4. Running RBP</h2>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>RBP &lt;command&gt; [options]</code></pre>
+</div>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--make-grm</code></td><td>build a genomic relationship matrix</td></tr>
+<tr><td><code>--make-compress</code></td><td>compress genotypes into a low-rank predictor matrix</td></tr>
+<tr><td><code>--make-hmatrix</code></td><td>build a pedigree-informed H matrix (file-based)</td></tr>
+<tr><td><code>--trans-grm</code></td><td>convert a GRM binary between float and double</td></tr>
+<tr><td><code>--kpca</code></td><td>principal components from a GRM</td></tr>
+<tr><td><code>--single-trait</code></td><td>BLUP / GWAS with AI-REML</td></tr>
+<tr><td><code>--single-step</code></td><td>single-step GBLUP (pedigree + genotypes)</td></tr>
+<tr><td><code>--batch-trait</code></td><td>batch analysis of many traits (DFREML)</td></tr>
+<tr><td><code>--help</code>, <code>-h</code></td><td>help</td></tr>
+</tbody>
+</table>
+
+<h3 id="41-global-parameters">4.1 Global parameters</h3>
+
+<p>These apply to every module.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--out PREFIX</code></td><td>prefix of all output files</td><td><code>rbp</code></td></tr>
+<tr><td><code>--ncpus N</code></td><td>number of CPU threads</td><td><code>1</code></td></tr>
+<tr><td><code>--float</code></td><td>single precision (float) to save memory</td><td>off (double)</td></tr>
+<tr><td><code>--chunk</code></td><td>force the out-of-core (chunked) path for very large data</td><td>off</td></tr>
+<tr><td><code>--quiet</code></td><td>suppress console output (the <code>.log</code> file is still written)</td><td>off</td></tr>
+</tbody>
+</table>
+
+<p>Three rules worth memorising:</p>
+
+<p>1. <strong><code>--float</code> must be consistent.</strong> If a GRM is built with <code>--float</code>, every module that reads it must also run with <code>--float</code> — mixing float and double binaries raises a data-type error. 2. <strong><code>--chunk</code> is not available for <code>--batch-trait</code>.</strong> 3. <strong>PEV, the <code>standard</code> GWAS test and the <code>Cholesky</code> solver require a full, non-chunked KINSHIP GRM</strong> — otherwise the run stops with <code>PEV, standard test and Cholesky solver require non-chunked GRM. Remove the --chunk parameter.</code></p>
+
+<h3 id="42-building-relationship-matrices">4.2 Building relationship matrices</h3>
+
+<h4><code>--make-grm</code></h4>
+
+<p>Computes the additive or dominance GRM from PLINK genotypes, optionally together with its generalised inverse.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--geno FILE</code></td><td>genotype prefix</td><td>required</td></tr>
+<tr><td><code>--method N</code></td><td><code>1</code> = Yang, <code>2</code> = VanRaden, <code>3</code> = dominance</td><td><code>1</code></td></tr>
+<tr><td><code>--weight FILE</code></td><td>one weight per selected SNP (§3.6)</td><td>equal weights</td></tr>
+<tr><td><code>--inv</code></td><td>also write the generalised inverse of the GRM</td><td>off</td></tr>
+<tr><td><code>--snp-chunk N</code></td><td>SNPs per chunk in chunked mode</td><td><code>10000</code></td></tr>
+<tr><td><code>--ind-chunk N</code></td><td>individuals per chunk for very large data (N &gt; 50k)</td><td><code>512</code></td></tr>
+</tbody>
+</table>
+
+<p><strong>Output</strong></p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>&lt;out&gt;.GA.bin      additive GRM (methods 1, 2)
+&lt;out&gt;.GA.id       IDs of the rows/columns
+&lt;out&gt;.GA.inv.txt  generalised inverse as (row, col, value)   [--inv]
+&lt;out&gt;.GD.bin      dominance GRM, together with &lt;out&gt;.GD.id   [--method 3]</code></pre>
+</div>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno data/demo_geno --method 2 --out demo --ncpus 16
+./rbp --make-grm --geno geno --method 2 --inv --snp-chunk 20000 --out G</code></pre>
+</div>
+
+<h4><code>--make-hmatrix</code></h4>
+
+<p>Builds the file-based single-step matrix from a pedigree plus one or two GRMs, using the blending <code>G_w = (1 - w) G + w A22</code>, and writes it out.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--pedigree FILE</code></td><td>3-column pedigree (§3.4)</td><td>required</td></tr>
+<tr><td><code>--grm LIST</code></td><td>GRM prefix(es); <code>.GA</code> becomes <code>.HA</code>, <code>.GD</code> becomes <code>.HD</code></td><td>—</td></tr>
+<tr><td><code>--w VALUE</code></td><td>blending weight of A22</td><td><code>0.05</code></td></tr>
+<tr><td><code>--only-ped</code></td><td>write the pedigree A matrix only</td><td>off</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output</strong>: <code>&lt;out&gt;.HA.bin/.HA.id</code> (or <code>.HD.*</code> for a dominance GRM input), or <code>&lt;out&gt;.PA.bin/.PA.id</code> with <code>--only-ped</code>. The <code>.id</code> file always lists <strong>all</strong> pedigree individuals.</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-hmatrix --pedigree data/demo_pedigree.ped --grm G.GA --w 0.05 --out H</code></pre>
+</div>
+
+<blockquote><p>For actually fitting a single-step model, prefer <code>--single-step</code> (§4.5) over building H on disk.</p></blockquote>
+
+<h4><code>--make-compress</code></h4>
+
+<p>Projects the genotype matrix into a low-rank predictor matrix: LD blocks are partitioned and one principal component is extracted per block (<code>--BlockComp</code>), or, without it, the standardised genotype matrix is written directly.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--geno FILE</code>, <code>--method N</code>, <code>--weight FILE</code>, <code>--snp-chunk N</code></td><td>as in <code>--make-grm</code></td><td>—</td></tr>
+<tr><td><code>--BlockComp</code></td><td>LD-block partition + per-block PC1 compression</td><td>off</td></tr>
+<tr><td><code>--r2 X</code></td><td>smoothed *r*² threshold for LD-block boundaries</td><td><code>0.1</code></td></tr>
+<tr><td><code>--window-size N</code></td><td>smoothing window radius in SNPs</td><td><code>10</code></td></tr>
+<tr><td><code>--block-size-limit N</code></td><td>minimum block size; smaller blocks are merged</td><td><code>5</code></td></tr>
+</tbody>
+</table>
+
+<p><strong>Output</strong></p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>&lt;out&gt;.compress.bin / .compress.id / .compress.col   compressed matrix (N × K)
+&lt;out&gt;.Z.bin / .Z.id / .Z.col                        projected genotype matrix (N × P)</code></pre>
+</div>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-compress --geno geno --BlockComp --r2 0.1 --out C --ncpus 32</code></pre>
+</div>
+
+<p><strong>[TBC]</strong> Guideline for choosing between <code>.GA</code> and <code>.compress</code> (marker count, population size), and the accuracy of the compressed representation.</p>
+
+<h4><code>--trans-grm</code></h4>
+
+<p>Streams an existing GRM binary between precisions, without going back to the genotypes.</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --trans-grm --grm demo.GA --float --out demo_f    # double -&gt; float
+./rbp --trans-grm --grm demo_f  --out demo_d            # float  -&gt; double</code></pre>
+</div>
+
+<p><code>--out</code> must differ from the input prefix (the program refuses to overwrite the input). The module works on the plain <code>&lt;prefix&gt;.bin/.id/.col</code> triple, so give the full prefix (<code>demo.GA</code>, not <code>demo</code>).</p>
+
+<h3 id="43-principal-component-analysis---kpca">4.3 Principal component analysis (<code>--kpca</code>)</h3>
+
+<p>Computes the leading principal components of the relationship matrix with a Lanczos iteration — for describing population structure, as covariates in a model, or for dimensionality reduction before clustering.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--grm LIST</code></td><td>GRM prefix</td><td>required</td></tr>
+<tr><td><code>--npc N</code></td><td>number of leading PCs</td><td><code>10</code></td></tr>
+<tr><td><code>--tol VAL</code></td><td>Lanczos convergence tolerance</td><td><code>1e-6</code></td></tr>
+</tbody>
+</table>
+
+<p><strong>Output</strong>: <code>&lt;out&gt;.eigval</code> (eigenvalues, descending), <code>&lt;out&gt;.eigvec</code> (the corresponding eigenvectors, one column per PC).</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --kpca --grm demo.GA --npc 20 --out pca --ncpus 16</code></pre>
+</div>
+
+<h3 id="44-blup---single-trait">4.4 BLUP (<code>--single-trait</code>)</h3>
+
+<p>Fits the mixed model</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>y = Xb + Zu + e</code></pre>
+</div>
+
+<p>by <strong>AI-REML</strong>: variance components are estimated by average-information REML, then fixed effects, random effects (EBVs) and — on request — their prediction error variance are computed. With <code>--gwas</code> the same fitted model powers a marker scan (§4.8).</p>
+
+<h4>Solvers</h4>
+
+<p>The mixed-model equations inside every AI-REML iteration can be solved in three ways; <code>--solver</code> selects between them, while deflation is a property of the CG path.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Mode</th>
+<th>How to select</th>
+<th>Characteristics</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Cholesky</strong></td><td><code>--solver Cholesky</code></td><td>Direct inversion of the mixed-model operator; most accurate per solve, but needs the <strong>full, non-chunked</strong> relationship matrix and O(n²) memory</td><td>Small to medium data sets, or when the operator must be inverted anyway (PEV by inversion)</td></tr>
+<tr><td><strong>CG</strong></td><td><code>--solver CG</code> (default)</td><td>Matrix-free preconditioned conjugate gradients; memory proportional to the data, works chunked</td><td>Large data; the default choice</td></tr>
+<tr><td><strong>DPCG</strong></td><td><code>--solver CG</code> with deflation (the default)</td><td>CG with <strong>Lanczos eigenvalue deflation</strong>: <code>--lanczos-m</code> largest and <code>--lanczos-lm</code> smallest eigenpairs are removed, so the deflated operator is far better conditioned and the CG converges in many fewer iterations</td><td>The default and the recommended setting for large single-step / large-GRM problems; <code>--no-deflation</code> falls back to plain CG</td></tr>
+</tbody>
+</table>
+
+<p>The repeatability model (<code>--repeat</code>) always uses the CG path.</p>
+
+<h4>Parameters</h4>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--grm LIST</code></td><td>relationship matrix/matrices (§3.7); several prefixes give several variance components</td><td>required</td></tr>
+<tr><td><code>--phe</code>, <code>--phe-col</code>, <code>--fix-col</code>, <code>--cov-col</code>, <code>--rand-col</code>, <code>--rand-cov</code></td><td>data and model (§3.1–3.3)</td><td>—</td></tr>
+<tr><td><code>--solver METHOD</code></td><td><code>CG</code> or <code>Cholesky</code></td><td><code>CG</code></td></tr>
+<tr><td><code>--no-deflation</code></td><td>disable Lanczos deflation (plain CG)</td><td>off</td></tr>
+<tr><td><code>--lanczos-m N</code></td><td>number of largest eigenvalues deflated</td><td><code>87</code></td></tr>
+<tr><td><code>--lanczos-lm N</code></td><td>number of smallest eigenvalues deflated</td><td><code>13</code></td></tr>
+<tr><td><code>--criterion N</code></td><td>AI-REML stopping rule: <code>0</code> = either, <code>1</code> = relative error, <code>2</code> = gradient</td><td><code>0</code></td></tr>
+<tr><td><code>--maxit N</code></td><td>maximum AI-REML iterations</td><td><code>30</code></td></tr>
+<tr><td><code>--tol VAL</code></td><td>AI-REML convergence tolerance</td><td><code>1e-5</code></td></tr>
+<tr><td><code>--cg-maxit N</code></td><td>maximum CG iterations per solve</td><td><code>500</code></td></tr>
+<tr><td><code>--cg-tol VAL</code></td><td>CG convergence tolerance</td><td><code>1e-6</code></td></tr>
+<tr><td><code>--mom</code></td><td>initialise variance components with MoM-RHE</td><td>off</td></tr>
+<tr><td><code>--pev</code></td><td>output PEV and reliability for the random effects (§4.7)</td><td>off</td></tr>
+<tr><td><code>--repeat</code></td><td>repeated-records model (adds a permanent-environment component)</td><td>off</td></tr>
+<tr><td><code>--seed N</code></td><td>random seed for the stochastic trace estimates</td><td><code>6666</code></td></tr>
+<tr><td><code>--gwas</code>, <code>--test</code>, <code>--num-ranvec</code>, <code>--re-gamma-size</code>, <code>--re-est-gamma</code></td><td>marker scan (§4.8)</td><td>—</td></tr>
+</tbody>
+</table>
+
+<h4>Examples</h4>
+
+<p><strong>(1) One genetic random effect</strong> — the standard genomic BLUP:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --out G --ncpus 32
+./rbp --single-trait --grm G.GA --phe pheno.txt \
+      --phe-col 3 --fix-col 2 --out gs --ncpus 32</code></pre>
+</div>
+
+<p><strong>(2) Several genetic random effects</strong> — additive and dominance together; each <code>--grm</code> prefix contributes its own variance component:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --out A --ncpus 32
+./rbp --make-grm --geno geno --method 3 --out D --ncpus 32
+./rbp --single-trait --grm A.GA D.GD --phe pheno.txt \
+      --phe-col 3 --fix-col 2 --out ad --ncpus 32</code></pre>
+</div>
+
+<p><strong>(3) Repeatability model</strong> — repeated records per individual; a permanent environment is added, and the CG path is used automatically:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --single-trait --grm G.GA --phe records.txt \
+      --phe-col 3 --fix-col 2 --repeat --out rep --ncpus 32
+# records.txt holds one row per record, several rows per individual</code></pre>
+</div>
+
+<p><strong>(4) Maternal genetic effect</strong> — an extra random effect whose levels are related through the pedigree; the maternal-effect column (here 7) and the pedigree are given separately:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --single-trait --grm G.GA --phe pheno.txt \
+      --phe-col 3 --fix-col 2 \
+      --rand-col 7 --rand-cov data/demo_pedigree.ped \
+      --out mat --ncpus 32</code></pre>
+</div>
+
+<p>The same mechanism covers i.i.d. effects (litter, batch, technician): <code>--rand-col 6 --rand-cov 1</code>. A user-supplied covariance matrix can be passed as a <code>.bin</code>/<code>.id</code> prefix instead of <code>.ped</code> — see §3.3.</p>
+
+<h4>Output</h4>
+
+<p><code>&lt;out&gt;.log</code>, <code>&lt;out&gt;.var</code>, <code>&lt;out&gt;.rand</code>, <code>&lt;out&gt;.beta</code>, <code>&lt;out&gt;.anova</code> (+ <code>&lt;out&gt;.mlm</code> with <code>--gwas</code>); see Appendix A.</p>
+
+<h3 id="45-single-step-blup---single-step">4.5 Single-step BLUP (<code>--single-step</code>)</h3>
+
+<p>Fits the single-step model, in which the genetic random effect follows <code>N(0, H σ²_u)</code>, with H combining pedigree (A) and genomic (G) information through the standard blending of G with A22.</p>
+
+<blockquote><p><strong>When pedigree information exists, this module is strongly recommended</strong> over <code>--single-trait</code> with a pre-built <code>.HA</code> matrix.</p></blockquote>
+
+<h4>How it computes</h4>
+
+<p>The module never forms H (or H⁻¹):</p>
+
+<ul><li>the pedigree part is applied through the sparse <code>T⁻¹</code> and <code>D⁻¹</code> operators of</li></ul>
+
+<p><code>A⁻¹ = (T⁻¹)ᵀ D⁻¹ T⁻¹</code>, at O(n) cost per application;</p>
+
+<ul><li>the genomic block is handled by a <strong>Schur complement</strong> whose inner system</li></ul>
+
+<p><code>A¹¹ x = b</code> is solved by a preconditioned CG in the non-genotyped ordering;</p>
+
+<ul><li>the outermost system is solved by <strong>CG with Lanczos deflation</strong>, so the extreme</li></ul>
+
+<p>eigenvalues of the mixed-model operator are removed.</p>
+
+<p>The advantages are memory (no dense H, no H⁻¹) and speed (fewer CG iterations per AI-REML step, with all operators sparse or O(n)).</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--pedigree FILE</code></td><td>3-column pedigree (§3.4)</td><td>required</td></tr>
+<tr><td><code>--grm LIST</code></td><td><code>.GA</code>, <code>.GD</code> or <code>.compress</code> prefixes; an empty list gives a pedigree-only (ABLUP) analysis</td><td>empty</td></tr>
+<tr><td><code>--phe</code>, <code>--phe-col</code>, <code>--fix-col</code>, <code>--cov-col</code>, <code>--rand-col</code>, <code>--rand-cov</code></td><td>data and model (§3.1–3.3)</td><td>—</td></tr>
+<tr><td><code>--w VALUE</code></td><td>blending weight of A22 in <code>G_w</code></td><td><code>0.05</code></td></tr>
+<tr><td><code>--decouple</code></td><td>decouple H into <code>A + ΣΔᵢ</code> and fit a separate variance component per genomic term</td><td>off</td></tr>
+<tr><td><code>--a22-size-limit N</code></td><td>use a dense A22⁻¹ when n₂ ≤ N, a sparse Cholesky otherwise</td><td><code>30000</code></td></tr>
+<tr><td><code>--maxit</code>, <code>--tol</code></td><td>AI-REML iterations and tolerance</td><td><code>30</code>, <code>1e-5</code></td></tr>
+<tr><td><code>--cg-maxit</code>, <code>--cg-tol</code></td><td>CG iterations and tolerance</td><td><code>500</code>, <code>1e-6</code></td></tr>
+<tr><td><code>--lanczos-m</code>, <code>--lanczos-lm</code></td><td>deflated largest / smallest eigenpairs</td><td><code>87</code>, <code>13</code></td></tr>
+<tr><td><code>--no-deflation</code></td><td>plain CG instead of deflated PCG</td><td>off</td></tr>
+</tbody>
+</table>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --out G.GA --ncpus 32
+./rbp --single-step --pedigree ped.txt --grm G.GA \
+      --phe pheno.txt --phe-col 3 --fix-col 2 \
+      --a22-size-limit 20000 --w 0.05 --out ss --ncpus 32</code></pre>
+</div>
+
+<p><strong>Output</strong>: <code>&lt;out&gt;.log</code>, <code>&lt;out&gt;.var</code>, <code>&lt;out&gt;.rand</code>, <code>&lt;out&gt;.beta</code>, <code>&lt;out&gt;.anova</code>. With <code>--gwas</code> the scan runs in genotype space (SSGWAS) — see §4.8.</p>
+
+<p><strong>[TBC]</strong> Guidance for choosing <code>--lanczos-m</code> / <code>--lanczos-lm</code> and <code>--a22-size-limit</code> as a function of the model size.</p>
+
+<h3 id="46-batch-blup---batch-trait">4.6 Batch BLUP (<code>--batch-trait</code>)</h3>
+
+<p>Analyses <strong>many traits in one pass</strong>. It is a batch implementation, *not* a multivariate (multi-trait) model: each trait is fitted independently, sharing the genotype/GRM preparation and all I/O.</p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Traits</td><td>selected with <code>--phe-col 2,3,4</code>; all are analysed in the same run</td></tr>
+<tr><td>Genetic random effect</td><td>exactly <strong>one</strong>; additional random effects (<code>--rand-col</code>) and pedigree information are <strong>not</strong> accepted</td></tr>
+<tr><td>Missing values</td><td><strong>phenotypes may be missing</strong> — records are kept only where the trait is observed, and the likelihood is evaluated on that subset. Covariates must be present for the retained records <strong>[TBC: confirm the covariate rule]</strong></td></tr>
+<tr><td>Variance components</td><td>estimated by <strong>DFREML</strong> (the program prints <code>[ DFREML Running ]</code>); the <code>exact</code> GWAS test internally runs AI-REML per phenotype</td></tr>
+<tr><td>Not applicable</td><td><code>--chunk</code>, <code>--rand-col</code>, <code>--test quasi-standard</code>, <code>--pev</code></td></tr>
+</tbody>
+</table>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>--grm LIST</code>, <code>--geno</code>, <code>--phe</code>, <code>--phe-col</code>, <code>--fix-col</code>, <code>--cov-col</code></td><td>data and model (§3)</td><td>—</td></tr>
+<tr><td><code>--gwas</code>, <code>--test</code>, <code>--num-ranvec</code>, <code>--re-gamma-size</code>, <code>--re-est-gamma</code>, <code>--seed</code></td><td>marker scan (§4.8); tests <code>standard</code>, <code>gamma</code>, <code>exact</code></td><td>—</td></tr>
+<tr><td><code>--maxit</code>, <code>--tol</code>, <code>--cg-maxit</code>, <code>--cg-tol</code></td><td>solver controls</td><td><code>30</code>, <code>1e-5</code>, <code>500</code>, <code>1e-6</code></td></tr>
+</tbody>
+</table>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --batch-trait --grm demo.GA --geno data/demo_geno \
+      --phe data/demo_pheno.txt --phe-col 3 --fix-col 2 \
+      --gwas --test standard --out demo --ncpus 16</code></pre>
+</div>
+
+<p><strong>Output</strong>: <code>&lt;out&gt;.log</code>, <code>&lt;out&gt;.batchmlm</code> (GWAS results for all traits), <code>&lt;out&gt;.batchSummary</code> (per-trait summary), plus the per-trait <code>.var</code>, <code>.rand</code>, <code>.beta</code>, <code>.anova</code> files.</p>
+
+<h3 id="47-pev-and-reliability">4.7 PEV and reliability</h3>
+
+<p>For a BLUP the breeding value is a prediction, and its uncertainty is described by two numbers:</p>
+
+<ul><li><strong>PEV</strong> — the *prediction error variance* <code>Var(û − u)</code>: how far the estimate is</li></ul>
+
+<p>expected to be from the true value;</p>
+
+<ul><li><strong>reliability</strong> — <code>r² = 1 − PEV / σ²_u</code>, the fraction of the additive genetic</li></ul>
+
+<p>variance the prediction explains (1 means a perfectly predicted EBV).</p>
+
+<p>Both are requested with <code>--pev</code> in <code>--single-trait</code>:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --single-trait --grm G.GA --phe pheno.txt --phe-col 3 --fix-col 2 \
+      --pev --out gs --ncpus 32</code></pre>
+</div>
+
+<p><strong>Output.</strong> <code>&lt;out&gt;.rand</code> gains two columns per random effect, <code>&lt;effect&gt;_PEV</code> and <code>&lt;effect&gt;_r2</code>:</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>ID      G.GA      residuals   G.GA_PEV   G.GA_r2
+100001  0.533099  ...         0.132      0.678</code></pre>
+</div>
+
+<p>Individuals that are not levels of a given effect receive <code>NA</code> in that effect&#x27;s columns.</p>
+
+<p><strong>Requirements and scope</strong></p>
+
+<ul><li>PEV needs the projection matrix <code>P</code>, hence a <strong>KINSHIP-type GRM</strong> and a</li></ul>
+
+<p><strong>non-chunked</strong> one: otherwise the run stops with <code>PEV, standard test and Cholesky solver only support KINSHIP GRM.</code> or <code>... require non-chunked GRM. Remove the --chunk parameter.</code></p>
+
+<ul><li>Only single-trait runs produce PEV. For a multi-trait run the program reports</li></ul>
+
+<p><code>PEV can only be calculated for single trait</code> and continues without it, and <code>--batch-trait</code> does not produce PEV at all.</p>
+
+<ul><li>It is not available from <code>--single-step</code>, whose H-type kernels are not KINSHIP</li></ul>
+
+<p>matrices.</p>
+
+<h3 id="48-gwas">4.8 GWAS</h3>
+
+<p>Adding <code>--gwas</code> to <code>--single-trait</code>, <code>--single-step</code> or <code>--batch-trait</code> scans the markers under the fitted mixed model.</p>
+
+<blockquote><p><code>--gwas</code> <strong>requires <code>--geno</code></strong> as well, because marker IDs are matched against the genotype file: <code>Genotype prefix (--geno) is required for matching IDs.</code></p></blockquote>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>Test</th>
+<th><code>--single-trait</code></th>
+<th><code>--single-step</code> (SSGWAS)</th>
+<th><code>--batch-trait</code></th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>standard</code></td><td>yes</td><td>—</td><td>yes</td><td>Needs the projection matrix P ⇒ KINSHIP GRM, non-chunked, single record per individual</td></tr>
+<tr><td><code>quasi-standard</code></td><td>yes</td><td>—</td><td>—</td><td>Stochastic approximation; no P required; for large data where <code>standard</code> is too expensive</td></tr>
+<tr><td><code>gamma</code></td><td>yes</td><td><strong>yes (the only option)</strong></td><td>yes</td><td>Uses the estimated gamma shape; the practical choice for SSGWAS and very large scans</td></tr>
+<tr><td><code>exact</code></td><td>—</td><td>—</td><td>yes</td><td>Per-phenotype iterative AI-REML scan</td></tr>
+</tbody>
+</table>
+
+<p>Recommendations: <strong><code>gamma</code></strong> as the default for large data and for single-step (it is the only test accepted there; otherwise the program stops with <code>SSGWAS only support gamma test.</code>); <strong><code>standard</code></strong> when the projection matrix is affordable and a classical score test is wanted; <strong><code>quasi-standard</code></strong> as a cheaper approximation of <code>standard</code>; <strong><code>exact</code></strong> is the batch-mode reference and the slowest.</p>
+
+<p>Related parameters: <code>--num-ranvec N</code> (random vectors for the stochastic tests, default 100), <code>--re-gamma-size N</code> (SNPs used to estimate the gamma shape, default 500), <code>--re-est-gamma</code> (force re-estimation), <code>--seed N</code> (default 6666).</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --single-trait --grm demo.GA --geno data/demo_geno \
+      --phe data/demo_pheno.txt --phe-col 3 --fix-col 2 \
+      --gwas --test standard --out scan --ncpus 32</code></pre>
+</div>
+
+<p><strong>Output</strong>: <code>&lt;out&gt;.mlm</code>, with the columns</p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>SNP  CHR  POS  A1  A2  Freq  Effect  SE  Pvalue</code></pre>
+</div>
+
+<p><code>--batch-trait</code> writes <code>&lt;out&gt;.batchmlm</code> (all traits side by side) plus <code>&lt;out&gt;.batchSummary</code>.</p>
+
+<h2 id="appendix-a--output-files">Appendix A — Output files</h2>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Written by</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.log</code></td><td>every module</td><td>full console log</td></tr>
+<tr><td><code>&lt;out&gt;.GA.bin</code> / <code>.GA.id</code></td><td><code>--make-grm</code> (methods 1, 2)</td><td>additive GRM and its IDs</td></tr>
+<tr><td><code>&lt;out&gt;.GD.bin</code> / <code>.GD.id</code></td><td><code>--make-grm --method 3</code></td><td>dominance GRM and its IDs</td></tr>
+<tr><td><code>&lt;out&gt;.GA.inv.txt</code></td><td><code>--make-grm --inv</code></td><td>generalised inverse, three columns <code>row col value</code></td></tr>
+<tr><td><code>&lt;out&gt;.bin</code> / <code>.id</code> / <code>.col</code></td><td><code>--trans-grm</code></td><td>precision-converted GRM</td></tr>
+<tr><td><code>&lt;out&gt;.compress.bin</code> / <code>.compress.id</code> / <code>.compress.col</code></td><td><code>--make-compress</code></td><td>compressed predictor matrix (blocks in <code>.col</code>)</td></tr>
+<tr><td><code>&lt;out&gt;.Z.bin</code> / <code>.Z.id</code> / <code>.Z.col</code></td><td><code>--make-compress</code></td><td>standardised genotype matrix (marker names in <code>.col</code>)</td></tr>
+<tr><td><code>&lt;out&gt;.HA.bin</code> / <code>.HA.id</code>, <code>.HD.bin</code> / <code>.HD.id</code></td><td><code>--make-hmatrix</code></td><td>H matrix</td></tr>
+<tr><td><code>&lt;out&gt;.PA.bin</code> / <code>.PA.id</code></td><td><code>--make-hmatrix --only-ped</code></td><td>pedigree A matrix</td></tr>
+<tr><td><code>&lt;out&gt;.eigval</code> / <code>.eigvec</code></td><td><code>--kpca</code></td><td>eigenvalues / eigenvectors</td></tr>
+<tr><td><code>&lt;out&gt;.var</code></td><td>trait / single-step modules</td><td>variance components, SEs, h² and its test</td></tr>
+<tr><td><code>&lt;out&gt;.rand</code></td><td>trait / single-step modules</td><td>random effects (EBVs); with <code>--pev</code> also <code>_PEV</code> and <code>_r2</code></td></tr>
+<tr><td><code>&lt;out&gt;.beta</code></td><td>trait / single-step modules</td><td>fixed-effect solutions</td></tr>
+<tr><td><code>&lt;out&gt;.anova</code></td><td>trait / single-step modules</td><td>analysis-of-variance table</td></tr>
+<tr><td><code>&lt;out&gt;.mlm</code></td><td><code>--single-trait --gwas</code></td><td>marker scan</td></tr>
+<tr><td><code>&lt;out&gt;.batchmlm</code>, <code>&lt;out&gt;.batchSummary</code></td><td><code>--batch-trait</code></td><td>batch scan results and summary</td></tr>
+</tbody>
+</table>
+
+<h2 id="appendix-b--complete-workflows">Appendix B — Complete workflows</h2>
+
+<p><strong>A. GWAS with a genomic relationship matrix</strong></p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --out G --ncpus 32
+./rbp --single-trait --grm G.GA --geno geno --phe pheno.txt \
+      --phe-col 3 --fix-col 2 --gwas --test standard --out scan --ncpus 32
+# hits are in scan.mlm</code></pre>
+</div>
+
+<p><strong>B. Genomic prediction (EBVs for selection)</strong></p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --out G --ncpus 32
+./rbp --single-trait --grm G.GA --phe pheno.txt --phe-col 3 --fix-col 2 \
+      --pev --out gs --ncpus 32
+# EBVs and reliabilities are in gs.rand</code></pre>
+</div>
+
+<p><strong>C. Single-step (ssGBLUP) with pedigree + genotypes</strong></p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --out G.GA --ncpus 32
+./rbp --single-step --pedigree ped.txt --grm G.GA --phe pheno.txt \
+      --phe-col 3 --fix-col 2 --a22-size-limit 20000 --out ss --ncpus 32</code></pre>
+</div>
+
+<p><strong>D. Single-step GWAS (SSGWAS)</strong></p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --single-step --pedigree ped.txt --grm G.GA --geno geno \
+      --phe pheno.txt --phe-col 3 --fix-col 2 \
+      --gwas --test gamma --out ssgwas --ncpus 32</code></pre>
+</div>
+
+<p><strong>E. Large-scale, memory-limited run</strong></p>
+
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --float --chunk \
+      --snp-chunk 20000 --ind-chunk 512 --out G --ncpus 64
+./rbp --single-trait --grm G.GA --float --chunk \
+      --phe pheno.txt --phe-col 3 --fix-col 2 --out big --ncpus 64</code></pre>
+</div>
+
+<h2 id="appendix-c--performance-and-memory">Appendix C — Performance and memory</h2>
+
+<ul><li><strong>Threads</strong> — <code>--ncpus</code> sets the OpenMP team size; <code>OMP_NUM_THREADS</code>,</li></ul>
+
+<p><code>OPENBLAS_NUM_THREADS</code> and <code>MKL_NUM_THREADS</code> also apply.</p>
+
+<ul><li><strong>Precision</strong> — <code>--float</code> roughly halves the working set; keep it consistent</li></ul>
+
+<p>across the whole pipeline (§4.1).</p>
+
+<ul><li><strong>Chunking</strong> — <code>--chunk</code> streams matrix blocks instead of holding them, and is</li></ul>
+
+<p>recommended above ~50,000 genotyped individuals. It is incompatible with <code>--batch-trait</code>, with the Cholesky solver, with the <code>standard</code> test and with <code>--pev</code>.</p>
+
+<ul><li><strong>Deflation</strong> — <code>--lanczos-m</code> / <code>--lanczos-lm</code> decide how many extreme</li></ul>
+
+<p>eigenvalues are removed from the operator. More deflation means fewer CG iterations in every AI-REML step, at the cost of one Lanczos pass in the first iteration.</p>
+
+<ul><li><strong>A22 path</strong> — <code>--a22-size-limit</code> switches between a dense A22⁻¹ and a sparse</li></ul>
+
+<p>Cholesky for the non-genotyped block.</p>
+
+<ul><li><strong>Reference runs [TBC — to be replaced by a benchmark table]</strong> — on our own</li></ul>
+
+<p>single-step runs with 100,000–150,000 genotyped individuals (double precision, 32 threads), peak memory stayed at 3–4 GB and the analysis converged within 5–6 AI-REML iterations.</p>
+
+<h2 id="appendix-d--open-items">Appendix D — Open items</h2>
+
+<p>1. <strong>Module coverage.</strong> The published page (<code>docs/index.html</code>) still lists five modules; the binary provides eight. The page is regenerated from this manual. 2. <strong><code>--make-compress</code></strong> — guidance on when to prefer it over <code>--make-grm</code>, and on the accuracy of the compressed representation. 3. <strong>&quot;Vx-based&quot; strategy</strong> — the phrase used in the outline for §4.5 could not be matched to an identifier in the source; the mechanism documented there (implicit H⁻¹ through T/D operators + Schur complement + deflated PCG) needs the author&#x27;s confirmation of the preferred wording. 4. <strong>Deflation parameters</strong> — practical rules for <code>--lanczos-m</code> / <code>--lanczos-lm</code> and <code>--a22-size-limit</code> versus model size. 5. <strong>GWAS tests</strong> — one paragraph each on the four statistics: model, assumptions, cost and the recommended use case. 6. <strong><code>--mom</code>, <code>--re-gamma-size</code>, <code>--re-est-gamma</code></strong> — user-level explanation of the MoM-RHE initialisation and the gamma estimator. 7. <strong><code>--decouple</code></strong> — the exact model fitted and how the reported variance components should be interpreted. 8. <strong>Batch mode</strong> — confirm the covariate missing-value rule and the precise definition of the per-trait summary. 9. <strong>Error messages and FAQ</strong> — collect the common failures (float/double mismatch, ID mismatches between files, memory exhaustion, a missing <code>--geno</code> with <code>--gwas</code>) with the message text users will see. 10. <strong>Licence and citation</strong> — licence statement and preferred citation.</p>
 
   </main>
 </div>
