@@ -65,6 +65,9 @@
   .release-asset-link:first-child {
     border-bottom: 1px solid #d0d7de;
   }
+  .release-asset-link:last-child {
+    border-bottom: none;
+  }
   .release-asset-link:hover {
     background-color: #f6f8fa;
     color: #0969da;
@@ -400,20 +403,6 @@
 
 <p>RBP (Rapid Batch-process-supported Powerful tool) is a command-line tool for <strong>GWAS</strong> and <strong>genomic selection (GS)</strong> on large-scale genomic data, built on the mixed linear model (MLM).</p>
 
-<blockquote><p><strong>Draft status.</strong> The text follows the author&#x27;s outline (<code>1.docx</code>). Every command, parameter, default value, output file name and restriction below was checked against the source code (<code>src/</code>) and the program&#x27;s built-in <code>--help</code>; all examples in §2, §4 and Appendix B were executed against the bundled demo data. Items that still need the author&#x27;s input are marked <strong>[TBC]</strong> and collected in Appendix D.</p></blockquote>
-
-<h2 id="contents">Contents</h2>
-
-<p>1. <a href="#1-introduction">Introduction</a> 2. <a href="#2-installation">Installation</a> 3. <a href="#3-input-file-formats">Input file formats</a></p>
-
-<ul><li>3.1 <a href="#31-phenotype-file">Phenotype file</a></li><li>3.2 <a href="#32-fixed-effects-and-covariates">Fixed effects and covariates</a></li><li>3.3 <a href="#33-additional-random-effects">Additional random effects</a></li><li>3.4 <a href="#34-pedigree-file">Pedigree file</a></li><li>3.5 <a href="#35-genotype-file">Genotype file</a></li><li>3.6 <a href="#36-snp-weight-file">SNP weight file</a></li><li>3.7 <a href="#37-genetic-relationship-and-predictor-matrices">Genetic relationship and predictor matrices</a></li></ul>
-
-<p>4. <a href="#4-running-rbp">Running RBP</a></p>
-
-<ul><li>4.1 <a href="#41-global-parameters">Global parameters</a></li><li>4.2 <a href="#42-building-relationship-matrices">Building relationship matrices</a></li><li>4.3 <a href="#43-principal-component-analysis---kpca">Principal component analysis</a></li><li>4.4 <a href="#44-blup---single-trait">BLUP: <code>--single-trait</code></a></li><li>4.5 <a href="#45-single-step-blup---single-step">Single-step BLUP: <code>--single-step</code></a></li><li>4.6 <a href="#46-batch-blup---batch-trait">Batch BLUP: <code>--batch-trait</code></a></li><li>4.7 <a href="#47-pev-and-reliability">PEV and reliability</a></li><li>4.8 <a href="#48-gwas">GWAS</a></li></ul>
-
-<p>5. <a href="#appendix-a--output-files">Appendix A — Output files</a> 6. <a href="#appendix-b--complete-workflows">Appendix B — Complete workflows</a> 7. <a href="#appendix-c--performance-and-memory">Appendix C — Performance and memory</a> 8. <a href="#appendix-d--open-items">Appendix D — Open items</a></p>
-
 <h2 id="1-introduction">1. Introduction</h2>
 
 <p>Genotyping has outgrown the classical analysis pipeline. A single sequencing or imputation project can carry millions of markers on hundreds of thousands of individuals, so a genome-wide mixed model has to solve a system whose dimension is the number of individuals, repeatedly, once per variance-component iteration. The practical bottlenecks are therefore matrix size (memory) and the number of linear solves (time), not the statistical model itself.</p>
@@ -459,11 +448,14 @@
 
 <h3 id="download">Download</h3>
 
-<p>The Linux package is published on GitHub:</p>
+<p>The Linux package is published on GitHub — click to download:</p>
 
-<div class="code-wrapper">
-  <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>https://github.com/fjxu1014/RBP/releases/download/V1.13/RBP_v1.13_Linux.tar.gz</code></pre>
+<div class="release-links-container">
+  <a class="release-asset-link"
+     href="https://github.com/fjxu1014/RBP/releases/download/V1.13/RBP_v1.13_Linux.tar.gz">
+    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"></path><path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"></path></svg>
+    RBP_v1.13_Linux.tar.gz
+  </a>
 </div>
 
 <div class="code-wrapper">
