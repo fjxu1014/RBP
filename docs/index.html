@@ -24,7 +24,7 @@
   .navbar {
     position: fixed;
     top: 0; left: 0; right: 0;
-    height: 90px;
+    height: 116px;
     background-color: #ffffff;
     border-bottom: 1px solid #eaeaea;
     display: flex;
@@ -57,7 +57,7 @@
     color: #0969da;
     text-decoration: none;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 600;
     padding: 14px 16px;
     transition: background-color 0.2s;
@@ -83,7 +83,7 @@
   .main-wrapper {
     display: flex;
     flex: 1;
-    margin-top: 90px; /* Offset for fixed navbar */
+    margin-top: 116px; /* Offset for fixed navbar */
     max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
@@ -97,8 +97,8 @@
     border-right: 1px solid #eaeaea;
     padding: 30px 20px;
     position: sticky;
-    top: 90px;
-    height: calc(100vh - 90px);
+    top: 116px;
+    height: calc(100vh - 116px);
     overflow-y: auto;
     background: #ffffff;
   }
@@ -106,7 +106,7 @@
   /* Nav Menu */
   .nav-menu { list-style: none; }
   .nav-menu .nav-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 800;
     color: #000;
     margin-top: 25px;
@@ -114,15 +114,43 @@
     text-transform: uppercase;
     padding-left: 10px;
   }
-  .nav-menu .nav-title a {
+  .nav-menu .nav-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
     text-decoration: none;
-    color: inherit;
+    cursor: pointer;
   }
+  /* 折叠箭头：纯 CSS 画的 chevron，展开时朝下 */
+  .nav-menu .nav-title .caret {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin: 0 6px 2px 0;
+    border-right: 2px solid #9aa0a6;
+    border-bottom: 2px solid #9aa0a6;
+    transform: rotate(-45deg);
+    transition: transform 0.2s;
+  }
+  .nav-menu .nav-group.open > .nav-title .caret { transform: rotate(45deg); }
+  .nav-menu .nav-group:not(.has-children) > .nav-title .caret { display: none; }
+
+  /* 小节：默认隐藏，所属的章展开时才出现 */
+  .nav-menu .nav-sub {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-menu .nav-group.open > .nav-sub { max-height: 1000px; }
   .nav-menu .nav-item a {
     display: block;
     text-decoration: none;
     color: #333;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     padding: 10px 15px 10px 30px; /* Indent sub-items */
     text-transform: uppercase;
@@ -152,13 +180,13 @@
     max-width: 1100px;
   }
   .content h1 {
-    font-size: 42px;
+    font-size: 48px;
     font-weight: 700;
     color: #222;
     margin-bottom: 20px; /* Adjusted margin to accommodate the button */
   }
   .content h2 {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
     color: #000;
     margin-top: 50px;
@@ -167,7 +195,7 @@
   }
   /* Orange Sub-headers matching image */
   .content h3 {
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 600;
     color: #f5a623;
     margin-top: 40px;
@@ -178,20 +206,20 @@
     color: #fce4c5;
   }
   .content h4 {
-    font-size: 18px;
+    font-size: 21px;
     color: #333;
     margin-top: 30px;
     margin-bottom: 15px;
   }
   .content p {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 20px;
     color: #444;
   }
   .content ul, .content ol {
     margin-left: 25px;
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 18px;
     color: #444;
   }
   .content li { margin-bottom: 8px; }
@@ -202,7 +230,7 @@
     background: #f8f9fa;
     padding: 2px 6px;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 16px;
     color: #333;
   }
 
@@ -218,7 +246,7 @@
     padding: 20px;
     overflow-x: auto;
     font-family: Consolas, Monaco, "Courier New", monospace;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
     color: #333;
   }
@@ -239,7 +267,7 @@
     background: #f8f9fa;
     border: 1px solid #d1d5db;
     color: #6b7280;
-    font-size: 12px;
+    font-size: 13px;
     padding: 4px 8px;
     border-radius: 4px;
     font-family: "Segoe UI", sans-serif;
@@ -261,7 +289,7 @@
     border-left: 4px solid #f5a623;
     margin: 25px 0;
     font-family: "Segoe UI", sans-serif;
-    font-size: 15px;
+    font-size: 17px;
   }
   .warn strong { color: #f5a623; }
   .info {
@@ -286,7 +314,7 @@
     border-collapse: collapse;
     margin: 25px 0;
     font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
   }
   .param-table th, .param-table td {
     border: 1px solid #eaeaea;
@@ -309,18 +337,60 @@
     .content { padding: 30px 20px; }
   }
 
-  /* ---- added by md2html.py ---- */
-  .content blockquote {
-    margin: 22px 0;
-    padding: 14px 22px;
-    border-left: 4px solid #0969da;
-    background: #f6f8fa;
-    color: #24292f;
+
+
+  /* ========== Paged view ========== */
+  /* 分页由脚本接管：脚本给 <body> 加 .paged 才隐藏，脚本失效时退化成整篇文档 */
+  body.paged .page { display: none; }
+  body.paged .page.active { display: block; }
+  body.paged .page > :first-child { margin-top: 0; }
+
+  /* 锚点跳转时给固定导航条留出空间 */
+  html { scroll-padding-top: 136px; }
+  .content h2, .content h3, .content h4 { scroll-margin-top: 136px; }
+
+  /* 章节页里的子项索引 */
+  .page-index {
+    margin: 0 0 30px;
+    padding: 16px 22px;
+    border: 1px solid #eaeaea;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+    background: #fafbfc;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 14.5px;
-    line-height: 1.7;
+    font-size: 16px;
   }
-  .content blockquote p { margin: 0; font-size: inherit; }
+  .page-index-title {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 6px;
+  }
+  .page-index ul { list-style: none; margin: 0; padding: 0; }
+  .page-index li { margin: 0; }
+  .page-index a { display: block; padding: 5px 0; color: #007bff; text-decoration: none; }
+  .page-index a:hover { text-decoration: underline; }
+
+  /* 上一页 / 下一页 */
+  .page-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid #eaeaea;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+  }
+  .page-nav a { color: #007bff; text-decoration: none; font-weight: 600; }
+  .page-nav a:hover { text-decoration: underline; }
+  .page-nav .next { margin-left: auto; text-align: right; }
+
+  /* 侧边栏里当前所属章节的标记 */
+  .nav-menu a.nav-title.active { color: #007bff; }
+
 
   /* ---- added by md2html.py ---- */
   .content blockquote {
@@ -330,20 +400,7 @@
     background: #f6f8fa;
     color: #24292f;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 14.5px;
-    line-height: 1.7;
-  }
-  .content blockquote p { margin: 0; font-size: inherit; }
-
-  /* ---- added by md2html.py ---- */
-  .content blockquote {
-    margin: 22px 0;
-    padding: 14px 22px;
-    border-left: 4px solid #0969da;
-    background: #f6f8fa;
-    color: #24292f;
-    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 14.5px;
+    font-size: 16.5px;
     line-height: 1.7;
   }
   .content blockquote p { margin: 0; font-size: inherit; }
@@ -355,7 +412,7 @@
 <header class="navbar">
   <div class="logo">
     <!-- Assuming the image is named logo.png and is located in the same directory -->
-    <img src="logo.png" alt="RBP Logo" style="height: 78px; width: auto; object-fit: contain;">
+    <img src="logo.png" alt="RBP Logo" style="height: 100px; width: auto; object-fit: contain;">
   </div>
 </header>
 
@@ -363,39 +420,51 @@
 <div class="main-wrapper">
   
   <!-- ==================== SIDEBAR ==================== -->
-        <aside class="sidebar">
+  <aside class="sidebar">
     <ul class="nav-menu" id="sidebar-nav">
-      <li class="nav-title"><a href="#1-introduction">1. INTRODUCTION</a></li>
-      <li class="nav-title"><a href="#2-installation">2. INSTALLATION</a></li>
-      <li class="nav-item"><a class="nav-link" href="#download">Download</a></li>
-      <li class="nav-item"><a class="nav-link" href="#package-contents">Package contents</a></li>
-      <li class="nav-item"><a class="nav-link" href="#requirements">Requirements</a></li>
-      <li class="nav-item"><a class="nav-link" href="#smoke-test">Smoke test</a></li>
-      <li class="nav-title"><a href="#3-input-file-formats">3. INPUT FILE FORMATS</a></li>
-      <li class="nav-item"><a class="nav-link" href="#31-phenotype-file">3.1 Phenotype file</a></li>
-      <li class="nav-item"><a class="nav-link" href="#32-fixed-effects-and-covariates">3.2 Fixed effects and covariates</a></li>
-      <li class="nav-item"><a class="nav-link" href="#33-additional-random-effects">3.3 Additional random effects</a></li>
-      <li class="nav-item"><a class="nav-link" href="#34-pedigree-file">3.4 Pedigree file</a></li>
-      <li class="nav-item"><a class="nav-link" href="#35-genotype-file">3.5 Genotype file</a></li>
-      <li class="nav-item"><a class="nav-link" href="#36-snp-weight-file">3.6 SNP weight file</a></li>
-      <li class="nav-item"><a class="nav-link" href="#37-genetic-relationship-and-predictor-matrices">3.7 Genetic relationship and predictor matrices</a></li>
-      <li class="nav-title"><a href="#4-running-rbp">4. RUNNING RBP</a></li>
-      <li class="nav-item"><a class="nav-link" href="#41-global-parameters">4.1 Global parameters</a></li>
-      <li class="nav-item"><a class="nav-link" href="#42-building-relationship-matrices">4.2 Building relationship matrices</a></li>
-      <li class="nav-item"><a class="nav-link" href="#43-principal-component-analysis---kpca">4.3 Principal component analysis (`--kpca`)</a></li>
-      <li class="nav-item"><a class="nav-link" href="#44-blup---single-trait">4.4 BLUP (`--single-trait`)</a></li>
-      <li class="nav-item"><a class="nav-link" href="#45-single-step-blup---single-step">4.5 Single-step BLUP (`--single-step`)</a></li>
-      <li class="nav-item"><a class="nav-link" href="#46-batch-blup---batch-trait">4.6 Batch BLUP (`--batch-trait`)</a></li>
-      <li class="nav-item"><a class="nav-link" href="#47-pev-and-reliability">4.7 PEV and reliability</a></li>
-      <li class="nav-item"><a class="nav-link" href="#48-gwas">4.8 GWAS</a></li>
-      <li class="nav-title"><a href="#appendix-a--output-files">APPENDIX A — OUTPUT FILES</a></li>
-      <li class="nav-title"><a href="#appendix-b--complete-workflows">APPENDIX B — COMPLETE WORKFLOWS</a></li>
-      <li class="nav-title"><a href="#appendix-c--performance-and-memory">APPENDIX C — PERFORMANCE AND MEMORY</a></li>
-      <li class="nav-title"><a href="#appendix-d--open-items">APPENDIX D — OPEN ITEMS</a></li>
+      <li class="nav-group">
+        <a class="nav-title" href="#1-introduction"><span>1. INTRODUCTION</span><span class="caret"></span></a>
+      </li>
+      <li class="nav-group has-children">
+        <a class="nav-title" href="#2-installation"><span>2. INSTALLATION</span><span class="caret"></span></a>
+        <ul class="nav-sub">
+          <li class="nav-item"><a class="nav-link" href="#21-download">2.1 Download</a></li>
+          <li class="nav-item"><a class="nav-link" href="#22-package-contents">2.2 Package contents</a></li>
+          <li class="nav-item"><a class="nav-link" href="#23-requirements">2.3 Requirements</a></li>
+          <li class="nav-item"><a class="nav-link" href="#24-smoke-test">2.4 Smoke test</a></li>
+        </ul>
+      </li>
+      <li class="nav-group has-children">
+        <a class="nav-title" href="#3-input-file-formats"><span>3. INPUT FILE FORMATS</span><span class="caret"></span></a>
+        <ul class="nav-sub">
+          <li class="nav-item"><a class="nav-link" href="#31-phenotype-file">3.1 Phenotype file</a></li>
+          <li class="nav-item"><a class="nav-link" href="#32-fixed-effects-and-covariates">3.2 Fixed effects and covariates</a></li>
+          <li class="nav-item"><a class="nav-link" href="#33-additional-random-effects">3.3 Additional random effects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#34-pedigree-file">3.4 Pedigree file</a></li>
+          <li class="nav-item"><a class="nav-link" href="#35-genotype-file">3.5 Genotype file</a></li>
+          <li class="nav-item"><a class="nav-link" href="#36-snp-weight-file">3.6 SNP weight file</a></li>
+          <li class="nav-item"><a class="nav-link" href="#37-genetic-relationship-and-predictor-matrices">3.7 Genetic relationship and predictor matrices</a></li>
+        </ul>
+      </li>
+      <li class="nav-group has-children">
+        <a class="nav-title" href="#4-running-rbp"><span>4. RUNNING RBP</span><span class="caret"></span></a>
+        <ul class="nav-sub">
+          <li class="nav-item"><a class="nav-link" href="#41-global-parameters">4.1 Global parameters</a></li>
+          <li class="nav-item"><a class="nav-link" href="#42-building-relationship-matrices">4.2 Building relationship matrices</a></li>
+          <li class="nav-item"><a class="nav-link" href="#43-principal-component-analysis---kpca">4.3 Principal component analysis (`--kpca`)</a></li>
+          <li class="nav-item"><a class="nav-link" href="#44-blup---single-trait">4.4 BLUP (`--single-trait`)</a></li>
+          <li class="nav-item"><a class="nav-link" href="#45-single-step-blup---single-step">4.5 Single-step BLUP (`--single-step`)</a></li>
+          <li class="nav-item"><a class="nav-link" href="#46-batch-blup---batch-trait">4.6 Batch BLUP (`--batch-trait`)</a></li>
+          <li class="nav-item"><a class="nav-link" href="#47-pev-and-reliability">4.7 PEV and reliability</a></li>
+          <li class="nav-item"><a class="nav-link" href="#48-gwas">4.8 GWAS</a></li>
+        </ul>
+      </li>
     </ul>
   </aside>
 
   <main class="content" id="main-content">
+
+<section class="page" id="1-introduction" data-level="2">
 
 <h1>RBP User Manual</h1>
 
@@ -403,7 +472,7 @@
 
 <p>RBP (Rapid Batch-process-supported Powerful tool) is a command-line tool for <strong>GWAS</strong> and <strong>genomic selection (GS)</strong> on large-scale genomic data, built on the mixed linear model (MLM).</p>
 
-<h2 id="1-introduction">1. Introduction</h2>
+<h2>1. Introduction</h2>
 
 <p>Genotyping has outgrown the classical analysis pipeline. A single sequencing or imputation project can carry millions of markers on hundreds of thousands of individuals, so a genome-wide mixed model has to solve a system whose dimension is the number of individuals, repeatedly, once per variance-component iteration. The practical bottlenecks are therefore matrix size (memory) and the number of linear solves (time), not the statistical model itself.</p>
 
@@ -444,9 +513,17 @@
 
 <p>C++ with Armadillo and OpenMP. OpenBLAS or Intel MKL is linked <strong>statically</strong>; the Fortran/OpenMP runtime is <strong>bundled</strong> with the binaries, so the release package runs on a bare Linux installation (see §2). The <code>rbp</code> launcher selects the appropriate binary for the machine.</p>
 
-<h2 id="2-installation">2. Installation</h2>
+</section>
 
-<h3 id="download">Download</h3>
+<section class="page" id="2-installation" data-level="2">
+
+<h2>2. Installation</h2>
+
+</section>
+
+<section class="page" id="21-download" data-level="3">
+
+<h3>2.1 Download</h3>
 
 <p>The Linux package is published on GitHub — click to download:</p>
 
@@ -465,7 +542,11 @@ tar xzf RBP_v1.13_Linux.tar.gz
 ./rbp                    # prints the full help</code></pre>
 </div>
 
-<h3 id="package-contents">Package contents</h3>
+</section>
+
+<section class="page" id="22-package-contents" data-level="3">
+
+<h3>2.2 Package contents</h3>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -479,7 +560,11 @@ data/                small demo dataset
 README.md            package notes</code></pre>
 </div>
 
-<h3 id="requirements">Requirements</h3>
+</section>
+
+<section class="page" id="23-requirements" data-level="3">
+
+<h3>2.3 Requirements</h3>
 
 <table class="param-table">
 <thead>
@@ -493,7 +578,7 @@ README.md            package notes</code></pre>
 <tr><td>OS</td><td>any GNU/Linux with glibc ≥ 2.7 (CentOS 7 / Ubuntu 16.04 and newer)</td></tr>
 <tr><td>Shell</td><td><code>bash</code></td></tr>
 <tr><td>Libraries</td><td><strong>nothing to install</strong> — OpenBLAS/MKL are linked in, the Fortran/OpenMP runtime ships in <code>x86_libs/</code> / <code>rbp_arm_libs/</code></td></tr>
-<tr><td>Optional</td><td><code>gcc</code>/<code>gfortran</code> are *not* needed; no conda environment is required</td></tr>
+<tr><td>Optional</td><td><code>gcc</code>/<code>gfortran</code> are <em>not</em> needed; no conda environment is required</td></tr>
 </tbody>
 </table>
 
@@ -508,7 +593,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>To force one, call it directly (e.g. <code>./rbp_x86_openBLAS</code>).</p>
 
-<h3 id="smoke-test">Smoke test</h3>
+</section>
+
+<section class="page" id="24-smoke-test" data-level="3">
+
+<h3>2.4 Smoke test</h3>
 
 <p>The bundled demo data runs the whole pipeline in about two minutes:</p>
 
@@ -523,11 +612,19 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p><code>demo.var</code> should report a genetic variance near 0.40 and a residual near 0.59 (h² ≈ 0.41) — the demo population was simulated with h² = 0.4.</p>
 
-<h2 id="3-input-file-formats">3. Input file formats</h2>
+</section>
+
+<section class="page" id="3-input-file-formats" data-level="2">
+
+<h2>3. Input file formats</h2>
 
 <p>All input files are whitespace-separated text unless stated otherwise, and <strong>all column indices are 1-based</strong> (the ID column counts as column 1).</p>
 
-<h3 id="31-phenotype-file">3.1 Phenotype file</h3>
+</section>
+
+<section class="page" id="31-phenotype-file" data-level="3">
+
+<h3>3.1 Phenotype file</h3>
 
 <p>A phenotype file holds <strong>one row per record</strong> and <strong>must have a header line</strong>. Its first column must be the individual ID; every other quantity used by the model — traits, fixed effects, covariates and any additional random effect — must be a column of this same file.</p>
 
@@ -554,7 +651,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>Only the individuals present in the phenotype file contribute records; individuals without a record may still appear in the relationship matrix (they then receive an EBV but no residual).</p>
 
-<h3 id="32-fixed-effects-and-covariates">3.2 Fixed effects and covariates</h3>
+</section>
+
+<section class="page" id="32-fixed-effects-and-covariates" data-level="3">
+
+<h3>3.2 Fixed effects and covariates</h3>
 
 <p>Both live in the phenotype file as extra columns; the difference is how they are treated:</p>
 
@@ -580,9 +681,13 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 </tbody>
 </table>
 
-<p>A model statement spelled out in one line reads: *trait = column 3, fixed effects are sex (column 2) and herd (column 4), age (column 5) enters as a covariate* → <code>--phe-col 3 --fix-col 2,4 --cov-col 5</code>.</p>
+<p>A model statement spelled out in one line reads: <em>trait = column 3, fixed effects are sex (column 2) and herd (column 4), age (column 5) enters as a covariate</em> → <code>--phe-col 3 --fix-col 2,4 --cov-col 5</code>.</p>
 
-<h3 id="33-additional-random-effects">3.3 Additional random effects</h3>
+</section>
+
+<section class="page" id="33-additional-random-effects" data-level="3">
+
+<h3>3.3 Additional random effects</h3>
 
 <p>Random effects other than the genetic one (a permanent environment, a litter effect, a maternal genetic effect) are handled the same way: the factor whose levels are the random-effect levels must be a <strong>column of the phenotype file</strong>, and each such column is declared with <code>--rand-col</code>.</p>
 
@@ -624,7 +729,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
       --rand-col 6,7 --rand-cov 1 data/demo_pedigree.ped --out demo</code></pre>
 </div>
 
-<h3 id="34-pedigree-file">3.4 Pedigree file</h3>
+</section>
+
+<section class="page" id="34-pedigree-file" data-level="3">
+
+<h3>3.4 Pedigree file</h3>
 
 <p>Three columns, <strong>with a header line</strong> (a header is recognised and skipped — see below), one row per individual, unknown parents coded as <code>0</code>:</p>
 
@@ -650,7 +759,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>The parser detects a header line automatically when the first token is one of the common header labels (<code>ID</code>, <code>id</code>, <code>IND</code>, <code>Animal</code>, <code>Individual</code>, <code>个体号</code>, …), so a pedigree without a header is also accepted. Individuals in the genotype file <strong>must all be present in the pedigree</strong> with the same IDs.</p>
 
-<h3 id="35-genotype-file">3.5 Genotype file</h3>
+</section>
+
+<section class="page" id="35-genotype-file" data-level="3">
+
+<h3>3.5 Genotype file</h3>
 
 <p>Only the <strong>PLINK binary</strong> format is supported: a <code>.bed</code> / <code>.bim</code> / <code>.fam</code> triple, specified by its prefix (<code>--geno PREFIX</code>, with or without the <code>.bed</code> suffix).</p>
 
@@ -677,9 +790,13 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 --geno-snp 1,2,3,500      --geno-snp snp_list.txt</code></pre>
 </div>
 
-<p>*Smart parsing*: if the argument is an existing file it is read as a list, otherwise it is parsed as a comma-separated index list. Indices refer to the <code>.fam</code> / <code>.bim</code> order, 1-based.</p>
+<p><em>Smart parsing</em>: if the argument is an existing file it is read as a list, otherwise it is parsed as a comma-separated index list. Indices refer to the <code>.fam</code> / <code>.bim</code> order, 1-based.</p>
 
-<h3 id="36-snp-weight-file">3.6 SNP weight file</h3>
+</section>
+
+<section class="page" id="36-snp-weight-file" data-level="3">
+
+<h3>3.6 SNP weight file</h3>
 
 <p>A single column of numbers, <strong>no header</strong>, one weight per marker <strong>of the selected marker set</strong> (i.e. after <code>--geno-snp</code>).</p>
 
@@ -712,7 +829,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
   <pre><code>./rbp --make-grm --geno geno --weight snp_weights.txt --out G</code></pre>
 </div>
 
-<h3 id="37-genetic-relationship-and-predictor-matrices">3.7 Genetic relationship and predictor matrices</h3>
+</section>
+
+<section class="page" id="37-genetic-relationship-and-predictor-matrices" data-level="3">
+
+<h3>3.7 Genetic relationship and predictor matrices</h3>
 
 <p>Everything a module reads through <code>--grm</code> is a <strong>binary matrix plus an ID file</strong>, identified by a shared prefix:</p>
 
@@ -745,7 +866,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 <tbody>
 <tr><td><code>.GA</code></td><td>genomic additive (Yang or VanRaden)</td><td>BLUP, GWAS</td></tr>
 <tr><td><code>.GD</code></td><td>genomic dominance</td><td>dominance models</td></tr>
-<tr><td><code>.HA</code>, <code>.HD</code></td><td>pedigree-informed H (G blended with A22)</td><td>*see the note below*</td></tr>
+<tr><td><code>.HA</code>, <code>.HD</code></td><td>pedigree-informed H (G blended with A22)</td><td><em>see the note below</em></td></tr>
 </tbody>
 </table>
 
@@ -770,7 +891,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>Because these matrices are rectangular, the <code>.col</code> file records what the columns mean: marker identity for <code>.Z</code>, and the genomic interval of each block for <code>.compress</code>. Both are accepted wherever a GRM prefix is accepted.</p>
 
-<h2 id="4-running-rbp">4. Running RBP</h2>
+</section>
+
+<section class="page" id="4-running-rbp" data-level="2">
+
+<h2>4. Running RBP</h2>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -797,7 +922,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 </tbody>
 </table>
 
-<h3 id="41-global-parameters">4.1 Global parameters</h3>
+</section>
+
+<section class="page" id="41-global-parameters" data-level="3">
+
+<h3>4.1 Global parameters</h3>
 
 <p>These apply to every module.</p>
 
@@ -818,13 +947,29 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 </tbody>
 </table>
 
+<p>Every module writes <code>&lt;out&gt;.log</code> — the full console log of the run — and keeps writing it under <code>--quiet</code>, which only silences the console.</p>
+
 <p>Three rules worth memorising:</p>
 
 <p>1. <strong><code>--float</code> must be consistent.</strong> If a GRM is built with <code>--float</code>, every module that reads it must also run with <code>--float</code> — mixing float and double binaries raises a data-type error. 2. <strong><code>--chunk</code> is not available for <code>--batch-trait</code>.</strong> 3. <strong>PEV, the <code>standard</code> GWAS test and the <code>Cholesky</code> solver require a full, non-chunked KINSHIP GRM</strong> — otherwise the run stops with <code>PEV, standard test and Cholesky solver require non-chunked GRM. Remove the --chunk parameter.</code></p>
 
-<h3 id="42-building-relationship-matrices">4.2 Building relationship matrices</h3>
+<p><strong>Complete workflow: a large, memory-limited run.</strong> <code>--float</code> roughly halves the working set, <code>--chunk</code> streams the matrix blocks instead of holding them, and both must be repeated by every module that touches the same files.</p>
 
-<h4><code>--make-grm</code></h4>
+<div class="code-wrapper">
+  <button class="copy-btn" onclick="copyCode(this)">copy</button>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --float --chunk \
+      --snp-chunk 20000 --ind-chunk 512 --out G --ncpus 64
+./rbp --single-trait --grm G.GA --float --chunk \
+      --phe pheno.txt --phe-col 3 --fix-col 2 --out big --ncpus 64</code></pre>
+</div>
+
+</section>
+
+<section class="page" id="42-building-relationship-matrices" data-level="3">
+
+<h3>4.2 Building relationship matrices</h3>
+
+<h4 id="42-building-relationship-matrices--make-grm"><code>--make-grm</code></h4>
 
 <p>Computes the additive or dominance GRM from PLINK genotypes, optionally together with its generalised inverse.</p>
 
@@ -848,13 +993,20 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p><strong>Output</strong></p>
 
-<div class="code-wrapper">
-  <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>&lt;out&gt;.GA.bin      additive GRM (methods 1, 2)
-&lt;out&gt;.GA.id       IDs of the rows/columns
-&lt;out&gt;.GA.inv.txt  generalised inverse as (row, col, value)   [--inv]
-&lt;out&gt;.GD.bin      dominance GRM, together with &lt;out&gt;.GD.id   [--method 3]</code></pre>
-</div>
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.GA.bin</code> / <code>.GA.id</code></td><td>additive GRM (methods 1, 2) and the IDs of its rows/columns</td></tr>
+<tr><td><code>&lt;out&gt;.GD.bin</code> / <code>.GD.id</code></td><td>dominance GRM (<code>--method 3</code>) and its IDs</td></tr>
+<tr><td><code>&lt;out&gt;.GA.inv.txt</code></td><td>the generalised inverse, three columns <code>row col value</code> (<code>--inv</code>)</td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -862,7 +1014,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 ./rbp --make-grm --geno geno --method 2 --inv --snp-chunk 20000 --out G</code></pre>
 </div>
 
-<h4><code>--make-hmatrix</code></h4>
+<h4 id="42-building-relationship-matrices--make-hmatrix"><code>--make-hmatrix</code></h4>
 
 <p>Builds the file-based single-step matrix from a pedigree plus one or two GRMs, using the blending <code>G_w = (1 - w) G + w A22</code>, and writes it out.</p>
 
@@ -882,7 +1034,23 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 </tbody>
 </table>
 
-<p><strong>Output</strong>: <code>&lt;out&gt;.HA.bin/.HA.id</code> (or <code>.HD.*</code> for a dominance GRM input), or <code>&lt;out&gt;.PA.bin/.PA.id</code> with <code>--only-ped</code>. The <code>.id</code> file always lists <strong>all</strong> pedigree individuals.</p>
+<p><strong>Output</strong></p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.HA.bin</code> / <code>.HA.id</code></td><td>the H matrix (<code>.HD.*</code> when a dominance GRM is given)</td></tr>
+<tr><td><code>&lt;out&gt;.PA.bin</code> / <code>.PA.id</code></td><td>the pedigree A matrix (<code>--only-ped</code>)</td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
+
+<p>The <code>.id</code> file always lists <strong>all</strong> pedigree individuals, not only the genotyped subset.</p>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -891,7 +1059,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <blockquote><p>For actually fitting a single-step model, prefer <code>--single-step</code> (§4.5) over building H on disk.</p></blockquote>
 
-<h4><code>--make-compress</code></h4>
+<h4 id="42-building-relationship-matrices--make-compress"><code>--make-compress</code></h4>
 
 <p>Projects the genotype matrix into a low-rank predictor matrix: LD blocks are partitioned and one principal component is extracted per block (<code>--BlockComp</code>), or, without it, the standardised genotype matrix is written directly.</p>
 
@@ -906,7 +1074,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 <tbody>
 <tr><td><code>--geno FILE</code>, <code>--method N</code>, <code>--weight FILE</code>, <code>--snp-chunk N</code></td><td>as in <code>--make-grm</code></td><td>—</td></tr>
 <tr><td><code>--BlockComp</code></td><td>LD-block partition + per-block PC1 compression</td><td>off</td></tr>
-<tr><td><code>--r2 X</code></td><td>smoothed *r*² threshold for LD-block boundaries</td><td><code>0.1</code></td></tr>
+<tr><td><code>--r2 X</code></td><td>smoothed <em>r</em>² threshold for LD-block boundaries</td><td><code>0.1</code></td></tr>
 <tr><td><code>--window-size N</code></td><td>smoothing window radius in SNPs</td><td><code>10</code></td></tr>
 <tr><td><code>--block-size-limit N</code></td><td>minimum block size; smaller blocks are merged</td><td><code>5</code></td></tr>
 </tbody>
@@ -914,20 +1082,26 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p><strong>Output</strong></p>
 
-<div class="code-wrapper">
-  <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>&lt;out&gt;.compress.bin / .compress.id / .compress.col   compressed matrix (N × K)
-&lt;out&gt;.Z.bin / .Z.id / .Z.col                        projected genotype matrix (N × P)</code></pre>
-</div>
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.compress.bin</code> / <code>.compress.id</code> / <code>.compress.col</code></td><td>the compressed predictor matrix (N × K); LD blocks in <code>.col</code></td></tr>
+<tr><td><code>&lt;out&gt;.Z.bin</code> / <code>.Z.id</code> / <code>.Z.col</code></td><td>the standardised genotype matrix (N × P); marker names in <code>.col</code></td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
   <pre><code>./rbp --make-compress --geno geno --BlockComp --r2 0.1 --out C --ncpus 32</code></pre>
 </div>
 
-<p><strong>[TBC]</strong> Guideline for choosing between <code>.GA</code> and <code>.compress</code> (marker count, population size), and the accuracy of the compressed representation.</p>
-
-<h4><code>--trans-grm</code></h4>
+<h4 id="42-building-relationship-matrices--trans-grm"><code>--trans-grm</code></h4>
 
 <p>Streams an existing GRM binary between precisions, without going back to the genotypes.</p>
 
@@ -937,9 +1111,15 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 ./rbp --trans-grm --grm demo_f  --out demo_d            # float  -&gt; double</code></pre>
 </div>
 
+<p><strong>Output</strong>: <code>&lt;out&gt;.bin</code> / <code>.id</code> / <code>.col</code> — the same GRM rewritten at the requested precision, plus <code>&lt;out&gt;.log</code>.</p>
+
 <p><code>--out</code> must differ from the input prefix (the program refuses to overwrite the input). The module works on the plain <code>&lt;prefix&gt;.bin/.id/.col</code> triple, so give the full prefix (<code>demo.GA</code>, not <code>demo</code>).</p>
 
-<h3 id="43-principal-component-analysis---kpca">4.3 Principal component analysis (<code>--kpca</code>)</h3>
+</section>
+
+<section class="page" id="43-principal-component-analysis---kpca" data-level="3">
+
+<h3>4.3 Principal component analysis (<code>--kpca</code>)</h3>
 
 <p>Computes the leading principal components of the relationship matrix with a Lanczos iteration — for describing population structure, as covariates in a model, or for dimensionality reduction before clustering.</p>
 
@@ -958,14 +1138,32 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 </tbody>
 </table>
 
-<p><strong>Output</strong>: <code>&lt;out&gt;.eigval</code> (eigenvalues, descending), <code>&lt;out&gt;.eigvec</code> (the corresponding eigenvectors, one column per PC).</p>
+<p><strong>Output</strong></p>
+
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.eigval</code></td><td>the eigenvalues, descending</td></tr>
+<tr><td><code>&lt;out&gt;.eigvec</code></td><td>the corresponding eigenvectors, one column per PC</td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
   <pre><code>./rbp --kpca --grm demo.GA --npc 20 --out pca --ncpus 16</code></pre>
 </div>
 
-<h3 id="44-blup---single-trait">4.4 BLUP (<code>--single-trait</code>)</h3>
+</section>
+
+<section class="page" id="44-blup---single-trait" data-level="3">
+
+<h3>4.4 BLUP (<code>--single-trait</code>)</h3>
 
 <p>Fits the mixed model</p>
 
@@ -976,7 +1174,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>by <strong>AI-REML</strong>: variance components are estimated by average-information REML, then fixed effects, random effects (EBVs) and — on request — their prediction error variance are computed. With <code>--gwas</code> the same fitted model powers a marker scan (§4.8).</p>
 
-<h4>Solvers</h4>
+<h4 id="44-blup---single-trait--solvers">Solvers</h4>
 
 <p>The mixed-model equations inside every AI-REML iteration can be solved in three ways; <code>--solver</code> selects between them, while deflation is a property of the CG path.</p>
 
@@ -998,7 +1196,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>The repeatability model (<code>--repeat</code>) always uses the CG path.</p>
 
-<h4>Parameters</h4>
+<h4 id="44-blup---single-trait--parameters">Parameters</h4>
 
 <table class="param-table">
 <thead>
@@ -1022,13 +1220,13 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 <tr><td><code>--cg-tol VAL</code></td><td>CG convergence tolerance</td><td><code>1e-6</code></td></tr>
 <tr><td><code>--mom</code></td><td>initialise variance components with MoM-RHE</td><td>off</td></tr>
 <tr><td><code>--pev</code></td><td>output PEV and reliability for the random effects (§4.7)</td><td>off</td></tr>
-<tr><td><code>--repeat</code></td><td>repeated-records model (adds a permanent-environment component)</td><td>off</td></tr>
+<tr><td><code>--repeat</code></td><td>repeated-records analysis: forces the CG solver and switches the <code>standard</code> GWAS test to its repeated-measures variant. It does <strong>not</strong> add a random effect by itself — declare the permanent environment with <code>--rand-col</code> on the ID column</td><td>off</td></tr>
 <tr><td><code>--seed N</code></td><td>random seed for the stochastic trace estimates</td><td><code>6666</code></td></tr>
 <tr><td><code>--gwas</code>, <code>--test</code>, <code>--num-ranvec</code>, <code>--re-gamma-size</code>, <code>--re-est-gamma</code></td><td>marker scan (§4.8)</td><td>—</td></tr>
 </tbody>
 </table>
 
-<h4>Examples</h4>
+<h4 id="44-blup---single-trait--examples">Examples</h4>
 
 <p><strong>(1) One genetic random effect</strong> — the standard genomic BLUP:</p>
 
@@ -1049,13 +1247,14 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
       --phe-col 3 --fix-col 2 --out ad --ncpus 32</code></pre>
 </div>
 
-<p><strong>(3) Repeatability model</strong> — repeated records per individual; a permanent environment is added, and the CG path is used automatically:</p>
+<p><strong>(3) Repeatability model</strong> — repeated records per individual. The permanent environment is an i.i.d. effect on the individual ID, so column 1 must be declared with <code>--rand-col</code>; <code>--repeat</code> switches the analysis to the repeated-measures path:</p>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
   <pre><code>./rbp --single-trait --grm G.GA --phe records.txt \
-      --phe-col 3 --fix-col 2 --repeat --out rep --ncpus 32
-# records.txt holds one row per record, several rows per individual</code></pre>
+      --phe-col 3 --fix-col 2 --rand-col 1 --repeat --out rep --ncpus 32
+# records.txt holds one row per record, several rows per individual
+# --rand-col 1 = the permanent-environment effect, levels taken from the ID column</code></pre>
 </div>
 
 <p><strong>(4) Maternal genetic effect</strong> — an extra random effect whose levels are related through the pedigree; the maternal-effect column (here 7) and the pedigree are given separately:</p>
@@ -1070,17 +1269,37 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>The same mechanism covers i.i.d. effects (litter, batch, technician): <code>--rand-col 6 --rand-cov 1</code>. A user-supplied covariance matrix can be passed as a <code>.bin</code>/<code>.id</code> prefix instead of <code>.ped</code> — see §3.3.</p>
 
-<h4>Output</h4>
+<h4 id="44-blup---single-trait--output">Output</h4>
 
-<p><code>&lt;out&gt;.log</code>, <code>&lt;out&gt;.var</code>, <code>&lt;out&gt;.rand</code>, <code>&lt;out&gt;.beta</code>, <code>&lt;out&gt;.anova</code> (+ <code>&lt;out&gt;.mlm</code> with <code>--gwas</code>); see Appendix A.</p>
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.var</code></td><td>variance components, their standard errors, h² and its test</td></tr>
+<tr><td><code>&lt;out&gt;.rand</code></td><td>random effects (EBVs); with <code>--pev</code> also the <code>_PEV</code> and <code>_r2</code> columns (§4.7)</td></tr>
+<tr><td><code>&lt;out&gt;.beta</code></td><td>fixed-effect solutions</td></tr>
+<tr><td><code>&lt;out&gt;.anova</code></td><td>analysis-of-variance table</td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
 
-<h3 id="45-single-step-blup---single-step">4.5 Single-step BLUP (<code>--single-step</code>)</h3>
+<p>With <code>--gwas</code> the run also writes <code>&lt;out&gt;.mlm</code> — see §4.8.</p>
+
+</section>
+
+<section class="page" id="45-single-step-blup---single-step" data-level="3">
+
+<h3>4.5 Single-step BLUP (<code>--single-step</code>)</h3>
 
 <p>Fits the single-step model, in which the genetic random effect follows <code>N(0, H σ²_u)</code>, with H combining pedigree (A) and genomic (G) information through the standard blending of G with A22.</p>
 
 <blockquote><p><strong>When pedigree information exists, this module is strongly recommended</strong> over <code>--single-trait</code> with a pre-built <code>.HA</code> matrix.</p></blockquote>
 
-<h4>How it computes</h4>
+<h4 id="45-single-step-blup---single-step--how-it-computes">How it computes</h4>
 
 <p>The module never forms H (or H⁻¹):</p>
 
@@ -1128,13 +1347,33 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
       --a22-size-limit 20000 --w 0.05 --out ss --ncpus 32</code></pre>
 </div>
 
-<p><strong>Output</strong>: <code>&lt;out&gt;.log</code>, <code>&lt;out&gt;.var</code>, <code>&lt;out&gt;.rand</code>, <code>&lt;out&gt;.beta</code>, <code>&lt;out&gt;.anova</code>. With <code>--gwas</code> the scan runs in genotype space (SSGWAS) — see §4.8.</p>
+<p><strong>Output</strong></p>
 
-<p><strong>[TBC]</strong> Guidance for choosing <code>--lanczos-m</code> / <code>--lanczos-lm</code> and <code>--a22-size-limit</code> as a function of the model size.</p>
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.var</code></td><td>variance components, their standard errors, h² and its test</td></tr>
+<tr><td><code>&lt;out&gt;.rand</code></td><td>random effects (EBVs) for <strong>all</strong> pedigree individuals</td></tr>
+<tr><td><code>&lt;out&gt;.beta</code></td><td>fixed-effect solutions</td></tr>
+<tr><td><code>&lt;out&gt;.anova</code></td><td>analysis-of-variance table</td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
 
-<h3 id="46-batch-blup---batch-trait">4.6 Batch BLUP (<code>--batch-trait</code>)</h3>
+<p>With <code>--gwas</code> the scan runs in genotype space (SSGWAS) and adds <code>&lt;out&gt;.mlm</code> — see §4.8.</p>
 
-<p>Analyses <strong>many traits in one pass</strong>. It is a batch implementation, *not* a multivariate (multi-trait) model: each trait is fitted independently, sharing the genotype/GRM preparation and all I/O.</p>
+</section>
+
+<section class="page" id="46-batch-blup---batch-trait" data-level="3">
+
+<h3>4.6 Batch BLUP (<code>--batch-trait</code>)</h3>
+
+<p>Analyses <strong>many traits in one pass</strong>. It is a batch implementation, <em>not</em> a multivariate (multi-trait) model: each trait is fitted independently, sharing the genotype/GRM preparation and all I/O.</p>
 
 <table class="param-table">
 <thead>
@@ -1146,7 +1385,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 <tbody>
 <tr><td>Traits</td><td>selected with <code>--phe-col 2,3,4</code>; all are analysed in the same run</td></tr>
 <tr><td>Genetic random effect</td><td>exactly <strong>one</strong>; additional random effects (<code>--rand-col</code>) and pedigree information are <strong>not</strong> accepted</td></tr>
-<tr><td>Missing values</td><td><strong>phenotypes may be missing</strong> — records are kept only where the trait is observed, and the likelihood is evaluated on that subset. Covariates must be present for the retained records <strong>[TBC: confirm the covariate rule]</strong></td></tr>
+<tr><td>Missing values</td><td><strong>phenotypes may be missing</strong> — records are kept only where the trait is observed, and the likelihood is evaluated on that subset. Covariates must be present for the retained records.</td></tr>
 <tr><td>Variance components</td><td>estimated by <strong>DFREML</strong> (the program prints <code>[ DFREML Running ]</code>); the <code>exact</code> GWAS test internally runs AI-REML per phenotype</td></tr>
 <tr><td>Not applicable</td><td><code>--chunk</code>, <code>--rand-col</code>, <code>--test quasi-standard</code>, <code>--pev</code></td></tr>
 </tbody>
@@ -1174,13 +1413,32 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
       --gwas --test standard --out demo --ncpus 16</code></pre>
 </div>
 
-<p><strong>Output</strong>: <code>&lt;out&gt;.log</code>, <code>&lt;out&gt;.batchmlm</code> (GWAS results for all traits), <code>&lt;out&gt;.batchSummary</code> (per-trait summary), plus the per-trait <code>.var</code>, <code>.rand</code>, <code>.beta</code>, <code>.anova</code> files.</p>
+<p><strong>Output</strong></p>
 
-<h3 id="47-pev-and-reliability">4.7 PEV and reliability</h3>
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.batchmlm</code></td><td>GWAS results for all traits, side by side (<code>--gwas</code>)</td></tr>
+<tr><td><code>&lt;out&gt;.batchSummary</code></td><td>one summary line per trait</td></tr>
+<tr><td><code>&lt;out&gt;.var</code>, <code>&lt;out&gt;.rand</code>, <code>&lt;out&gt;.beta</code>, <code>&lt;out&gt;.anova</code></td><td>the per-trait files — one set per analysed trait (§4.4)</td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
+
+</section>
+
+<section class="page" id="47-pev-and-reliability" data-level="3">
+
+<h3>4.7 PEV and reliability</h3>
 
 <p>For a BLUP the breeding value is a prediction, and its uncertainty is described by two numbers:</p>
 
-<ul><li><strong>PEV</strong> — the *prediction error variance* <code>Var(û − u)</code>: how far the estimate is</li></ul>
+<ul><li><strong>PEV</strong> — the <em>prediction error variance</em> <code>Var(û − u)</code>: how far the estimate is</li></ul>
 
 <p>expected to be from the true value;</p>
 
@@ -1188,12 +1446,16 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>variance the prediction explains (1 means a perfectly predicted EBV).</p>
 
-<p>Both are requested with <code>--pev</code> in <code>--single-trait</code>:</p>
+<p>Both are requested with <code>--pev</code> in <code>--single-trait</code>.</p>
+
+<p><strong>Complete workflow: genomic prediction</strong> — EBVs together with their reliabilities for selection.</p>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>./rbp --single-trait --grm G.GA --phe pheno.txt --phe-col 3 --fix-col 2 \
-      --pev --out gs --ncpus 32</code></pre>
+  <pre><code>./rbp --make-grm --geno geno --method 2 --out G --ncpus 32
+./rbp --single-trait --grm G.GA --phe pheno.txt --phe-col 3 --fix-col 2 \
+      --pev --out gs --ncpus 32
+# EBVs and reliabilities are in gs.rand</code></pre>
 </div>
 
 <p><strong>Output.</strong> <code>&lt;out&gt;.rand</code> gains two columns per random effect, <code>&lt;effect&gt;_PEV</code> and <code>&lt;effect&gt;_r2</code>:</p>
@@ -1220,7 +1482,11 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>matrices.</p>
 
-<h3 id="48-gwas">4.8 GWAS</h3>
+</section>
+
+<section class="page" id="48-gwas" data-level="3">
+
+<h3>4.8 GWAS</h3>
 
 <p>Adding <code>--gwas</code> to <code>--single-trait</code>, <code>--single-step</code> or <code>--batch-trait</code> scans the markers under the fitted mixed model.</p>
 
@@ -1248,55 +1514,7 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 
 <p>Related parameters: <code>--num-ranvec N</code> (random vectors for the stochastic tests, default 100), <code>--re-gamma-size N</code> (SNPs used to estimate the gamma shape, default 500), <code>--re-est-gamma</code> (force re-estimation), <code>--seed N</code> (default 6666).</p>
 
-<div class="code-wrapper">
-  <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>./rbp --single-trait --grm demo.GA --geno data/demo_geno \
-      --phe data/demo_pheno.txt --phe-col 3 --fix-col 2 \
-      --gwas --test standard --out scan --ncpus 32</code></pre>
-</div>
-
-<p><strong>Output</strong>: <code>&lt;out&gt;.mlm</code>, with the columns</p>
-
-<div class="code-wrapper">
-  <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>SNP  CHR  POS  A1  A2  Freq  Effect  SE  Pvalue</code></pre>
-</div>
-
-<p><code>--batch-trait</code> writes <code>&lt;out&gt;.batchmlm</code> (all traits side by side) plus <code>&lt;out&gt;.batchSummary</code>.</p>
-
-<h2 id="appendix-a--output-files">Appendix A — Output files</h2>
-
-<table class="param-table">
-<thead>
-<tr>
-<th>File</th>
-<th>Written by</th>
-<th>Content</th>
-</tr>
-</thead>
-<tbody>
-<tr><td><code>&lt;out&gt;.log</code></td><td>every module</td><td>full console log</td></tr>
-<tr><td><code>&lt;out&gt;.GA.bin</code> / <code>.GA.id</code></td><td><code>--make-grm</code> (methods 1, 2)</td><td>additive GRM and its IDs</td></tr>
-<tr><td><code>&lt;out&gt;.GD.bin</code> / <code>.GD.id</code></td><td><code>--make-grm --method 3</code></td><td>dominance GRM and its IDs</td></tr>
-<tr><td><code>&lt;out&gt;.GA.inv.txt</code></td><td><code>--make-grm --inv</code></td><td>generalised inverse, three columns <code>row col value</code></td></tr>
-<tr><td><code>&lt;out&gt;.bin</code> / <code>.id</code> / <code>.col</code></td><td><code>--trans-grm</code></td><td>precision-converted GRM</td></tr>
-<tr><td><code>&lt;out&gt;.compress.bin</code> / <code>.compress.id</code> / <code>.compress.col</code></td><td><code>--make-compress</code></td><td>compressed predictor matrix (blocks in <code>.col</code>)</td></tr>
-<tr><td><code>&lt;out&gt;.Z.bin</code> / <code>.Z.id</code> / <code>.Z.col</code></td><td><code>--make-compress</code></td><td>standardised genotype matrix (marker names in <code>.col</code>)</td></tr>
-<tr><td><code>&lt;out&gt;.HA.bin</code> / <code>.HA.id</code>, <code>.HD.bin</code> / <code>.HD.id</code></td><td><code>--make-hmatrix</code></td><td>H matrix</td></tr>
-<tr><td><code>&lt;out&gt;.PA.bin</code> / <code>.PA.id</code></td><td><code>--make-hmatrix --only-ped</code></td><td>pedigree A matrix</td></tr>
-<tr><td><code>&lt;out&gt;.eigval</code> / <code>.eigvec</code></td><td><code>--kpca</code></td><td>eigenvalues / eigenvectors</td></tr>
-<tr><td><code>&lt;out&gt;.var</code></td><td>trait / single-step modules</td><td>variance components, SEs, h² and its test</td></tr>
-<tr><td><code>&lt;out&gt;.rand</code></td><td>trait / single-step modules</td><td>random effects (EBVs); with <code>--pev</code> also <code>_PEV</code> and <code>_r2</code></td></tr>
-<tr><td><code>&lt;out&gt;.beta</code></td><td>trait / single-step modules</td><td>fixed-effect solutions</td></tr>
-<tr><td><code>&lt;out&gt;.anova</code></td><td>trait / single-step modules</td><td>analysis-of-variance table</td></tr>
-<tr><td><code>&lt;out&gt;.mlm</code></td><td><code>--single-trait --gwas</code></td><td>marker scan</td></tr>
-<tr><td><code>&lt;out&gt;.batchmlm</code>, <code>&lt;out&gt;.batchSummary</code></td><td><code>--batch-trait</code></td><td>batch scan results and summary</td></tr>
-</tbody>
-</table>
-
-<h2 id="appendix-b--complete-workflows">Appendix B — Complete workflows</h2>
-
-<p><strong>A. GWAS with a genomic relationship matrix</strong></p>
+<p><strong>Complete workflow: GWAS with a genomic relationship matrix.</strong></p>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -1306,26 +1524,16 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
 # hits are in scan.mlm</code></pre>
 </div>
 
-<p><strong>B. Genomic prediction (EBVs for selection)</strong></p>
+<p>The same run against the bundled demo data:</p>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>./rbp --make-grm --geno geno --method 2 --out G --ncpus 32
-./rbp --single-trait --grm G.GA --phe pheno.txt --phe-col 3 --fix-col 2 \
-      --pev --out gs --ncpus 32
-# EBVs and reliabilities are in gs.rand</code></pre>
+  <pre><code>./rbp --single-trait --grm demo.GA --geno data/demo_geno \
+      --phe data/demo_pheno.txt --phe-col 3 --fix-col 2 \
+      --gwas --test standard --out scan --ncpus 32</code></pre>
 </div>
 
-<p><strong>C. Single-step (ssGBLUP) with pedigree + genotypes</strong></p>
-
-<div class="code-wrapper">
-  <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>./rbp --make-grm --geno geno --method 2 --out G.GA --ncpus 32
-./rbp --single-step --pedigree ped.txt --grm G.GA --phe pheno.txt \
-      --phe-col 3 --fix-col 2 --a22-size-limit 20000 --out ss --ncpus 32</code></pre>
-</div>
-
-<p><strong>D. Single-step GWAS (SSGWAS)</strong></p>
+<p><strong>Complete workflow: single-step GWAS (SSGWAS)</strong> — the scan runs in genotype space, so <code>gamma</code> is the only test accepted.</p>
 
 <div class="code-wrapper">
   <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -1334,45 +1542,24 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
       --gwas --test gamma --out ssgwas --ncpus 32</code></pre>
 </div>
 
-<p><strong>E. Large-scale, memory-limited run</strong></p>
+<p><strong>Output</strong></p>
 
-<div class="code-wrapper">
-  <button class="copy-btn" onclick="copyCode(this)">copy</button>
-  <pre><code>./rbp --make-grm --geno geno --method 2 --float --chunk \
-      --snp-chunk 20000 --ind-chunk 512 --out G --ncpus 64
-./rbp --single-trait --grm G.GA --float --chunk \
-      --phe pheno.txt --phe-col 3 --fix-col 2 --out big --ncpus 64</code></pre>
-</div>
+<table class="param-table">
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;out&gt;.mlm</code></td><td>marker scan, columns <code>SNP  CHR  POS  A1  A2  Freq  Effect  SE  Pvalue</code></td></tr>
+<tr><td><code>&lt;out&gt;.batchmlm</code></td><td><code>--batch-trait</code> only: all traits side by side</td></tr>
+<tr><td><code>&lt;out&gt;.batchSummary</code></td><td><code>--batch-trait</code> only: one summary line per trait</td></tr>
+<tr><td><code>&lt;out&gt;.log</code></td><td>full console log</td></tr>
+</tbody>
+</table>
 
-<h2 id="appendix-c--performance-and-memory">Appendix C — Performance and memory</h2>
-
-<ul><li><strong>Threads</strong> — <code>--ncpus</code> sets the OpenMP team size; <code>OMP_NUM_THREADS</code>,</li></ul>
-
-<p><code>OPENBLAS_NUM_THREADS</code> and <code>MKL_NUM_THREADS</code> also apply.</p>
-
-<ul><li><strong>Precision</strong> — <code>--float</code> roughly halves the working set; keep it consistent</li></ul>
-
-<p>across the whole pipeline (§4.1).</p>
-
-<ul><li><strong>Chunking</strong> — <code>--chunk</code> streams matrix blocks instead of holding them, and is</li></ul>
-
-<p>recommended above ~50,000 genotyped individuals. It is incompatible with <code>--batch-trait</code>, with the Cholesky solver, with the <code>standard</code> test and with <code>--pev</code>.</p>
-
-<ul><li><strong>Deflation</strong> — <code>--lanczos-m</code> / <code>--lanczos-lm</code> decide how many extreme</li></ul>
-
-<p>eigenvalues are removed from the operator. More deflation means fewer CG iterations in every AI-REML step, at the cost of one Lanczos pass in the first iteration.</p>
-
-<ul><li><strong>A22 path</strong> — <code>--a22-size-limit</code> switches between a dense A22⁻¹ and a sparse</li></ul>
-
-<p>Cholesky for the non-genotyped block.</p>
-
-<ul><li><strong>Reference runs [TBC — to be replaced by a benchmark table]</strong> — on our own</li></ul>
-
-<p>single-step runs with 100,000–150,000 genotyped individuals (double precision, 32 threads), peak memory stayed at 3–4 GB and the analysis converged within 5–6 AI-REML iterations.</p>
-
-<h2 id="appendix-d--open-items">Appendix D — Open items</h2>
-
-<p>1. <strong>Module coverage.</strong> The published page (<code>docs/index.html</code>) still lists five modules; the binary provides eight. The page is regenerated from this manual. 2. <strong><code>--make-compress</code></strong> — guidance on when to prefer it over <code>--make-grm</code>, and on the accuracy of the compressed representation. 3. <strong>&quot;Vx-based&quot; strategy</strong> — the phrase used in the outline for §4.5 could not be matched to an identifier in the source; the mechanism documented there (implicit H⁻¹ through T/D operators + Schur complement + deflated PCG) needs the author&#x27;s confirmation of the preferred wording. 4. <strong>Deflation parameters</strong> — practical rules for <code>--lanczos-m</code> / <code>--lanczos-lm</code> and <code>--a22-size-limit</code> versus model size. 5. <strong>GWAS tests</strong> — one paragraph each on the four statistics: model, assumptions, cost and the recommended use case. 6. <strong><code>--mom</code>, <code>--re-gamma-size</code>, <code>--re-est-gamma</code></strong> — user-level explanation of the MoM-RHE initialisation and the gamma estimator. 7. <strong><code>--decouple</code></strong> — the exact model fitted and how the reported variance components should be interpreted. 8. <strong>Batch mode</strong> — confirm the covariate missing-value rule and the precise definition of the per-trait summary. 9. <strong>Error messages and FAQ</strong> — collect the common failures (float/double mismatch, ID mismatches between files, memory exhaustion, a missing <code>--geno</code> with <code>--gwas</code>) with the message text users will see. 10. <strong>Licence and citation</strong> — licence statement and preferred citation.</p>
+</section>
 
   </main>
 </div>
@@ -1410,33 +1597,174 @@ otherwise                        -&gt; rbp_x86_openBLAS</code></pre>
     document.body.removeChild(textArea);
   }
 
-  // Sidebar ScrollSpy (Highlights current reading section)
-  document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll("h2[id], h3[id]");
-    const navLinks = document.querySelectorAll(".nav-menu a.nav-link");
+  // ==================== 分页路由 ====================
+  // 一次只显示一个 <section class="page">（md2html.py 按 h2/h3 切好的页）。
+  // 左侧导航是完整目录，点哪一项就切到哪一页。
+  (function () {
+    const sections = Array.from(document.querySelectorAll("section.page"));
+    if (!sections.length) return;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -70% 0px",
-      threshold: 0
+    const byId = {};
+    sections.forEach(s => { byId[s.id] = s; });
+
+    const navLinks = Array.from(document.querySelectorAll(".nav-menu a"));
+    const linkFor = id => navLinks.find(a => a.getAttribute("href") === "#" + id) || null;
+    const label = section => {
+      const a = linkFor(section.id);
+      return a ? a.textContent.trim() : section.id;
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute("id");
-          navLinks.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === `#${id}`) {
-              link.classList.add("active");
-            }
-          });
+    // 该页所属的章；页本身就是章时返回 null
+    function chapterOf(section) {
+      const idx = sections.indexOf(section);
+      for (let i = idx; i >= 0; i--) {
+        if (sections[i].dataset.level === "2") {
+          return i === idx ? null : linkFor(sections[i].id);
         }
-      });
-    }, observerOptions);
+      }
+      return null;
+    }
 
-    sections.forEach(sec => observer.observe(sec));
-  });
+    // 章底下的节，直到下一个章
+    function childrenOf(section) {
+      const out = [];
+      for (let i = sections.indexOf(section) + 1; i < sections.length; i++) {
+        if (sections[i].dataset.level === "2") break;
+        out.push(sections[i]);
+      }
+      return out;
+    }
+
+    // 「In this section」：章列出子节，页内如有 h4 也一并列出
+    function buildIndex(section) {
+      const items = [];
+      if (section.dataset.level === "2") {
+        childrenOf(section).forEach(s => {
+          const h = s.querySelector("h1, h2, h3");
+          items.push([s.id, h ? h.textContent.trim() : s.id]);
+        });
+      }
+      section.querySelectorAll("h4[id]").forEach(h => {
+        items.push([h.id, h.textContent.trim()]);
+      });
+      if (!items.length) return;
+
+      const box = document.createElement("div");
+      box.className = "page-index";
+      const title = document.createElement("div");
+      title.className = "page-index-title";
+      title.textContent = "In this section";
+      const ul = document.createElement("ul");
+      items.forEach(([id, text]) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = "#" + id;
+        a.textContent = text;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      box.appendChild(title);
+      box.appendChild(ul);
+
+      const heading = section.querySelector("h1, h2, h3");
+      if (heading) heading.insertAdjacentElement("afterend", box);
+      else section.insertBefore(box, section.firstChild);
+    }
+    sections.forEach(buildIndex);
+
+    // 页脚的「上一页 / 下一页」
+    const pageNav = document.createElement("nav");
+    pageNav.className = "page-nav";
+    const mainEl = document.querySelector("main.content");
+    if (mainEl) mainEl.appendChild(pageNav);
+
+    function updatePageNav(section) {
+      const i = sections.indexOf(section);
+      const prev = sections[i - 1], next = sections[i + 1];
+      pageNav.innerHTML = "";
+      if (prev) {
+        const a = document.createElement("a");
+        a.className = "prev";
+        a.href = "#" + prev.id;
+        a.textContent = "← " + label(prev);
+        pageNav.appendChild(a);
+      }
+      if (next) {
+        const a = document.createElement("a");
+        a.className = "next";
+        a.href = "#" + next.id;
+        a.textContent = label(next) + " →";
+        pageNav.appendChild(a);
+      }
+      pageNav.style.display = (prev || next) ? "" : "none";
+    }
+
+    // 折叠导航：小节默认隐藏，展开一个章的同时收起其它章
+    const groups = Array.from(document.querySelectorAll(".nav-menu li.nav-group"));
+
+    function groupOf(id) {
+      const link = linkFor(id);
+      return link ? link.closest("li.nav-group") : null;
+    }
+
+    // 当前页所在的章保持展开，否则选中项会被折叠起来看不见
+    function expandFor(section) {
+      const own = groupOf(section.id);
+      groups.forEach(g => g.classList.toggle("open", g === own));
+    }
+
+    groups.forEach(g => {
+      const title = g.querySelector("a.nav-title");
+      if (!title) return;
+      title.addEventListener("click", () => {
+        // 链接照常跳到章页面；这里只管箭头和展开状态
+        const willOpen = !g.classList.contains("open");
+        groups.forEach(other => other.classList.toggle("open", other === g && willOpen));
+      });
+    });
+
+    let current = null;
+    function show(section, target) {
+      if (current !== section) {
+        sections.forEach(s => s.classList.toggle("active", s === section));
+        current = section;
+        navLinks.forEach(a => a.classList.remove("active"));
+        const link = linkFor(section.id);
+        if (link) link.classList.add("active");
+        const chapter = chapterOf(section);
+        if (chapter) chapter.classList.add("active");
+        expandFor(section);
+        updatePageNav(section);
+      }
+      if (target) {
+        target.scrollIntoView();
+      } else {
+        window.scrollTo(0, 0);
+      }
+      const active = navLinks.find(a => a.classList.contains("active"));
+      if (active) active.scrollIntoView({ block: "nearest" });
+    }
+
+    // hash 指向某一页 → 打开它；指向页内的 h4 → 打开该页并滚到那里
+    function resolve(hash) {
+      const id = (hash || "").replace(/^#/, "");
+      if (!id) return null;
+      if (byId[id]) return { section: byId[id], target: null };
+      const el = document.getElementById(id);
+      const section = el && el.closest("section.page");
+      return section ? { section: section, target: el } : null;
+    }
+
+    function render() {
+      const r = resolve(location.hash);
+      if (r) show(r.section, r.target);
+      else show(sections[0], null);
+    }
+
+    document.body.classList.add("paged");
+    window.addEventListener("hashchange", render);
+    render();
+  })();
 </script>
 
 </body>
